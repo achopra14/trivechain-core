@@ -1,6 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
 // Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2018-2019 The Trivechain Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -20,7 +21,6 @@
 #include "netbase.h"
 #include "scheduler.h"
 #include "ui_interface.h"
-#include "wallet/wallet.h"
 #include "utilstrencodings.h"
 
 #include "instantx.h"
@@ -2033,7 +2033,7 @@ bool CConnman::BindListenPort(const CService &addrBind, std::string& strError, b
     {
         int nErr = WSAGetLastError();
         if (nErr == WSAEADDRINUSE)
-            strError = strprintf(_("Unable to bind to %s on this computer. Trivechain is probably already running."), addrBind.ToString());
+            strError = strprintf(_("Unable to bind to %s on this computer. Trivechain Core is probably already running."), addrBind.ToString());
         else
             strError = strprintf(_("Unable to bind to %s on this computer (bind returned error %s)"), addrBind.ToString(), NetworkErrorString(nErr));
         LogPrintf("%s\n", strError);
@@ -2480,7 +2480,7 @@ void CConnman::RelayTransaction(const CTransaction& tx)
     ss.reserve(10000);
     uint256 hash = tx.GetHash();
     CTxLockRequest txLockRequest;
-    CDarksendBroadcastTx dstx = CExclusiveSend::GetDSTX(hash);
+    CExclusivesendBroadcastTx dstx = CExclusiveSend::GetDSTX(hash);
     if(dstx) { // MSG_DSTX
         ss << dstx;
     } else if(directsend.GetTxLockRequest(hash, txLockRequest)) { // MSG_TXLOCK_REQUEST

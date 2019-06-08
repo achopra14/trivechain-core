@@ -1,5 +1,6 @@
 // Copyright (c) 2011-2015 The Bitcoin Core developers
 // Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2018-2019 The Trivechain Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -22,12 +23,10 @@
 #ifdef ENABLE_WALLET
 #include "wallet/wallet.h"
 #include "wallet/walletdb.h"
-#endif
 
-#ifdef ENABLE_WALLET
 #include "masternodeconfig.h"
-#endif
 #include "exclusivesend-client.h"
+#endif
 
 #include <QNetworkProxy>
 #include <QSettings>
@@ -82,14 +81,16 @@ void OptionsModel::Init(bool resetSettings)
         settings.setValue("strThirdPartyTxUrls", "");
     strThirdPartyTxUrls = settings.value("strThirdPartyTxUrls", "").toString();
 
+    if (!settings.contains("theme"))
+        settings.setValue("theme", "");
+
+#ifdef ENABLE_WALLET
     if (!settings.contains("fCoinControlFeatures"))
         settings.setValue("fCoinControlFeatures", false);
     fCoinControlFeatures = settings.value("fCoinControlFeatures", false).toBool();
 
     if (!settings.contains("digits"))
         settings.setValue("digits", "2");
-    if (!settings.contains("theme"))
-        settings.setValue("theme", "");
 
     if (!settings.contains("fShowMasternodesTab"))
         settings.setValue("fShowMasternodesTab", masternodeConfig.getCount());
@@ -100,6 +101,7 @@ void OptionsModel::Init(bool resetSettings)
 
     if (!settings.contains("fLowKeysWarning"))
         settings.setValue("fLowKeysWarning", true);
+#endif // ENABLE_WALLET
 
     // These are shared with the core or have a command-line parameter
     // and we want command-line parameters to overwrite the GUI settings.
@@ -132,7 +134,7 @@ void OptionsModel::Init(bool resetSettings)
         settings.setValue("nExclusiveSendRounds", DEFAULT_EXCLUSIVESEND_ROUNDS);
     if (!SoftSetArg("-exclusivesendrounds", settings.value("nExclusiveSendRounds").toString().toStdString()))
         addOverriddenOption("-exclusivesendrounds");
-    privateSendClient.nExclusiveSendRounds = settings.value("nExclusiveSendRounds").toInt();
+    exclusiveSendClient.nExclusiveSendRounds = settings.value("nExclusiveSendRounds").toInt();
 
     if (!settings.contains("nExclusiveSendAmount")) {
         // for migration from old settings
@@ -143,13 +145,13 @@ void OptionsModel::Init(bool resetSettings)
     }
     if (!SoftSetArg("-exclusivesendamount", settings.value("nExclusiveSendAmount").toString().toStdString()))
         addOverriddenOption("-exclusivesendamount");
-    privateSendClient.nExclusiveSendAmount = settings.value("nExclusiveSendAmount").toInt();
+    exclusiveSendClient.nExclusiveSendAmount = settings.value("nExclusiveSendAmount").toInt();
 
     if (!settings.contains("fExclusiveSendMultiSession"))
         settings.setValue("fExclusiveSendMultiSession", DEFAULT_EXCLUSIVESEND_MULTISESSION);
     if (!SoftSetBoolArg("-exclusivesendmultisession", settings.value("fExclusiveSendMultiSession").toBool()))
         addOverriddenOption("-exclusivesendmultisession");
-    privateSendClient.fExclusiveSendMultiSession = settings.value("fExclusiveSendMultiSession").toBool();
+    exclusiveSendClient.fExclusiveSendMultiSession = settings.value("fExclusiveSendMultiSession").toBool();
 #endif
 
     // Network
@@ -281,14 +283,18 @@ QVariant OptionsModel::data(const QModelIndex & index, int role) const
             return nDisplayUnit;
         case ThirdPartyTxUrls:
             return strThirdPartyTxUrls;
+#ifdef ENABLE_WALLET
         case Digits:
             return settings.value("digits");
+#endif // ENABLE_WALLET
         case Theme:
             return settings.value("theme");
         case Language:
             return settings.value("language");
+#ifdef ENABLE_WALLET
         case CoinControlFeatures:
             return fCoinControlFeatures;
+#endif // ENABLE_WALLET
         case DatabaseCache:
             return settings.value("nDatabaseCache");
         case ThreadsScriptVerif:
@@ -420,24 +426,24 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
         case ExclusiveSendRounds:
             if (settings.value("nExclusiveSendRounds") != value)
             {
-                privateSendClient.nExclusiveSendRounds = value.toInt();
-                settings.setValue("nExclusiveSendRounds", privateSendClient.nExclusiveSendRounds);
-                Q_EMIT privateSendRoundsChanged();
+                exclusiveSendClient.nExclusiveSendRounds = value.toInt();
+                settings.setValue("nExclusiveSendRounds", exclusiveSendClient.nExclusiveSendRounds);
+                Q_EMIT exclusiveSendRoundsChanged();
             }
             break;
         case ExclusiveSendAmount:
             if (settings.value("nExclusiveSendAmount") != value)
             {
-                privateSendClient.nExclusiveSendAmount = value.toInt();
-                settings.setValue("nExclusiveSendAmount", privateSendClient.nExclusiveSendAmount);
+                exclusiveSendClient.nExclusiveSendAmount = value.toInt();
+                settings.setValue("nExclusiveSendAmount", exclusiveSendClient.nExclusiveSendAmount);
                 Q_EMIT privateSentAmountChanged();
             }
             break;
         case ExclusiveSendMultiSession:
             if (settings.value("fExclusiveSendMultiSession") != value)
             {
-                privateSendClient.fExclusiveSendMultiSession = value.toBool();
-                settings.setValue("fExclusiveSendMultiSession", privateSendClient.fExclusiveSendMultiSession);
+                exclusiveSendClient.fExclusiveSendMultiSession = value.toBool();
+                settings.setValue("fExclusiveSendMultiSession", exclusiveSendClient.fExclusiveSendMultiSession);
             }
             break;
 #endif
@@ -451,12 +457,14 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
                 setRestartRequired(true);
             }
             break;
+#ifdef ENABLE_WALLET
         case Digits:
             if (settings.value("digits") != value) {
                 settings.setValue("digits", value);
                 setRestartRequired(true);
             }
             break;            
+#endif // ENABLE_WALLET
         case Theme:
             if (settings.value("theme") != value) {
                 settings.setValue("theme", value);
@@ -469,11 +477,13 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
                 setRestartRequired(true);
             }
             break;
+#ifdef ENABLE_WALLET
         case CoinControlFeatures:
             fCoinControlFeatures = value.toBool();
             settings.setValue("fCoinControlFeatures", fCoinControlFeatures);
             Q_EMIT coinControlFeaturesChanged(fCoinControlFeatures);
             break;
+#endif // ENABLE_WALLET
         case DatabaseCache:
             if (settings.value("nDatabaseCache") != value) {
                 settings.setValue("nDatabaseCache", value);

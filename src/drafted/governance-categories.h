@@ -4,7 +4,7 @@
 
 	* means the category has an associated class
 	
-	CTrivechainNetwork: TRVC NETWORK (ROOT)
+	CTrivechainNetwork: TRIVECHAIN NETWORK (ROOT)
 	has:
 		vector<CNetworkVariable> vecNetworkVariables;
 		vector<CTrivechainProject> vecProjects;
@@ -19,7 +19,7 @@
 
 */
 
-	// TRVC NETWORK (ROOT)
+	// TRIVECHAIN NETWORK (ROOT)
 	// 	-> NETWORK VARIABLE
 	// 		-> switch, setting
 	// 	-> CATEGORIES
@@ -49,7 +49,7 @@
 	// 			-> USER1 (only users are allowed here in this scope)
 	// 			-> USER2
 	// 		-> GROUP2 (EVO)
-	// 			-> VALUEOVERRIDE (STORE=TRVCDRIVE)
+	// 			-> VALUEOVERRIDE (STORE=TRIVECHAINDRIVE)
 	// 			-> USER1
 
 	// 	-> COMPANIES

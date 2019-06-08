@@ -1,6 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
 // Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2018-2019 The Trivechain Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -34,8 +35,8 @@
 
 // Uncomment the following line to enable debugging messages
 // or enable on a per file basis prior to inclusion of util.h
-//#define ENABLE_TRVC_DEBUG
-#ifdef ENABLE_TRVC_DEBUG
+//#define ENABLE_TRIVECHAIN_DEBUG
+#ifdef ENABLE_TRIVECHAIN_DEBUG
 #define DBG( x ) x
 #else
 #define DBG( x ) 

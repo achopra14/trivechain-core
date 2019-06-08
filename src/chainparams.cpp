@@ -72,7 +72,7 @@ class CMainParams : public CChainParams {
 public:
     CMainParams() {
         strNetworkID = "main";
-        consensus.nSubsidyHalvingInterval = 210240; // Note: actual number of blocks per calendar year with DGW v3 is ~200700 (for example 449750 - 249050)
+        consensus.nSubsidyHalvingInterval = 525600; // Note: actual number of blocks per calendar year with DGW v3 is ~200700 (for example 449750 - 249050)
         consensus.nMasternodePaymentsStartBlock = 1000; 
         consensus.nMasternodePaymentsIncreaseBlock = 0; // Masternode payment in Trivechain is fixed at 40%
         consensus.nMasternodePaymentsIncreasePeriod = 0; // Masternode payment in Trivechain is fixed at 40%
@@ -171,15 +171,19 @@ public:
         nFulfilledRequestExpireTime = 60*60; // fulfilled requests expire in 1 hour
         strSporkPubKey = "03136a7e7ce557dbcdc38860684cd31299e013cfd7ba4dfb117ec2cee0f420828c";
 
+
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            (  0, uint256S("0x000008ad295e16d2a5456aef65cb1c28139835aba6a340d0be0fb8ca2b2e9e26"))
-            (  4991, uint256S("0x000000003b01809551952460744d5dbb8fcbd6cbae3c220267bf7fa43f837367"))
-            (  19465, uint256S("0x0000000000002d6b4663d59a7dd8ced9379ab551da02bdf1e2821057a8e3d7c8"))
-            (  53039, uint256S("0x0000000000000662d00551043355938b21a485633e771ef648b7d9000b49ee22"))
-            (  80233, uint256S("0x0000000000000413123b48d1d5af96a1879f2b41b1f401b651476cdc33b6a000")),
-            0, // * UNIX timestamp of last checkpoint block
-            0,    // * total number of transactions between genesis and last checkpoint
+            (   1500, uint256S("0x0000019499f2569d0c4c99a171a94294f8111036fc3331a85e1d09320f586684"))
+            (   5000, uint256S("0x000002bcecf140a86b1db138706636e58b09b6271066110369cb4b2c168b0262"))
+            (  50000, uint256S("0x00000000000012dcd42042070a4e106e577394760f7663ebfc130c348766acea"))
+            ( 100000, uint256S("0x0000000000015c62c9a493529215f3f0c3e9e01a45c14063671340558dce34d4"))
+            ( 150000, uint256S("0x000000000000a5a404d4b403401c61159df545da193fe002115d7f799e2b85fe"))
+            ( 200000, uint256S("0x00000000000df26f68d1a64d69ef250797d773b0c6e00fa399ee3cec059541e7"))
+            ( 226650, uint256S("0x0000000000012c3d19793ebb8fe56bf3644529b159fbee8b7a8ab21ff463f4eb"))
+            ( 288000, uint256S("0x00000000029c6f80395cbec98682c8fba0f13d47b7089607637173ff7f65f65b")),
+            1559822642, // * UNIX timestamp of last checkpoint block
+            507840,     // * total number of transactions between genesis and last checkpoint
                         //   (the tx=... number in the SetBestChain debug.log lines)
             5000        // * estimated number of transactions per day after checkpoint
         };
@@ -194,7 +198,7 @@ class CTestNetParams : public CChainParams {
 public:
     CTestNetParams() {
         strNetworkID = "test";
-        consensus.nSubsidyHalvingInterval = 210240;
+        consensus.nSubsidyHalvingInterval = 525600;
         consensus.nMasternodePaymentsStartBlock = 4010; // not true, but it's ok as long as it's less then nMasternodePaymentsIncreaseBlock
         consensus.nMasternodePaymentsIncreaseBlock = 4030;
         consensus.nMasternodePaymentsIncreasePeriod = 10;
@@ -290,14 +294,12 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            (  0, uint256S("0x000008ad295e16d2a5456aef65cb1c28139835aba6a340d0be0fb8ca2b2e9e26"))
-            (  16433, uint256S("0x00000144b4df98b684c3524fa38964fa3b9cdadeb90bca8ed415c836e4935045")),
-            0, // * UNIX timestamp of last checkpoint block
-            0,    // * total number of transactions between genesis and last checkpoint
+            ( 203871, uint256S("0x000000d54be3783d235c99915edb20f1a711f3a78717208c58a35087e77cf2aa")),
+            1554365338, // * UNIX timestamp of last known number of transactions (Block 203871)
+            204600,     // * total number of transactions between genesis and that timestamp
                         //   (the tx=... number in the SetBestChain debug.log lines)
-            5000        // * estimated number of transactions per day after checkpoint
+            0.01        // * estimated number of transactions per second after that timestamp
         };
-
     }
 };
 static CTestNetParams testNetParams;

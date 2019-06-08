@@ -62,7 +62,7 @@ patch -p0 < /usr/ports/devel/boost/patches/patch-boost_test_impl_execution_monit
 sed 's/__OPEN_BSD__/__OpenBSD__/g' < libs/filesystem/src/path.cpp > libs/filesystem/src/path.cpp.tmp
 mv libs/filesystem/src/path.cpp.tmp libs/filesystem/src/path.cpp
 
-# Build w/ minimum configuration necessary for dash
+# Build w/ minimum configuration necessary for trivechain
 echo 'using gcc : : eg++ : <cxxflags>"-fvisibility=hidden -fPIC" <linkflags>"" <archiver>"ar" <striper>"strip"  <ranlib>"ranlib" <rc>"" : ;' > user-config.jam
 config_opts="runtime-link=shared threadapi=pthread threading=multi link=static variant=release --layout=tagged --build-type=complete --user-config=user-config.jam -sNO_BZIP2=1"
 ./bootstrap.sh --without-icu --with-libraries=chrono,filesystem,program_options,system,thread,test
@@ -78,7 +78,7 @@ See "Berkeley DB" in [build_unix.md](build_unix.md) for instructions on how to b
 You cannot use the BerkeleyDB library from ports, for the same reason as boost above (g++/libstd++ incompatibility).
 
 ```bash
-# Pick some path to install BDB to, here we create a directory within the dash directory
+# Pick some path to install BDB to, here we create a directory within the trivechain directory
 TRIVECHAIN_ROOT=$(pwd)
 BDB_PREFIX="${TRIVECHAIN_ROOT}/db4"
 mkdir -p $BDB_PREFIX

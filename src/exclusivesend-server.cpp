@@ -1,4 +1,5 @@
 // Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2018-2019 The Trivechain Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include "exclusivesend-server.h"
@@ -9,11 +10,12 @@
 #include "init.h"
 #include "masternode-sync.h"
 #include "masternodeman.h"
+#include "script/interpreter.h"
 #include "txmempool.h"
 #include "util.h"
 #include "utilmoneystr.h"
 
-CExclusiveSendServer privateSendServer;
+CExclusiveSendServer exclusiveSendServer;
 
 void CExclusiveSendServer::ProcessMessage(CNode* pfrom, std::string& strCommand, CDataStream& vRecv, CConnman& connman)
 {
@@ -71,7 +73,7 @@ void CExclusiveSendServer::ProcessMessage(CNode* pfrom, std::string& strCommand,
         }
 
     } else if(strCommand == NetMsgType::DSQUEUE) {
-        TRY_LOCK(cs_darksend, lockRecv);
+        TRY_LOCK(cs_exclusivesend, lockRecv);
         if(!lockRecv) return;
 
         if(pfrom->nVersion < MIN_EXCLUSIVESEND_PEER_PROTO_VERSION) {
@@ -79,11 +81,11 @@ void CExclusiveSendServer::ProcessMessage(CNode* pfrom, std::string& strCommand,
             return;
         }
 
-        CDarksendQueue dsq;
+        CExclusivesendQueue dsq;
         vRecv >> dsq;
 
         // process every dsq only once
-        BOOST_FOREACH(CDarksendQueue q, vecDarksendQueue) {
+        BOOST_FOREACH(CExclusivesendQueue q, vecExclusivesendQueue) {
             if(q == dsq) {
                 // LogPrint("exclusivesend", "DSQUEUE -- %s seen\n", dsq.ToString());
                 return;
@@ -104,7 +106,7 @@ void CExclusiveSendServer::ProcessMessage(CNode* pfrom, std::string& strCommand,
         }
 
         if(!dsq.fReady) {
-            BOOST_FOREACH(CDarksendQueue q, vecDarksendQueue) {
+            BOOST_FOREACH(CExclusivesendQueue q, vecExclusivesendQueue) {
                 if(q.vin == dsq.vin) {
                     // no way same mn can send another "not yet ready" dsq this soon
                     LogPrint("exclusivesend", "DSQUEUE -- Masternode %s is sending WAY too many dsq messages\n", mnInfo.addr.ToString());
@@ -122,7 +124,7 @@ void CExclusiveSendServer::ProcessMessage(CNode* pfrom, std::string& strCommand,
             mnodeman.AllowMixing(dsq.vin.prevout);
 
             LogPrint("exclusivesend", "DSQUEUE -- new ExclusiveSend queue (%s) from masternode %s\n", dsq.ToString(), mnInfo.addr.ToString());
-            vecDarksendQueue.push_back(dsq);
+            vecExclusivesendQueue.push_back(dsq);
             dsq.Relay(connman);
         }
 
@@ -141,7 +143,7 @@ void CExclusiveSendServer::ProcessMessage(CNode* pfrom, std::string& strCommand,
             return;
         }
 
-        CDarkSendEntry entry;
+        CExclusiveSendEntry entry;
         vRecv >> entry;
 
         LogPrint("exclusivesend", "DSVIN -- txCollateral %s", entry.txCollateral.ToString());
@@ -152,14 +154,14 @@ void CExclusiveSendServer::ProcessMessage(CNode* pfrom, std::string& strCommand,
             return;
         }
 
-        if(entry.vecTxDSOut.size() > EXCLUSIVESEND_ENTRY_MAX_SIZE) {
-            LogPrintf("DSVIN -- ERROR: too many outputs! %d/%d\n", entry.vecTxDSOut.size(), EXCLUSIVESEND_ENTRY_MAX_SIZE);
+        if(entry.vecTxOut.size() > EXCLUSIVESEND_ENTRY_MAX_SIZE) {
+            LogPrintf("DSVIN -- ERROR: too many outputs! %d/%d\n", entry.vecTxOut.size(), EXCLUSIVESEND_ENTRY_MAX_SIZE);
             PushStatus(pfrom, STATUS_REJECTED, ERR_MAXIMUM, connman);
             return;
         }
 
         //do we have the same denominations as the current session?
-        if(!IsOutputsCompatibleWithSessionDenom(entry.vecTxDSOut)) {
+        if(!IsOutputsCompatibleWithSessionDenom(entry.vecTxOut)) {
             LogPrintf("DSVIN -- not compatible with existing transactions!\n");
             PushStatus(pfrom, STATUS_REJECTED, ERR_EXISTING_TX, connman);
             return;
@@ -172,7 +174,7 @@ void CExclusiveSendServer::ProcessMessage(CNode* pfrom, std::string& strCommand,
 
             CMutableTransaction tx;
 
-            BOOST_FOREACH(const CTxOut txout, entry.vecTxDSOut) {
+            for (const auto& txout : entry.vecTxOut) {
                 nValueOut += txout.nValue;
                 tx.vout.push_back(txout);
 
@@ -181,7 +183,7 @@ void CExclusiveSendServer::ProcessMessage(CNode* pfrom, std::string& strCommand,
                     PushStatus(pfrom, STATUS_REJECTED, ERR_NON_STANDARD_PUBKEY, connman);
                     return;
                 }
-                if(!txout.scriptPubKey.IsNormalPaymentScript()) {
+                if(!txout.scriptPubKey.IsPayToPublicKeyHash()) {
                     LogPrintf("DSVIN -- invalid script! scriptPubKey=%s\n", ScriptToAsmStr(txout.scriptPubKey));
                     PushStatus(pfrom, STATUS_REJECTED, ERR_INVALID_SCRIPT, connman);
                     return;
@@ -193,9 +195,9 @@ void CExclusiveSendServer::ProcessMessage(CNode* pfrom, std::string& strCommand,
 
                 LogPrint("exclusivesend", "DSVIN -- txin=%s\n", txin.ToString());
 
-                CCoins coins;
-                if(GetUTXOCoins(txin.prevout, coins)) {
-                    nValueIn += coins.vout[txin.prevout.n].nValue;
+                Coin coin;
+                if(GetUTXOCoin(txin.prevout, coin)) {
+                    nValueIn += coin.out.nValue;
                 } else {
                     LogPrintf("DSVIN -- missing input! tx=%s", tx.ToString());
                     PushStatus(pfrom, STATUS_REJECTED, ERR_MISSING_TX, connman);
@@ -310,8 +312,8 @@ void CExclusiveSendServer::CreateFinalTransaction(CConnman& connman)
 
     // make our new transaction
     for(int i = 0; i < GetEntriesCount(); i++) {
-        BOOST_FOREACH(const CTxDSOut& txdsout, vecEntries[i].vecTxDSOut)
-            txNew.vout.push_back(txdsout);
+        for (const auto& txout : vecEntries[i].vecTxOut)
+            txNew.vout.push_back(txout);
 
         BOOST_FOREACH(const CTxDSIn& txdsin, vecEntries[i].vecTxDSIn)
             txNew.vin.push_back(txdsin);
@@ -356,7 +358,7 @@ void CExclusiveSendServer::CommitFinalTransaction(CConnman& connman)
 
     // create and sign masternode dstx transaction
     if(!CExclusiveSend::GetDSTX(hashTx)) {
-        CDarksendBroadcastTx dstxNew(finalTransaction, activeMasternode.outpoint, GetAdjustedTime());
+        CExclusivesendBroadcastTx dstxNew(finalTransaction, activeMasternode.outpoint, GetAdjustedTime());
         dstxNew.Sign();
         CExclusiveSend::AddDSTX(dstxNew);
     }
@@ -401,7 +403,7 @@ void CExclusiveSendServer::ChargeFees(CConnman& connman)
     if(nState == POOL_STATE_ACCEPTING_ENTRIES) {
         BOOST_FOREACH(const CTransaction& txCollateral, vecSessionCollaterals) {
             bool fFound = false;
-            BOOST_FOREACH(const CDarkSendEntry& entry, vecEntries)
+            BOOST_FOREACH(const CExclusiveSendEntry& entry, vecEntries)
                 if(entry.txCollateral == txCollateral)
                     fFound = true;
 
@@ -415,7 +417,7 @@ void CExclusiveSendServer::ChargeFees(CConnman& connman)
 
     if(nState == POOL_STATE_SIGNING) {
         // who didn't sign?
-        BOOST_FOREACH(const CDarkSendEntry entry, vecEntries) {
+        BOOST_FOREACH(const CExclusiveSendEntry entry, vecEntries) {
             BOOST_FOREACH(const CTxDSIn txdsin, entry.vecTxDSIn) {
                 if(!txdsin.fHasSig) {
                     LogPrintf("CExclusiveSendServer::ChargeFees -- found uncooperative node (didn't sign), found offence\n");
@@ -494,19 +496,7 @@ void CExclusiveSendServer::ChargeRandomFees(CConnman& connman)
 //
 void CExclusiveSendServer::CheckTimeout(CConnman& connman)
 {
-    {
-        TRY_LOCK(cs_darksend, lockDS);
-        if(!lockDS) return; // it's ok to fail here, we run this quite frequently
-
-        // check mixing queue objects for timeouts
-        std::vector<CDarksendQueue>::iterator it = vecDarksendQueue.begin();
-        while(it != vecDarksendQueue.end()) {
-            if((*it).IsExpired()) {
-                LogPrint("exclusivesend", "CExclusiveSendServer::CheckTimeout -- Removing expired queue (%s)\n", (*it).ToString());
-                it = vecDarksendQueue.erase(it);
-            } else ++it;
-        }
-    }
+    CheckQueue();
 
     if(!fMasterNode) return;
 
@@ -535,7 +525,7 @@ void CExclusiveSendServer::CheckForCompleteQueue(CConnman& connman)
     if(nState == POOL_STATE_QUEUE && IsSessionReady()) {
         SetState(POOL_STATE_ACCEPTING_ENTRIES);
 
-        CDarksendQueue dsq(nSessionDenom, activeMasternode.outpoint, GetAdjustedTime(), true);
+        CExclusivesendQueue dsq(nSessionDenom, activeMasternode.outpoint, GetAdjustedTime(), true);
         LogPrint("exclusivesend", "CExclusiveSendServer::CheckForCompleteQueue -- queue is ready, signing and relaying (%s)\n", dsq.ToString());
         dsq.Sign();
         dsq.Relay(connman);
@@ -553,10 +543,10 @@ bool CExclusiveSendServer::IsInputScriptSigValid(const CTxIn& txin)
     int nTxInIndex = -1;
     CScript sigPubKey = CScript();
 
-    BOOST_FOREACH(CDarkSendEntry& entry, vecEntries) {
+    BOOST_FOREACH(CExclusiveSendEntry& entry, vecEntries) {
 
-        BOOST_FOREACH(const CTxDSOut& txdsout, entry.vecTxDSOut)
-            txNew.vout.push_back(txdsout);
+        for (const auto& txout : entry.vecTxOut)
+            txNew.vout.push_back(txout);
 
         BOOST_FOREACH(const CTxDSIn& txdsin, entry.vecTxDSIn) {
             txNew.vin.push_back(txdsin);
@@ -588,7 +578,7 @@ bool CExclusiveSendServer::IsInputScriptSigValid(const CTxIn& txin)
 //
 // Add a clients transaction to the pool
 //
-bool CExclusiveSendServer::AddEntry(const CDarkSendEntry& entryNew, PoolMessage& nMessageIDRet)
+bool CExclusiveSendServer::AddEntry(const CExclusiveSendEntry& entryNew, PoolMessage& nMessageIDRet)
 {
     if(!fMasterNode) return false;
 
@@ -614,7 +604,7 @@ bool CExclusiveSendServer::AddEntry(const CDarkSendEntry& entryNew, PoolMessage&
 
     BOOST_FOREACH(CTxIn txin, entryNew.vecTxDSIn) {
         LogPrint("exclusivesend", "looking for txin -- %s\n", txin.ToString());
-        BOOST_FOREACH(const CDarkSendEntry& entry, vecEntries) {
+        BOOST_FOREACH(const CExclusiveSendEntry& entry, vecEntries) {
             BOOST_FOREACH(const CTxDSIn& txdsin, entry.vecTxDSIn) {
                 if(txdsin.prevout == txin.prevout) {
                     LogPrint("exclusivesend", "CExclusiveSendServer::AddEntry -- found in txin\n");
@@ -638,7 +628,7 @@ bool CExclusiveSendServer::AddScriptSig(const CTxIn& txinNew)
 {
     LogPrint("exclusivesend", "CExclusiveSendServer::AddScriptSig -- scriptSig=%s\n", ScriptToAsmStr(txinNew.scriptSig).substr(0,24));
 
-    BOOST_FOREACH(const CDarkSendEntry& entry, vecEntries) {
+    BOOST_FOREACH(const CExclusiveSendEntry& entry, vecEntries) {
         BOOST_FOREACH(const CTxDSIn& txdsin, entry.vecTxDSIn) {
             if(txdsin.scriptSig == txinNew.scriptSig) {
                 LogPrint("exclusivesend", "CExclusiveSendServer::AddScriptSig -- already exists\n");
@@ -657,7 +647,6 @@ bool CExclusiveSendServer::AddScriptSig(const CTxIn& txinNew)
     BOOST_FOREACH(CTxIn& txin, finalMutableTransaction.vin) {
         if(txinNew.prevout == txin.prevout && txin.nSequence == txinNew.nSequence) {
             txin.scriptSig = txinNew.scriptSig;
-            txin.prevPubKey = txinNew.prevPubKey;
             LogPrint("exclusivesend", "CExclusiveSendServer::AddScriptSig -- adding to finalMutableTransaction, scriptSig=%s\n", ScriptToAsmStr(txinNew.scriptSig).substr(0,24));
         }
     }
@@ -675,21 +664,21 @@ bool CExclusiveSendServer::AddScriptSig(const CTxIn& txinNew)
 // Check to make sure everything is signed
 bool CExclusiveSendServer::IsSignaturesComplete()
 {
-    BOOST_FOREACH(const CDarkSendEntry& entry, vecEntries)
+    BOOST_FOREACH(const CExclusiveSendEntry& entry, vecEntries)
         BOOST_FOREACH(const CTxDSIn& txdsin, entry.vecTxDSIn)
             if(!txdsin.fHasSig) return false;
 
     return true;
 }
 
-bool CExclusiveSendServer::IsOutputsCompatibleWithSessionDenom(const std::vector<CTxDSOut>& vecTxDSOut)
+bool CExclusiveSendServer::IsOutputsCompatibleWithSessionDenom(const std::vector<CTxOut>& vecTxOut)
 {
-    if(CExclusiveSend::GetDenominations(vecTxDSOut) == 0) return false;
+    if(CExclusiveSend::GetDenominations(vecTxOut) == 0) return false;
 
-    BOOST_FOREACH(const CDarkSendEntry entry, vecEntries) {
-        LogPrintf("CExclusiveSendServer::IsOutputsCompatibleWithSessionDenom -- vecTxDSOut denom %d, entry.vecTxDSOut denom %d\n",
-                CExclusiveSend::GetDenominations(vecTxDSOut), CExclusiveSend::GetDenominations(entry.vecTxDSOut));
-        if(CExclusiveSend::GetDenominations(vecTxDSOut) != CExclusiveSend::GetDenominations(entry.vecTxDSOut)) return false;
+    BOOST_FOREACH(const CExclusiveSendEntry entry, vecEntries) {
+        LogPrintf("CExclusiveSendServer::IsOutputsCompatibleWithSessionDenom -- vecTxOut denom %d, entry.vecTxOut denom %d\n",
+                CExclusiveSend::GetDenominations(vecTxOut), CExclusiveSend::GetDenominations(entry.vecTxOut));
+        if(CExclusiveSend::GetDenominations(vecTxOut) != CExclusiveSend::GetDenominations(entry.vecTxOut)) return false;
     }
 
     return true;
@@ -742,11 +731,11 @@ bool CExclusiveSendServer::CreateNewSession(int nDenom, CTransaction txCollatera
 
     if(!fUnitTest) {
         //broadcast that I'm accepting entries, only if it's the first entry through
-        CDarksendQueue dsq(nDenom, activeMasternode.outpoint, GetAdjustedTime(), false);
+        CExclusivesendQueue dsq(nDenom, activeMasternode.outpoint, GetAdjustedTime(), false);
         LogPrint("exclusivesend", "CExclusiveSendServer::CreateNewSession -- signing and relaying new queue: %s\n", dsq.ToString());
         dsq.Sign();
         dsq.Relay(connman);
-        vecDarksendQueue.push_back(dsq);
+        vecExclusivesendQueue.push_back(dsq);
     }
 
     vecSessionCollaterals.push_back(txCollateral);
@@ -901,8 +890,8 @@ void ThreadCheckExclusiveSendServer(CConnman& connman)
 
         if(masternodeSync.IsBlockchainSynced() && !ShutdownRequested()) {
             nTick++;
-            privateSendServer.CheckTimeout(connman);
-            privateSendServer.CheckForCompleteQueue(connman);
+            exclusiveSendServer.CheckTimeout(connman);
+            exclusiveSendServer.CheckForCompleteQueue(connman);
         }
     }
 }

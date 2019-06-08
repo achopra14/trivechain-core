@@ -1,4 +1,5 @@
 // Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2018-2019 The Trivechain Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -125,7 +126,7 @@ struct masternode_info_t
 };
 
 //
-// The Masternode Class. For managing the Darksend process. It contains the input of the 1000DRK, signature to prove
+// The Masternode Class. For managing the Exclusivesend process. It contains the input of the 1000DRK, signature to prove
 // it's the one who own that ip address and code for calculating the payment election.
 //
 class CMasternode : public masternode_info_t
@@ -149,8 +150,7 @@ public:
     enum CollateralStatus {
         COLLATERAL_OK,
         COLLATERAL_UTXO_NOT_FOUND,
-        COLLATERAL_INVALID_AMOUNT,
-        COLLATERAL_INVALID_AMOUNT_1000
+        COLLATERAL_INVALID_AMOUNT
     };
 
 
@@ -252,7 +252,7 @@ public:
         return false;
     }
 
-    /// Is the input associated with collateral public key? (and there is 1000 TRVC - checking if valid masternode)
+    /// Is the input associated with collateral public key? (and there is 10000 TRVC - checking if valid masternode)
     bool IsInputAssociatedWithPubkey();
 
     bool IsValidNetAddr();

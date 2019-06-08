@@ -1,4 +1,5 @@
 // Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2018-2019 The Trivechain Core developers
 
 /*
  * FIELDS AND CLASSIFICATION
@@ -79,7 +80,7 @@
  *  TREE STRUCTURE
  *  ===========================================
  * 
- *  TRVC NETWORK (ROOT)
+ *  TRIVECHAIN NETWORK (ROOT)
  *      -> NETWORK GLOBOLS
  *          -> SWITCHES, SETTINGS
  *      -> CATEGORIES
@@ -117,7 +118,7 @@ private:
     int nLevel;
     std::string strCategory;
 
-    // Current OBJECT STATUS (see http://gov.trivechain.com)
+    // Current OBJECT STATUS (see http://govman.trivechain.com/index.php/Documentation_:_Status_Field)
     int nStatusID;
     std::string strStatusMessage;
 

@@ -61,6 +61,7 @@ libconftest.dylib*
 *.pyc
 *.o
 *.o-*
+*.patch
 .trivechain
 *.a
 *.pb.cc
@@ -80,7 +81,6 @@ libconftest.dylib*
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
-!depends/Makefile
 trivechain-qt
 Trivechain-Qt.app
 
@@ -132,6 +132,3 @@ trivechain-cli
 trivechaind
 trivechain-qt
 make
-trvc.code-workspace
-runtime/*
-.vscode/*

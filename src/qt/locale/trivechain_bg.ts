@@ -62,12 +62,12 @@
         <translation>Адреси за получаване</translation>
     </message>
     <message>
-        <source>These are your Dash addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Това са вашите Dash адреси за изпращане на плащания. Преди изпращане винаги проверявайте количеството и адреса за получаване на монетите.</translation>
+        <source>These are your Trivechain addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Това са вашите Trivechain адреси за изпращане на плащания. Преди изпращане винаги проверявайте количеството и адреса за получаване на монетите.</translation>
     </message>
     <message>
-        <source>These are your Dash addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Това са вашите Dash адреси за получаване на плащания. Препоръчително е да използвате нов адрес за всяка нова транзакция. </translation>
+        <source>These are your Trivechain addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Това са вашите Trivechain адреси за получаване на плащания. Препоръчително е да използвате нов адрес за всяка нова транзакция. </translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -136,8 +136,8 @@
         <translation>Служи да изключи изпращането на средства, когато акаунта на Операционната система е компрометиран. Не предоставя реална сигурност. </translation>
     </message>
     <message>
-        <source>Only for mixing via PrivateSend</source>
-        <translation>Само за миксиране с PrivateSend</translation>
+        <source>Only for mixing via ExclusiveSend</source>
+        <translation>Само за миксиране с ExclusiveSend</translation>
     </message>
     <message>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
@@ -176,8 +176,8 @@
         <translation>Потвърдете на шифрирането на портфейла</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR DASH&lt;/b&gt;!</source>
-        <translation>Внимание: Ако шифрирате вашия портфейл и загубите паролата си,  &lt;b&gt;ЩЕ ЗАГУБИТЕ ВСИЧКИ DASH МОНЕТИ!&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR TRIVECHAIN&lt;/b&gt;!</source>
+        <translation>Внимание: Ако шифрирате вашия портфейл и загубите паролата си,  &lt;b&gt;ЩЕ ЗАГУБИТЕ ВСИЧКИ TRIVECHAIN МОНЕТИ!&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -188,8 +188,8 @@
         <translation>Портфейлът е шифриран</translation>
     </message>
     <message>
-        <source>Dash Core will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your dashs from being stolen by malware infecting your computer.</source>
-        <translation>Dash Core ще се затвори за да завърши процеса на криптиране. Запомнете, това криптира вашият портфейл, но не може да защити вашите Dash от вируси заразили  компютъра Ви.</translation>
+        <source>Trivechain Core will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your trivechains from being stolen by malware infecting your computer.</source>
+        <translation>Trivechain Core ще се затвори за да завърши процеса на криптиране. Запомнете, това криптира вашият портфейл, но не може да защити вашите Trivechain от вируси заразили  компютъра Ви.</translation>
     </message>
     <message>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
@@ -242,12 +242,12 @@
 <context>
     <name>BitcoinGUI</name>
     <message>
-        <source>A fatal error occurred. Dash Core can no longer continue safely and will quit.</source>
-        <translation>Възникна фатална грешка. Dash Core не може да продължи безопасно и ще се изключи.</translation>
+        <source>A fatal error occurred. Trivechain Core can no longer continue safely and will quit.</source>
+        <translation>Възникна фатална грешка. Trivechain Core не може да продължи безопасно и ще се изключи.</translation>
     </message>
     <message>
-        <source>Dash Core</source>
-        <translation>Dash Ядро</translation>
+        <source>Trivechain Core</source>
+        <translation>Trivechain Ядро</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -270,16 +270,16 @@
         <translation>&amp;Изпращане</translation>
     </message>
     <message>
-        <source>Send coins to a Dash address</source>
-        <translation>Изпращане на монети към Dash адрес</translation>
+        <source>Send coins to a Trivechain address</source>
+        <translation>Изпращане на монети към Trivechain адрес</translation>
     </message>
     <message>
         <source>&amp;Receive</source>
         <translation>&amp;Получаване</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and dash: URIs)</source>
-        <translation>Заявка за плащане (генерира QR кодове и Dash: URI)</translation>
+        <source>Request payments (generates QR codes and trivechain: URIs)</source>
+        <translation>Заявка за плащане (генерира QR кодове и Trivechain: URI)</translation>
     </message>
     <message>
         <source>&amp;Transactions</source>
@@ -306,12 +306,12 @@
         <translation>Изход от приложението</translation>
     </message>
     <message>
-        <source>&amp;About Dash Core</source>
-        <translation>&amp;За Dash ядрото</translation>
+        <source>&amp;About Trivechain Core</source>
+        <translation>&amp;За Trivechain ядрото</translation>
     </message>
     <message>
-        <source>Show information about Dash Core</source>
-        <translation>Покаци информация за Dash Core</translation>
+        <source>Show information about Trivechain Core</source>
+        <translation>Покаци информация за Trivechain Core</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -326,8 +326,8 @@
         <translation>&amp;Опции...</translation>
     </message>
     <message>
-        <source>Modify configuration options for Dash Core</source>
-        <translation>Промяна опциите за конфигуриране на Dash Core</translation>
+        <source>Modify configuration options for Trivechain Core</source>
+        <translation>Промяна опциите за конфигуриране на Trivechain Core</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>
@@ -378,16 +378,16 @@
         <translation>Подписване на &amp;съобщение...</translation>
     </message>
     <message>
-        <source>Sign messages with your Dash addresses to prove you own them</source>
-        <translation>Подпиши съобщения с твоите Dash адреси за да докажеш че ги притежаваш</translation>
+        <source>Sign messages with your Trivechain addresses to prove you own them</source>
+        <translation>Подпиши съобщения с твоите Trivechain адреси за да докажеш че ги притежаваш</translation>
     </message>
     <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Проверка на съобщение...</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Dash addresses</source>
-        <translation>Проверете съобщенията, за да сте сигурни че са подписани с определен Dash адрес</translation>
+        <source>Verify messages to ensure they were signed with specified Trivechain addresses</source>
+        <translation>Проверете съобщенията, за да сте сигурни че са подписани с определен Trivechain адрес</translation>
     </message>
     <message>
         <source>&amp;Information</source>
@@ -474,24 +474,24 @@
         <translation>Отвори &amp;URI...</translation>
     </message>
     <message>
-        <source>Open a dash: URI or payment request</source>
-        <translation>Отвори Dash: URI или заявка за плащане</translation>
+        <source>Open a trivechain: URI or payment request</source>
+        <translation>Отвори Trivechain: URI или заявка за плащане</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
         <translation>&amp;Опции на командния ред</translation>
     </message>
     <message>
-        <source>Show the Dash Core help message to get a list with possible Dash Core command-line options</source>
-        <translation>Покажи съобщението за помощ на Dash Core за да получите списък с възможните опции за командния ред на Dash Core</translation>
+        <source>Show the Trivechain Core help message to get a list with possible Trivechain Core command-line options</source>
+        <translation>Покажи съобщението за помощ на Trivechain Core за да получите списък с възможните опции за командния ред на Trivechain Core</translation>
     </message>
     <message>
-        <source>&amp;PrivateSend information</source>
-        <translation>&amp;PrivateSend информация</translation>
+        <source>&amp;ExclusiveSend information</source>
+        <translation>&amp;ExclusiveSend информация</translation>
     </message>
     <message>
-        <source>Show the PrivateSend basic information</source>
-        <translation>Показване на базова информация на PrivateSend </translation>
+        <source>Show the ExclusiveSend basic information</source>
+        <translation>Показване на базова информация на ExclusiveSend </translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -514,12 +514,12 @@
         <translation>Лента с инструменти</translation>
     </message>
     <message>
-        <source>Dash Core client</source>
-        <translation>Dash Core клиент</translation>
+        <source>Trivechain Core client</source>
+        <translation>Trivechain Core клиент</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Dash network</source>
-        <translation><numerusform>%n активни връзки към Dash мрежата</numerusform><numerusform>%n активни връзки към Dash мрежата</numerusform></translation>
+        <source>%n active connection(s) to Trivechain network</source>
+        <translation><numerusform>%n активни връзки към Trivechain мрежата</numerusform><numerusform>%n активни връзки към Trivechain мрежата</numerusform></translation>
     </message>
     <message>
         <source>Network activity disabled</source>
@@ -794,8 +794,8 @@
         <translation>Моля преминете към "Режим Списък" за да използвате тази функция.</translation>
     </message>
     <message>
-        <source>Non-anonymized input selected. &lt;b&gt;PrivateSend will be disabled.&lt;/b&gt;&lt;br&gt;&lt;br&gt;If you still want to use PrivateSend, please deselect all non-nonymized inputs first and then check PrivateSend checkbox again.</source>
-        <translation>Избран е не анонимизиран вход. &lt;b&gt;PrivateSend ще бъде изключен.&lt;/b&gt;&lt;br&gt;&lt;br&gt;Ако все още желаете да използвате PrivateSend, моля отмаркирайте всички не анонимизирани входове и след това изберете PrivateSend опцията отново.</translation>
+        <source>Non-anonymized input selected. &lt;b&gt;ExclusiveSend will be disabled.&lt;/b&gt;&lt;br&gt;&lt;br&gt;If you still want to use ExclusiveSend, please deselect all non-nonymized inputs first and then check ExclusiveSend checkbox again.</source>
+        <translation>Избран е не анонимизиран вход. &lt;b&gt;ExclusiveSend ще бъде изключен.&lt;/b&gt;&lt;br&gt;&lt;br&gt;Ако все още желаете да използвате ExclusiveSend, моля отмаркирайте всички не анонимизирани входове и след това изберете ExclusiveSend опцията отново.</translation>
     </message>
     <message>
         <source>(%1 locked)</source>
@@ -835,10 +835,10 @@
     </message>
 </context>
 <context>
-    <name>DarksendConfig</name>
+    <name>ExclusivesendConfig</name>
     <message>
-        <source>Configure PrivateSend</source>
-        <translation>Конфигуриране на PrivateSend</translation>
+        <source>Configure ExclusiveSend</source>
+        <translation>Конфигуриране на ExclusiveSend</translation>
     </message>
     <message>
         <source>Basic Privacy</source>
@@ -857,48 +857,48 @@
         <translation>Моля изберете ниво на сигурност.</translation>
     </message>
     <message>
-        <source>Use 2 separate masternodes to mix funds up to 1000 DASH</source>
-        <translation>Използване на 2 различни masternodes за смесване на средства до 1000 DASH</translation>
+        <source>Use 2 separate masternodes to mix funds up to 1000 TRIVECHAIN</source>
+        <translation>Използване на 2 различни masternodes за смесване на средства до 1000 TRIVECHAIN</translation>
     </message>
     <message>
-        <source>Use 8 separate masternodes to mix funds up to 1000 DASH</source>
-        <translation>Използване на 8 различни masternodes за смесване на средства до 1000 DASH</translation>
+        <source>Use 8 separate masternodes to mix funds up to 1000 TRIVECHAIN</source>
+        <translation>Използване на 8 различни masternodes за смесване на средства до 1000 TRIVECHAIN</translation>
     </message>
     <message>
         <source>Use 16 separate masternodes</source>
-        <translation>Използване на 16 различни masternodes за смесване на средства до 1000 DASH</translation>
+        <translation>Използване на 16 различни masternodes за смесване на средства до 1000 TRIVECHAIN</translation>
     </message>
     <message>
-        <source>This option is the quickest and will cost about ~0.025 DASH to anonymize 1000 DASH</source>
-        <translation>Това е най-бързият вариант, анонимизиране на 1000 DASH ще ви струва около 0.025 DASH</translation>
+        <source>This option is the quickest and will cost about ~0.025 TRIVECHAIN to anonymize 1000 TRIVECHAIN</source>
+        <translation>Това е най-бързият вариант, анонимизиране на 1000 TRIVECHAIN ще ви струва около 0.025 TRIVECHAIN</translation>
     </message>
     <message>
-        <source>This option is moderately fast and will cost about 0.05 DASH to anonymize 1000 DASH</source>
-        <translation>Това е средно бърз вариант, анонимизиране на 1000 DASH ще ви струва около 0.05 DASH</translation>
+        <source>This option is moderately fast and will cost about 0.05 TRIVECHAIN to anonymize 1000 TRIVECHAIN</source>
+        <translation>Това е средно бърз вариант, анонимизиране на 1000 TRIVECHAIN ще ви струва около 0.05 TRIVECHAIN</translation>
     </message>
     <message>
-        <source>0.1 DASH per 1000 DASH you anonymize.</source>
-        <translation>0.1 DASH за всеки 1000 DASH които анонимизирате.</translation>
+        <source>0.1 TRIVECHAIN per 1000 TRIVECHAIN you anonymize.</source>
+        <translation>0.1 TRIVECHAIN за всеки 1000 TRIVECHAIN които анонимизирате.</translation>
     </message>
     <message>
         <source>This is the slowest and most secure option. Using maximum anonymity will cost</source>
         <translation>Това е най-бавния и най-сигурен начин. Използването на максимална анонимност ще ви коства</translation>
     </message>
     <message>
-        <source>PrivateSend Configuration</source>
-        <translation>PrivateSend конфигурация</translation>
+        <source>ExclusiveSend Configuration</source>
+        <translation>ExclusiveSend конфигурация</translation>
     </message>
     <message>
-        <source>PrivateSend was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening Dash's configuration screen.</source>
-        <translation>PrivateSend беше успешно настроен до основно ниво (%1  2 цикъла). Може да промените това по всяко време, като отворите екрана за конфигурация на Dash.</translation>
+        <source>ExclusiveSend was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening Trivechain's configuration screen.</source>
+        <translation>ExclusiveSend беше успешно настроен до основно ниво (%1  2 цикъла). Може да промените това по всяко време, като отворите екрана за конфигурация на Trivechain.</translation>
     </message>
     <message>
-        <source>PrivateSend was successfully set to high (%1 and 8 rounds). You can change this at any time by opening Dash's configuration screen.</source>
-        <translation>PrivateSend беше успешно настроен до високо ниво (%1 и 8 цикъла). Може да промените това по всяко време, като отворите екрана за конфигурация на Dash.</translation>
+        <source>ExclusiveSend was successfully set to high (%1 and 8 rounds). You can change this at any time by opening Trivechain's configuration screen.</source>
+        <translation>ExclusiveSend беше успешно настроен до високо ниво (%1 и 8 цикъла). Може да промените това по всяко време, като отворите екрана за конфигурация на Trivechain.</translation>
     </message>
     <message>
-        <source>PrivateSend was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening Dash's configuration screen.</source>
-        <translation>PrivateSend беше успешно настроен до максимално ниво (%1 и 16 цикъла). Може да промените това по всяко време, като отворите екрана за конфигурация на Dash.</translation>
+        <source>ExclusiveSend was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening Trivechain's configuration screen.</source>
+        <translation>ExclusiveSend беше успешно настроен до максимално ниво (%1 и 16 цикъла). Може да промените това по всяко време, като отворите екрана за конфигурация на Trivechain.</translation>
     </message>
 </context>
 <context>
@@ -940,8 +940,8 @@
         <translation>Редактиране на адрес за изпращане</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Dash address.</source>
-        <translation>Въведеният адрес "%1" не е валиден Dash адрес.</translation>
+        <source>The entered address "%1" is not a valid Trivechain address.</source>
+        <translation>Въведеният адрес "%1" не е валиден Trivechain адрес.</translation>
     </message>
     <message>
         <source>The entered address "%1" is already in the address book.</source>
@@ -982,8 +982,8 @@
 <context>
     <name>HelpMessageDialog</name>
     <message>
-        <source>Dash Core</source>
-        <translation>Dash ядро</translation>
+        <source>Trivechain Core</source>
+        <translation>Trivechain ядро</translation>
     </message>
     <message>
         <source>version</source>
@@ -994,8 +994,8 @@
         <translation>(%1-битов)</translation>
     </message>
     <message>
-        <source>About Dash Core</source>
-        <translation>За Dash ядрото</translation>
+        <source>About Trivechain Core</source>
+        <translation>За Trivechain ядрото</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -1038,12 +1038,12 @@
         <translation>Нулиране на всички настройки направени чрез GUI</translation>
     </message>
     <message>
-        <source>PrivateSend information</source>
-        <translation>PrivateSend информация</translation>
+        <source>ExclusiveSend information</source>
+        <translation>ExclusiveSend информация</translation>
     </message>
     <message>
-        <source>&lt;h3&gt;PrivateSend Basics&lt;/h3&gt; PrivateSend gives you true financial privacy by obscuring the origins of your funds. All the Dash in your wallet is comprised of different "inputs" which you can think of as separate, discrete coins.&lt;br&gt; PrivateSend uses an innovative process to mix your inputs with the inputs of two other people, without having your coins ever leave your wallet. You retain control of your money at all times..&lt;hr&gt; &lt;b&gt;The PrivateSend process works like this:&lt;/b&gt;&lt;ol type="1"&gt; &lt;li&gt;PrivateSend begins by breaking your transaction inputs down into standard denominations. These denominations are 0.01 DASH, 0.1 DASH, 1 DASH and 10 DASH -- sort of like the paper money you use every day.&lt;/li&gt; &lt;li&gt;Your wallet then sends requests to specially configured software nodes on the network, called "masternodes." These masternodes are informed then that you are interested in mixing a certain denomination. No identifiable information is sent to the masternodes, so they never know "who" you are.&lt;/li&gt; &lt;li&gt;When two other people send similar messages, indicating that they wish to mix the same denomination, a mixing session begins. The masternode mixes up the inputs and instructs all three users' wallets to pay the now-transformed input back to themselves. Your wallet pays that denomination directly to itself, but in a different address (called a change address).&lt;/li&gt; &lt;li&gt;In order to fully obscure your funds, your wallet must repeat this process a number of times with each denomination. Each time the process is completed, it's called a "round." Each round of PrivateSend makes it exponentially more difficult to determine where your funds originated.&lt;/li&gt; &lt;li&gt;This mixing process happens in the background without any intervention on your part. When you wish to make a transaction, your funds will already be anonymized. No additional waiting is required.&lt;/li&gt; &lt;/ol&gt; &lt;hr&gt;&lt;b&gt;IMPORTANT:&lt;/b&gt; Your wallet only contains 1000 of these "change addresses." Every time a mixing event happens, up to 9 of your addresses are used up. This means those 1000 addresses last for about 100 mixing events. When 900 of them are used, your wallet must create more addresses. It can only do this, however, if you have automatic backups enabled.&lt;br&gt; Consequently, users who have backups disabled will also have PrivateSend disabled. &lt;hr&gt;For more info see &lt;a href="https://dashpay.atlassian.net/wiki/display/DOC/PrivateSend"&gt;https://dashpay.atlassian.net/wiki/display/DOC/PrivateSend&lt;/a&gt;         </source>
-        <translation>&lt;h3&gt;PrivateSend основни понятия&lt;/h3&gt; PrivateSend ви дава истинска финансова независимост чрез скриване произхода на средствата ви. Всички Dash монети в портфейла ви са съставени от различни "входове" които можете да приемете като отделни дискретни монети&lt;br&gt; PrivateSend използва иновативен процес като смесва вашите входове с входовете на други двама души без монетите да напускат изобщо портфейла ви. Имате пълен контрол върху парите си през цялото време. &lt;hr&gt; &lt;b&gt; PrivateSend процесът работи по следния начин:&lt;/b&gt;&lt;ol type="1"&gt; &lt;li&gt;PrivateSend започва чрез разделяне на транзакцията ви до стандартни деноминации. Тези деноминации са 0.01 DASH, 0.1 DASH, 1 DASH и 10 DASH --подобно на стандартните пари, които ползваме ежедневно.&lt;/li&gt; &lt;li&gt;Вашия портфейл изпраща запитване към специално конфигурираните софтуерни възли в мрежата, наречени "masternodes." Тези masternodes са информирани, че се интересувате от смесване на определена деноминация. Никаква идентификационна информация не се изпраща към   masternodes, така, че те никога не знаят "кой" сте.&lt;/li&gt; &lt;li&gt;Когато други двама души изпратят подобни съобщения, обозначаващи, че искат да смесят същата деноминация, смесващата сесия започва. Masternode смесват входовете и инструктират портфейлите на тримата потребители да платят новотрансформираните входове обратно към притежателите им. Вашият портфейл плаща деноминацията директно на себе си, но с различен адрес (наричан сменен адрес).  &lt;/li&gt; &lt;li&gt;С цел напълно скриване на доходите ви, вашият портфейл трябва да повтори този процес няколко пъти във всяка деноминация.  Всеки път завършеният процес се нарича "цикъл." Всеки цикъл на PrivateSend прави откриването на първоначалния източник на вашите средства напълно непроследим.&lt;/li&gt; &lt;li&gt;Този смесващ процес се случва като процес на заден фон без никаква намеса от ваша страна. Когато искате да направите транзакция, вашите средства са винаги анонимни. Не е необходимо допълнително изчакване. &lt;/li&gt; &lt;/ol&gt; &lt;hr&gt;&lt;b&gt;ВАЖНО:&lt;/b&gt; Вашият портфейл съдържа само 1000 от тези "сменяеми адреси". Всеки път когато се случва смесването до 9 от вашите адреси се ползват.  Това означава, че тези 1000 адреси се миксират в около 100 смесващи събития. Когато 900 се използват, вашия портфейл трябва да създаде повече адреси. Това може да стане само ако имате автоматично архивиране.&lt;br&gt; Следователно, потребителите, на които е изключено автоматичното архивиране, нямат и  PrivateSend включено. &lt;hr&gt;За повече информация вижте&lt;a href="https://dashpay.atlassian.net/wiki/display/DOC/PrivateSend"&gt;https://dashpay.atlassian.net/wiki/display/DOC/PrivateSend&lt;/a&gt;         </translation>
+        <source>&lt;h3&gt;ExclusiveSend Basics&lt;/h3&gt; ExclusiveSend gives you true financial privacy by obscuring the origins of your funds. All the Trivechain in your wallet is comprised of different "inputs" which you can think of as separate, discrete coins.&lt;br&gt; ExclusiveSend uses an innovative process to mix your inputs with the inputs of two other people, without having your coins ever leave your wallet. You retain control of your money at all times..&lt;hr&gt; &lt;b&gt;The ExclusiveSend process works like this:&lt;/b&gt;&lt;ol type="1"&gt; &lt;li&gt;ExclusiveSend begins by breaking your transaction inputs down into standard denominations. These denominations are 0.01 TRIVECHAIN, 0.1 TRIVECHAIN, 1 TRIVECHAIN and 10 TRIVECHAIN -- sort of like the paper money you use every day.&lt;/li&gt; &lt;li&gt;Your wallet then sends requests to specially configured software nodes on the network, called "masternodes." These masternodes are informed then that you are interested in mixing a certain denomination. No identifiable information is sent to the masternodes, so they never know "who" you are.&lt;/li&gt; &lt;li&gt;When two other people send similar messages, indicating that they wish to mix the same denomination, a mixing session begins. The masternode mixes up the inputs and instructs all three users' wallets to pay the now-transformed input back to themselves. Your wallet pays that denomination directly to itself, but in a different address (called a change address).&lt;/li&gt; &lt;li&gt;In order to fully obscure your funds, your wallet must repeat this process a number of times with each denomination. Each time the process is completed, it's called a "round." Each round of ExclusiveSend makes it exponentially more difficult to determine where your funds originated.&lt;/li&gt; &lt;li&gt;This mixing process happens in the background without any intervention on your part. When you wish to make a transaction, your funds will already be anonymized. No additional waiting is required.&lt;/li&gt; &lt;/ol&gt; &lt;hr&gt;&lt;b&gt;IMPORTANT:&lt;/b&gt; Your wallet only contains 1000 of these "change addresses." Every time a mixing event happens, up to 9 of your addresses are used up. This means those 1000 addresses last for about 100 mixing events. When 900 of them are used, your wallet must create more addresses. It can only do this, however, if you have automatic backups enabled.&lt;br&gt; Consequently, users who have backups disabled will also have ExclusiveSend disabled. &lt;hr&gt;For more info see &lt;a href="https://trivechain.atlassian.net/wiki/display/DOC/ExclusiveSend"&gt;https://trivechain.atlassian.net/wiki/display/DOC/ExclusiveSend&lt;/a&gt;         </source>
+        <translation>&lt;h3&gt;ExclusiveSend основни понятия&lt;/h3&gt; ExclusiveSend ви дава истинска финансова независимост чрез скриване произхода на средствата ви. Всички Trivechain монети в портфейла ви са съставени от различни "входове" които можете да приемете като отделни дискретни монети&lt;br&gt; ExclusiveSend използва иновативен процес като смесва вашите входове с входовете на други двама души без монетите да напускат изобщо портфейла ви. Имате пълен контрол върху парите си през цялото време. &lt;hr&gt; &lt;b&gt; ExclusiveSend процесът работи по следния начин:&lt;/b&gt;&lt;ol type="1"&gt; &lt;li&gt;ExclusiveSend започва чрез разделяне на транзакцията ви до стандартни деноминации. Тези деноминации са 0.01 TRIVECHAIN, 0.1 TRIVECHAIN, 1 TRIVECHAIN и 10 TRIVECHAIN --подобно на стандартните пари, които ползваме ежедневно.&lt;/li&gt; &lt;li&gt;Вашия портфейл изпраща запитване към специално конфигурираните софтуерни възли в мрежата, наречени "masternodes." Тези masternodes са информирани, че се интересувате от смесване на определена деноминация. Никаква идентификационна информация не се изпраща към   masternodes, така, че те никога не знаят "кой" сте.&lt;/li&gt; &lt;li&gt;Когато други двама души изпратят подобни съобщения, обозначаващи, че искат да смесят същата деноминация, смесващата сесия започва. Masternode смесват входовете и инструктират портфейлите на тримата потребители да платят новотрансформираните входове обратно към притежателите им. Вашият портфейл плаща деноминацията директно на себе си, но с различен адрес (наричан сменен адрес).  &lt;/li&gt; &lt;li&gt;С цел напълно скриване на доходите ви, вашият портфейл трябва да повтори този процес няколко пъти във всяка деноминация.  Всеки път завършеният процес се нарича "цикъл." Всеки цикъл на ExclusiveSend прави откриването на първоначалния източник на вашите средства напълно непроследим.&lt;/li&gt; &lt;li&gt;Този смесващ процес се случва като процес на заден фон без никаква намеса от ваша страна. Когато искате да направите транзакция, вашите средства са винаги анонимни. Не е необходимо допълнително изчакване. &lt;/li&gt; &lt;/ol&gt; &lt;hr&gt;&lt;b&gt;ВАЖНО:&lt;/b&gt; Вашият портфейл съдържа само 1000 от тези "сменяеми адреси". Всеки път когато се случва смесването до 9 от вашите адреси се ползват.  Това означава, че тези 1000 адреси се миксират в около 100 смесващи събития. Когато 900 се използват, вашия портфейл трябва да създаде повече адреси. Това може да стане само ако имате автоматично архивиране.&lt;br&gt; Следователно, потребителите, на които е изключено автоматичното архивиране, нямат и  ExclusiveSend включено. &lt;hr&gt;За повече информация вижте&lt;a href="https://trivechain.atlassian.net/wiki/display/DOC/ExclusiveSend"&gt;https://trivechain.atlassian.net/wiki/display/DOC/ExclusiveSend&lt;/a&gt;         </translation>
     </message>
 </context>
 <context>
@@ -1053,16 +1053,16 @@
         <translation>Добре дошли</translation>
     </message>
     <message>
-        <source>Welcome to Dash Core.</source>
-        <translation>Добре дошли в ядрото на Dash.</translation>
+        <source>Welcome to Trivechain Core.</source>
+        <translation>Добре дошли в ядрото на Trivechain.</translation>
     </message>
     <message>
-        <source>As this is the first time the program is launched, you can choose where Dash Core will store its data.</source>
-        <translation>Тъй като програмата се стартира за първи път вие може да изберете къде Dash да съхранява своята информация.</translation>
+        <source>As this is the first time the program is launched, you can choose where Trivechain Core will store its data.</source>
+        <translation>Тъй като програмата се стартира за първи път вие може да изберете къде Trivechain да съхранява своята информация.</translation>
     </message>
     <message>
-        <source>Dash Core will download and store a copy of the Dash block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>Dash ще свали и съхрани копие на Dash регистъра на блокове. Информацията ще заеме поне %1ГБ  пространство и ще нараства с времето. В тази папка ще бъде съхранен и портфейла. </translation>
+        <source>Trivechain Core will download and store a copy of the Trivechain block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <translation>Trivechain ще свали и съхрани копие на Trivechain регистъра на блокове. Информацията ще заеме поне %1ГБ  пространство и ще нараства с времето. В тази папка ще бъде съхранен и портфейла. </translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -1073,8 +1073,8 @@
         <translation>Определете папка по ваш избор:</translation>
     </message>
     <message>
-        <source>Dash Core</source>
-        <translation>Dash ядро</translation>
+        <source>Trivechain Core</source>
+        <translation>Trivechain ядро</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" cannot be created.</source>
@@ -1219,12 +1219,12 @@
         <translation>Форма</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the Dash network, as detailed below.</source>
-        <translation>Скорошните транзакции може да не са видими, поради което салдото на портфейла Ви може да е неправилно. Тази информация ще бъде правилна, след като портфейлът ви е завършил синхронизиране с Dash мрежата, както е описано по-долу.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the Trivechain network, as detailed below.</source>
+        <translation>Скорошните транзакции може да не са видими, поради което салдото на портфейла Ви може да е неправилно. Тази информация ще бъде правилна, след като портфейлът ви е завършил синхронизиране с Trivechain мрежата, както е описано по-долу.</translation>
     </message>
     <message>
-        <source>Attempting to spend Dash that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation>Опита да похарчите Dash, които са  от не визуализирани транзакции няма да бъде приет от мрежата.</translation>
+        <source>Attempting to spend Trivechain that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
+        <translation>Опита да похарчите Trivechain, които са  от не визуализирани транзакции няма да бъде приет от мрежата.</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -1317,20 +1317,20 @@
         <translation>(0 = автоматично, &lt;0 = оставете толкова неизползвани ядра)</translation>
     </message>
     <message>
-        <source>Amount of Dash to keep anonymized</source>
-        <translation>Постоянно поддържано количество анонимни Dash монети </translation>
+        <source>Amount of Trivechain to keep anonymized</source>
+        <translation>Постоянно поддържано количество анонимни Trivechain монети </translation>
     </message>
     <message>
         <source>W&amp;allet</source>
         <translation>П&amp;ортфейл</translation>
     </message>
     <message>
-        <source>Automatically start Dash Core after logging in to the system.</source>
-        <translation>Автоматично стартиране на Dash Core след влизане в системата.</translation>
+        <source>Automatically start Trivechain Core after logging in to the system.</source>
+        <translation>Автоматично стартиране на Trivechain Core след влизане в системата.</translation>
     </message>
     <message>
-        <source>&amp;Start Dash Core on system login</source>
-        <translation>&amp;Стартиране на Dash Core при влизане</translation>
+        <source>&amp;Start Trivechain Core on system login</source>
+        <translation>&amp;Стартиране на Trivechain Core при влизане</translation>
     </message>
     <message>
         <source>Show additional tab listing all your masternodes in first sub-tab&lt;br/&gt;and all masternodes on the network in second sub-tab.</source>
@@ -1341,44 +1341,44 @@
         <translation>Показване на раздел Masternodes </translation>
     </message>
     <message>
-        <source>Show additional information and buttons for PrivateSend on overview screen.</source>
-        <translation>Показване на допълнителна информация и бутон PrivateSend на основния екран.</translation>
+        <source>Show additional information and buttons for ExclusiveSend on overview screen.</source>
+        <translation>Показване на допълнителна информация и бутон ExclusiveSend на основния екран.</translation>
     </message>
     <message>
-        <source>Enable advanced PrivateSend interface</source>
-        <translation>Включване PrivateSend интерфейс за напреднали</translation>
+        <source>Enable advanced ExclusiveSend interface</source>
+        <translation>Включване ExclusiveSend интерфейс за напреднали</translation>
     </message>
     <message>
-        <source>Show warning dialog when PrivateSend detects that wallet has very low number of keys left.</source>
-        <translation>Показване на предупреждение когато PrivateSend засече прекалено малък брой оставащи ключове.</translation>
+        <source>Show warning dialog when ExclusiveSend detects that wallet has very low number of keys left.</source>
+        <translation>Показване на предупреждение когато ExclusiveSend засече прекалено малък брой оставащи ключове.</translation>
     </message>
     <message>
-        <source>Warn if PrivateSend is running out of keys</source>
-        <translation>Предупреди ако PrivateSend е стартиран при недостатъчно ключове</translation>
+        <source>Warn if ExclusiveSend is running out of keys</source>
+        <translation>Предупреди ако ExclusiveSend е стартиран при недостатъчно ключове</translation>
     </message>
     <message>
-        <source>Whether to use experimental PrivateSend mode with multiple mixing sessions per block.&lt;br/&gt;Note: You must use this feature carefully.&lt;br/&gt;Make sure you always have recent wallet (auto)backup in a safe place!</source>
-        <translation>Дали да се използва експериментален PrivateSend режим с мулти сесийно миксиране на блок.&lt;br/&gt;Бележка: Трябва да използвате тази функция внимателно.&lt;br/&gt;Убедете се, че винаги имате скоро направен (авто) архив копие на сигурно място!</translation>
+        <source>Whether to use experimental ExclusiveSend mode with multiple mixing sessions per block.&lt;br/&gt;Note: You must use this feature carefully.&lt;br/&gt;Make sure you always have recent wallet (auto)backup in a safe place!</source>
+        <translation>Дали да се използва експериментален ExclusiveSend режим с мулти сесийно миксиране на блок.&lt;br/&gt;Бележка: Трябва да използвате тази функция внимателно.&lt;br/&gt;Убедете се, че винаги имате скоро направен (авто) архив копие на сигурно място!</translation>
     </message>
     <message>
-        <source>Enable PrivateSend &amp;multi-session</source>
-        <translation>Включи PrivateSend &amp;мулти сесия</translation>
+        <source>Enable ExclusiveSend &amp;multi-session</source>
+        <translation>Включи ExclusiveSend &amp;мулти сесия</translation>
     </message>
     <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction&lt;br/&gt;cannot be used until that transaction has at least one confirmation.&lt;br/&gt;This also affects how your balance is computed.</source>
         <translation>Ако деактивирате харченето на непотвърдено ресто, рестото от транзакция&lt;br/&gt; няма да може да се използва преди да бъде получено поне едно потвърждение. &lt;br/&gt;Това се отразява и на начина на изчисление на баланса ви.</translation>
     </message>
     <message>
-        <source>PrivateSend rounds to use</source>
-        <translation>PrivateSend използвани цикъла</translation>
+        <source>ExclusiveSend rounds to use</source>
+        <translation>ExclusiveSend използвани цикъла</translation>
     </message>
     <message>
-        <source>This amount acts as a threshold to turn off PrivateSend once it's reached.</source>
-        <translation>Тази сума действа като лимит, за да се изключи PrivateSend, когато веднъж бъде достигнат.</translation>
+        <source>This amount acts as a threshold to turn off ExclusiveSend once it's reached.</source>
+        <translation>Тази сума действа като лимит, за да се изключи ExclusiveSend, когато веднъж бъде достигнат.</translation>
     </message>
     <message>
-        <source>Automatically open the Dash Core client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Автоматично отваря порта за Dash Core клиента в маршрутизатора. Това работи само когато вашият маршрутизатор поддържа UPnP и той е разрешен.</translation>
+        <source>Automatically open the Trivechain Core client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Автоматично отваря порта за Trivechain Core клиента в маршрутизатора. Това работи само когато вашият маршрутизатор поддържа UPnP и той е разрешен.</translation>
     </message>
     <message>
         <source>Accept connections from outside</source>
@@ -1389,8 +1389,8 @@
         <translation>Разрешени входящи връзки</translation>
     </message>
     <message>
-        <source>Connect to the Dash network through a SOCKS5 proxy.</source>
-        <translation>Свързване с мрежата на Dash чрез SOCKS5 прокси.</translation>
+        <source>Connect to the Trivechain network through a SOCKS5 proxy.</source>
+        <translation>Свързване с мрежата на Trivechain чрез SOCKS5 прокси.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -1401,8 +1401,8 @@
         <translation>При затваряне на прозореца приложението остава минимизирано. Ако изберете тази опция, приложението може да се затвори само чрез Изход в менюто.</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting Dash Core.</source>
-        <translation>Тук можете да промените езика на потребителския изглед. Настройката ще влезе в сила след рестартиране на Dash Core. </translation>
+        <source>The user interface language can be set here. This setting will take effect after restarting Trivechain Core.</source>
+        <translation>Тук можете да промените езика на потребителския изглед. Настройката ще влезе в сила след рестартиране на Trivechain Core. </translation>
     </message>
     <message>
         <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items.&lt;br/&gt;%s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
@@ -1473,8 +1473,8 @@
         <translation>Tor</translation>
     </message>
     <message>
-        <source>Connect to the Dash network through a separate SOCKS5 proxy for Tor hidden services.</source>
-        <translation>Свързване с мрежата на Dash чрез SOCKS5 прокси за Tor скрити услуги.</translation>
+        <source>Connect to the Trivechain network through a separate SOCKS5 proxy for Tor hidden services.</source>
+        <translation>Свързване с мрежата на Trivechain чрез SOCKS5 прокси за Tor скрити услуги.</translation>
     </message>
     <message>
         <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services:</source>
@@ -1514,9 +1514,9 @@
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/projects/p/dash/</source>
+https://www.transifex.com/projects/p/trivechain/</source>
         <translation>Липсва език или превода е непълен? Можете да помогнете с превода тук:
-https://www.transifex.com/projects/p/dash/</translation>
+https://www.transifex.com/projects/p/trivechain/</translation>
     </message>
     <message>
         <source>User Interface Theme:</source>
@@ -1594,8 +1594,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Формуляр</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Dash network after a connection is established, but this process has not completed yet.</source>
-        <translation>Показаната информация може да е остаряла. Вашият портфейл се синхронизира автоматично след изграждането на връзка с Dash мрежата, но този процес все още не е завършен.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Trivechain network after a connection is established, but this process has not completed yet.</source>
+        <translation>Показаната информация може да е остаряла. Вашият портфейл се синхронизира автоматично след изграждането на връзка с Trivechain мрежата, но този процес все още не е завършен.</translation>
     </message>
     <message>
         <source>Available:</source>
@@ -1658,8 +1658,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Изразходени:</translation>
     </message>
     <message>
-        <source>PrivateSend</source>
-        <translation>PrivateSend</translation>
+        <source>ExclusiveSend</source>
+        <translation>ExclusiveSend</translation>
     </message>
     <message>
         <source>Status:</source>
@@ -1674,16 +1674,16 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Завършено:</translation>
     </message>
     <message>
-        <source>Try to manually submit a PrivateSend request.</source>
-        <translation>Опитай ръчно изпращане на PrivateSend заявка.</translation>
+        <source>Try to manually submit a ExclusiveSend request.</source>
+        <translation>Опитай ръчно изпращане на ExclusiveSend заявка.</translation>
     </message>
     <message>
-        <source>Reset the current status of PrivateSend (can interrupt PrivateSend if it's in the process of Mixing, which can cost you money!)</source>
-        <translation>Изчистване на текущия статус на PrivateSend (може да прекъсне PrivateSend по време на миксиране, което може да ви коства пари!)</translation>
+        <source>Reset the current status of ExclusiveSend (can interrupt ExclusiveSend if it's in the process of Mixing, which can cost you money!)</source>
+        <translation>Изчистване на текущия статус на ExclusiveSend (може да прекъсне ExclusiveSend по време на миксиране, което може да ви коства пари!)</translation>
     </message>
     <message>
-        <source>Information about PrivateSend and Mixing</source>
-        <translation>Информация за PrivateSend and Миксирането</translation>
+        <source>Information about ExclusiveSend and Mixing</source>
+        <translation>Информация за ExclusiveSend and Миксирането</translation>
     </message>
     <message>
         <source>Info</source>
@@ -1694,8 +1694,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Количество и цикли:</translation>
     </message>
     <message>
-        <source>0 DASH / 0 Rounds</source>
-        <translation>0 DASH / 0 Цикъла</translation>
+        <source>0 TRIVECHAIN / 0 Rounds</source>
+        <translation>0 TRIVECHAIN / 0 Цикъла</translation>
     </message>
     <message>
         <source>Submitted Denom:</source>
@@ -1714,8 +1714,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Пусни/Спри Смесване</translation>
     </message>
     <message>
-        <source>PrivateSend Balance:</source>
-        <translation>PrivateSend баланс:</translation>
+        <source>ExclusiveSend Balance:</source>
+        <translation>ExclusiveSend баланс:</translation>
     </message>
     <message>
         <source>The denominations you submitted to the Masternode.&lt;br&gt;To mix, other users must submit the exact same denominations.</source>
@@ -1830,9 +1830,9 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>ВНИМАНИЕ! Неуспешно попълване на keypool, моля отключете портфейла си за да се извърши.</translation>
     </message>
     <message>
-        <source>Last PrivateSend message:
+        <source>Last ExclusiveSend message:
 </source>
-        <translation>Последно PrivateSend съобщение:
+        <translation>Последно ExclusiveSend съобщение:
 </translation>
     </message>
     <message>
@@ -1840,20 +1840,20 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>N/A</translation>
     </message>
     <message>
-        <source>PrivateSend was successfully reset.</source>
-        <translation>PrivateSend беше успешно нулиран.</translation>
+        <source>ExclusiveSend was successfully reset.</source>
+        <translation>ExclusiveSend беше успешно нулиран.</translation>
     </message>
     <message>
-        <source>If you don't want to see internal PrivateSend fees/transactions select "Most Common" as Type on the "Transactions" tab.</source>
-        <translation>Ако не искате да видите вътрешните PrivateSend такси/транзакции изберете "Най-често срещаните" като тип от раздел "Транзакции" .</translation>
+        <source>If you don't want to see internal ExclusiveSend fees/transactions select "Most Common" as Type on the "Transactions" tab.</source>
+        <translation>Ако не искате да видите вътрешните ExclusiveSend такси/транзакции изберете "Най-често срещаните" като тип от раздел "Транзакции" .</translation>
     </message>
     <message>
-        <source>PrivateSend requires at least %1 to use.</source>
-        <translation>PrivateSend се нуждае от поне %1 за да започне.</translation>
+        <source>ExclusiveSend requires at least %1 to use.</source>
+        <translation>ExclusiveSend се нуждае от поне %1 за да започне.</translation>
     </message>
     <message>
-        <source>Wallet is locked and user declined to unlock. Disabling PrivateSend.</source>
-        <translation>Портфейлът е заключен и потребителя отказва отключване. PrivateSend е деактивиран.</translation>
+        <source>Wallet is locked and user declined to unlock. Disabling ExclusiveSend.</source>
+        <translation>Портфейлът е заключен и потребителя отказва отключване. ExclusiveSend е деактивиран.</translation>
     </message>
 </context>
 <context>
@@ -1863,8 +1863,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Грешка в заявката за плащане</translation>
     </message>
     <message>
-        <source>Cannot start dash: click-to-pay handler</source>
-        <translation>Не може да стартира dash: кликни за плащане на притежателя</translation>
+        <source>Cannot start trivechain: click-to-pay handler</source>
+        <translation>Не може да стартира trivechain: кликни за плащане на притежателя</translation>
     </message>
     <message>
         <source>URI handling</source>
@@ -1879,8 +1879,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Невалиден адрес за плащане %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Dash address or malformed URI parameters.</source>
-        <translation>Грешка при анализ на URI! Това може да е следствие от неправилен Dash адрес или неправилно зададени URI параметри.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid Trivechain address or malformed URI parameters.</source>
+        <translation>Грешка при анализ на URI! Това може да е следствие от неправилен Trivechain адрес или неправилно зададени URI параметри.</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -1969,8 +1969,8 @@ https://www.transifex.com/projects/p/dash/</translation>
 <context>
     <name>QObject</name>
     <message>
-        <source>Dash Core</source>
-        <translation>Dash Core</translation>
+        <source>Trivechain Core</source>
+        <translation>Trivechain Core</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" does not exist.</source>
@@ -1989,16 +1989,16 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Грешка при четене конфигурационният файл на masternode : %1</translation>
     </message>
     <message>
-        <source>Dash Core didn't yet exit safely...</source>
-        <translation>Dash Core все още не е приключило ...</translation>
+        <source>Trivechain Core didn't yet exit safely...</source>
+        <translation>Trivechain Core все още не е приключило ...</translation>
     </message>
     <message>
         <source>Amount</source>
         <translation>Сума</translation>
     </message>
     <message>
-        <source>Enter a Dash address (e.g. %1)</source>
-        <translation>Въведете Dash адрес (напр.%1)</translation>
+        <source>Enter a Trivechain address (e.g. %1)</source>
+        <translation>Въведете Trivechain адрес (напр.%1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -2163,8 +2163,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Използвана памет</translation>
     </message>
     <message>
-        <source>Open the Dash Core debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Отваря файла за откриване на грешки на Dash Core от текущата папка.  За по-големите файлове това може да отнеме няколко секунди.</translation>
+        <source>Open the Trivechain Core debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <translation>Отваря файла за откриване на грешки на Trivechain Core от текущата папка.  За по-големите файлове това може да отнеме няколко секунди.</translation>
     </message>
     <message>
         <source>&amp;Console</source>
@@ -2379,8 +2379,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>&amp;Премахване на бан</translation>
     </message>
     <message>
-        <source>Welcome to the Dash Core RPC console.</source>
-        <translation>Добре дошли в Dash Core RPC конзолата.</translation>
+        <source>Welcome to the Trivechain Core RPC console.</source>
+        <translation>Добре дошли в Trivechain Core RPC конзолата.</translation>
     </message>
     <message>
         <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>
@@ -2462,8 +2462,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>П&amp;овторно използване на съществуващ адрес за получаване (не се препоръчва)</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Dash network.</source>
-        <translation>Възможност  да се прикрепи съобщение към заявката за плащане, което да бъде показано при отваряне на заявката. Забележка: съобщението няма да бъде изпратено с плащането по мрежата на Dash.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Trivechain network.</source>
+        <translation>Възможност  да се прикрепи съобщение към заявката за плащане, което да бъде показано при отваряне на заявката. Забележка: съобщението няма да бъде изпратено с плащането по мрежата на Trivechain.</translation>
     </message>
     <message>
         <source>&amp;Message:</source>
@@ -2474,8 +2474,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Възможност да се прикрепи наименование към новия адрес за получаване.</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the Dash network.</source>
-        <translation>Възможност  да се прикрепи съобщение към заявката за плащане, което да бъде показано при отваряне на заявката. &lt;br&gt;Забележка: съобщението няма да бъде изпратено с плащането по мрежата на Dash.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the Trivechain network.</source>
+        <translation>Възможност  да се прикрепи съобщение към заявката за плащане, което да бъде показано при отваряне на заявката. &lt;br&gt;Забележка: съобщението няма да бъде изпратено с плащането по мрежата на Trivechain.</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
@@ -2506,8 +2506,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Изчистване</translation>
     </message>
     <message>
-        <source>Request InstantSend</source>
-        <translation>Заявка за InstantSend</translation>
+        <source>Request DirectSend</source>
+        <translation>Заявка за DirectSend</translation>
     </message>
     <message>
         <source>Requested payments history</source>
@@ -2593,8 +2593,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Съобщение</translation>
     </message>
     <message>
-        <source>InstantSend</source>
-        <translation>InstantSend</translation>
+        <source>DirectSend</source>
+        <translation>DirectSend</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -2715,12 +2715,12 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Показване настройки за такса</translation>
     </message>
     <message>
-        <source>PrivateSend</source>
-        <translation>PrivateSend</translation>
+        <source>ExclusiveSend</source>
+        <translation>ExclusiveSend</translation>
     </message>
     <message>
-        <source>InstantSend</source>
-        <translation>InstantSend</translation>
+        <source>DirectSend</source>
+        <translation>DirectSend</translation>
     </message>
     <message>
         <source>If the custom fee is set to 1000 duffs and the transaction is only 250 bytes, then "per kilobyte" only pays 250 duffs in fee,&lt;br /&gt;while "at least" pays 1000 duffs. For transactions bigger than a kilobyte both pay by kilobyte.</source>
@@ -2731,8 +2731,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Ако променената такса е 1000 duffs и транзакцията е само 250 байта, тогава "за килобайт" само плаща такса 250 duffs,&lt;br /&gt; тогава"за последно" заплаща 1000 duffs. За транзакции по-големи от килобайт едновременно се заплащат от килобайт.</translation>
     </message>
     <message>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for dash transactions than the network can process.</source>
-        <translation>Разплащането само минималната такса ще продължи толкова дълго,докато транзакцията заема по-малък обем в блоковото пространство.&lt;br /&gt; Но имайте предвид, че транзакцията може да се окаже без първоначално потвърждение ако се появи голямо търсене на dash транзакции отколкото мрежата може да обработи.</translation>
+        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for trivechain transactions than the network can process.</source>
+        <translation>Разплащането само минималната такса ще продължи толкова дълго,докато транзакцията заема по-малък обем в блоковото пространство.&lt;br /&gt; Но имайте предвид, че транзакцията може да се окаже без първоначално потвърждение ако се появи голямо търсене на trivechain транзакции отколкото мрежата може да обработи.</translation>
     </message>
     <message>
         <source>per kilobyte</source>
@@ -2847,16 +2847,16 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>анонимни средства</translation>
     </message>
     <message>
-        <source>(privatesend requires this amount to be rounded up to the nearest %1).</source>
-        <translation>(privatesend изисква тази сума да бъде закръглена до най-близката %1).</translation>
+        <source>(exclusivesend requires this amount to be rounded up to the nearest %1).</source>
+        <translation>(exclusivesend изисква тази сума да бъде закръглена до най-близката %1).</translation>
     </message>
     <message>
         <source>any available funds (not anonymous)</source>
         <translation>всякакви налични средства (не анонимизирани)</translation>
     </message>
     <message>
-        <source>and InstantSend</source>
-        <translation>и InstantSend</translation>
+        <source>and DirectSend</source>
+        <translation>и DirectSend</translation>
     </message>
     <message>
         <source>%1 to %2</source>
@@ -2927,8 +2927,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation><numerusform>Очаква се да започне потвърждение в %n блока.</numerusform><numerusform>Очаква се да започне потвърждение в %n блока.</numerusform></translation>
     </message>
     <message>
-        <source>Warning: Invalid Dash address</source>
-        <translation>Внимание: Невалиден Dash адрес</translation>
+        <source>Warning: Invalid Trivechain address</source>
+        <translation>Внимание: Невалиден Trivechain адрес</translation>
     </message>
     <message>
         <source>Warning: Unknown change address</source>
@@ -2950,8 +2950,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Плати &amp;На:</translation>
     </message>
     <message>
-        <source>The Dash address to send the payment to</source>
-        <translation>Dash адресът да изпрати плащането към </translation>
+        <source>The Trivechain address to send the payment to</source>
+        <translation>Trivechain адресът да изпрати плащането към </translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2986,8 +2986,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>С&amp;ума:</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive a lower amount of Dash than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>Таксата ще бъде приспадната от количеството за изпращане. Получателят ще получи по-малко количество Dash от това, което сте въвели в полето. Ако са избрани няколко получателя, таксата ще бъде разделена  по равно.</translation>
+        <source>The fee will be deducted from the amount being sent. The recipient will receive a lower amount of Trivechain than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
+        <translation>Таксата ще бъде приспадната от количеството за изпращане. Получателят ще получи по-малко количество Trivechain от това, което сте въвели в полето. Ако са избрани няколко получателя, таксата ще бъде разделена  по равно.</translation>
     </message>
     <message>
         <source>S&amp;ubtract fee from amount</source>
@@ -2998,8 +2998,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Съобщение:</translation>
     </message>
     <message>
-        <source>A message that was attached to the dash: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Dash network.</source>
-        <translation>Съобщението което беше прикрепено към dash: URI ще бъде запазено с транзакцията за ваше сведение. Забележка: Това съобщение няма да бъде изпратено през Dash мрежата.</translation>
+        <source>A message that was attached to the trivechain: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Trivechain network.</source>
+        <translation>Съобщението което беше прикрепено към trivechain: URI ще бъде запазено с транзакцията за ваше сведение. Забележка: Това съобщение няма да бъде изпратено през Trivechain мрежата.</translation>
     </message>
     <message>
         <source>This is an unauthenticated payment request.</source>
@@ -3025,8 +3025,8 @@ https://www.transifex.com/projects/p/dash/</translation>
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>Dash Core is shutting down...</source>
-        <translation>Dash ядрото се изключва...</translation>
+        <source>Trivechain Core is shutting down...</source>
+        <translation>Trivechain ядрото се изключва...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
@@ -3044,12 +3044,12 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>&amp;Подпиши</translation>
     </message>
     <message>
-        <source>You can sign messages/agreements with your addresses to prove you can receive Dash sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
-        <translation>Може да подпишете съобщенията/потвържденията с вашите адреси като доказателство, че сте получили Dash. Бъдете внимателни, не подписвайте съобщения, които биха разкрили лична информация без ваше съгласие.</translation>
+        <source>You can sign messages/agreements with your addresses to prove you can receive Trivechain sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
+        <translation>Може да подпишете съобщенията/потвържденията с вашите адреси като доказателство, че сте получили Trivechain. Бъдете внимателни, не подписвайте съобщения, които биха разкрили лична информация без ваше съгласие.</translation>
     </message>
     <message>
-        <source>The Dash address to sign the message with</source>
-        <translation>Dash адресът да подпише съобщението</translation>
+        <source>The Trivechain address to sign the message with</source>
+        <translation>Trivechain адресът да подпише съобщението</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -3080,8 +3080,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Копиране на текущия подпис в системния клипборд</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Dash address</source>
-        <translation>Подпиши съобщението за да докажеш че притежаваш този Dash адрес</translation>
+        <source>Sign the message to prove you own this Trivechain address</source>
+        <translation>Подпиши съобщението за да докажеш че притежаваш този Trivechain адрес</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -3104,12 +3104,12 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Въведете адреса на получателя, съобщението (уверете се, че сте копирали редовете, спациите, табовете и другите точно) и подпишете отдолу, за да удостоверите съобщението. Внимавайте да не вмъкнете излишни символи в подписа от това, което е в самото съобщение, за избегнете риска от злонамерена външна намеса. Имайте предвид, че това само доказва, че подписа е получен с адреса, но не доказва изпращането на всяка транзакция!</translation>
     </message>
     <message>
-        <source>The Dash address the message was signed with</source>
-        <translation>Dash адресът ,с който е подписано съобщението</translation>
+        <source>The Trivechain address the message was signed with</source>
+        <translation>Trivechain адресът ,с който е подписано съобщението</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Dash address</source>
-        <translation>Проверете съобщението, за да сте сигурни че е подписано с определен Dash адрес</translation>
+        <source>Verify the message to ensure it was signed with the specified Trivechain address</source>
+        <translation>Проверете съобщението, за да сте сигурни че е подписано с определен Trivechain адрес</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -3179,8 +3179,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>[testnet]</translation>
     </message>
     <message>
-        <source>Dash Core</source>
-        <translation>Dash Ядро</translation>
+        <source>Trivechain Core</source>
+        <translation>Trivechain Ядро</translation>
     </message>
     <message>
         <source>Version %1</source>
@@ -3191,8 +3191,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Водещи Bitcoin разработчици</translation>
     </message>
     <message>
-        <source>The Dash Core developers</source>
-        <translation>Водещи Dash разработчици</translation>
+        <source>The Trivechain Core developers</source>
+        <translation>Водещи Trivechain разработчици</translation>
     </message>
 </context>
 <context>
@@ -3245,16 +3245,16 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>включена в %1 блока</translation>
     </message>
     <message>
-        <source>verified via InstantSend</source>
-        <translation>потвърдено чрез InstantSend</translation>
+        <source>verified via DirectSend</source>
+        <translation>потвърдено чрез DirectSend</translation>
     </message>
     <message>
-        <source>InstantSend verification in progress - %1 of %2 signatures</source>
-        <translation>InstantSend потвърждение в процес - %1 от %2 подписани</translation>
+        <source>DirectSend verification in progress - %1 of %2 signatures</source>
+        <translation>DirectSend потвърждение в процес - %1 от %2 подписани</translation>
     </message>
     <message>
-        <source>InstantSend verification failed</source>
-        <translation>InstantSend потвърждение неуспешно</translation>
+        <source>DirectSend verification failed</source>
+        <translation>DirectSend потвърждение неуспешно</translation>
     </message>
     <message>
         <source>Status</source>
@@ -3463,8 +3463,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Получен от</translation>
     </message>
     <message>
-        <source>Received via PrivateSend</source>
-        <translation>Получени чрез PrivateSend</translation>
+        <source>Received via ExclusiveSend</source>
+        <translation>Получени чрез ExclusiveSend</translation>
     </message>
     <message>
         <source>Sent to</source>
@@ -3479,24 +3479,24 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Емитирани</translation>
     </message>
     <message>
-        <source>PrivateSend Denominate</source>
-        <translation>PrivateSend деноминиране</translation>
+        <source>ExclusiveSend Denominate</source>
+        <translation>ExclusiveSend деноминиране</translation>
     </message>
     <message>
-        <source>PrivateSend Collateral Payment</source>
-        <translation>PrivateSend обезпечение на плащането</translation>
+        <source>ExclusiveSend Collateral Payment</source>
+        <translation>ExclusiveSend обезпечение на плащането</translation>
     </message>
     <message>
-        <source>PrivateSend Make Collateral Inputs</source>
-        <translation>PrivateSend прави обезпечение на входовете</translation>
+        <source>ExclusiveSend Make Collateral Inputs</source>
+        <translation>ExclusiveSend прави обезпечение на входовете</translation>
     </message>
     <message>
-        <source>PrivateSend Create Denominations</source>
-        <translation>PrivateSend създава деноминации</translation>
+        <source>ExclusiveSend Create Denominations</source>
+        <translation>ExclusiveSend създава деноминации</translation>
     </message>
     <message>
-        <source>PrivateSend</source>
-        <translation>PrivateSend</translation>
+        <source>ExclusiveSend</source>
+        <translation>ExclusiveSend</translation>
     </message>
     <message>
         <source>watch-only</source>
@@ -3578,24 +3578,24 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Изпратени на</translation>
     </message>
     <message>
-        <source>PrivateSend</source>
-        <translation>PrivateSend</translation>
+        <source>ExclusiveSend</source>
+        <translation>ExclusiveSend</translation>
     </message>
     <message>
-        <source>PrivateSend Make Collateral Inputs</source>
-        <translation>PrivateSend прави обезпечение на входовете</translation>
+        <source>ExclusiveSend Make Collateral Inputs</source>
+        <translation>ExclusiveSend прави обезпечение на входовете</translation>
     </message>
     <message>
-        <source>PrivateSend Create Denominations</source>
-        <translation>PrivateSend създава деноминации</translation>
+        <source>ExclusiveSend Create Denominations</source>
+        <translation>ExclusiveSend създава деноминации</translation>
     </message>
     <message>
-        <source>PrivateSend Denominate</source>
-        <translation>PrivateSend деноминиране</translation>
+        <source>ExclusiveSend Denominate</source>
+        <translation>ExclusiveSend деноминиране</translation>
     </message>
     <message>
-        <source>PrivateSend Collateral Payment</source>
-        <translation>PrivateSend обезпечение на плащането</translation>
+        <source>ExclusiveSend Collateral Payment</source>
+        <translation>ExclusiveSend обезпечение на плащането</translation>
     </message>
     <message>
         <source>To yourself</source>
@@ -3735,12 +3735,12 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Изпращане</translation>
     </message>
     <message>
-        <source>InstantSend doesn't support sending values that high yet. Transactions are currently limited to %1 DASH.</source>
-        <translation>InstantSend не поддържа толкова високи стойности за изпращане все още. Транзакциите в момента са ограничени до %1 DASH.</translation>
+        <source>DirectSend doesn't support sending values that high yet. Transactions are currently limited to %1 TRIVECHAIN.</source>
+        <translation>DirectSend не поддържа толкова високи стойности за изпращане все още. Транзакциите в момента са ограничени до %1 TRIVECHAIN.</translation>
     </message>
     <message>
-        <source>Used way too many inputs (&gt;%1) for this InstantSend transaction, fees could be huge.</source>
-        <translation>Използвани са твърде много входове  (&gt;%1) за тази InstantSend транзакция, таксите могат да бъдат огромни.</translation>
+        <source>Used way too many inputs (&gt;%1) for this DirectSend transaction, fees could be huge.</source>
+        <translation>Използвани са твърде много входове  (&gt;%1) за тази DirectSend транзакция, таксите могат да бъдат огромни.</translation>
     </message>
 </context>
 <context>
@@ -3783,14 +3783,14 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
 </context>
 <context>
-    <name>dash-core</name>
+    <name>trivechain-core</name>
     <message>
         <source>Bind to given address and always listen on it. Use [host]:port notation for IPv6</source>
         <translation>Свързва се с посочения адрес и винаги слуша за него. Използвайте [хост]:порт за изписване при IPv6</translation>
     </message>
     <message>
-        <source>Cannot obtain a lock on data directory %s. Dash Core is probably already running.</source>
-        <translation>Не може да се заключи дата директорията %s. Dash ядрото вече работи.</translation>
+        <source>Cannot obtain a lock on data directory %s. Trivechain Core is probably already running.</source>
+        <translation>Не може да се заключи дата директорията %s. Trivechain ядрото вече работи.</translation>
     </message>
     <message>
         <source>Error: Listening for incoming connections failed (listen returned error %s)</source>
@@ -3829,8 +3829,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Това е предварителна тест версия - използвайте я на ваша отговорност - не използвайте за копане или за търговски приложения.</translation>
     </message>
     <message>
-        <source>Unable to bind to %s on this computer. Dash Core is probably already running.</source>
-        <translation>Не може да се свърже с %s на този компютър. Dash ядрото най-вероятно вече работи.</translation>
+        <source>Unable to bind to %s on this computer. Trivechain Core is probably already running.</source>
+        <translation>Не може да се свърже с %s на този компютър. Trivechain ядрото най-вероятно вече работи.</translation>
     </message>
     <message>
         <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
@@ -4073,8 +4073,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Този продукт включва софтуер, разработен от проекта OpenSSL за използване в OpenSSL Toolkit &lt;https://www.openssl.org/&gt; и криптографски софтуер, написан от Eric Young и UPnP софтуер, написан от Thomas Bernard.</translation>
     </message>
     <message>
-        <source>Unable to locate enough funds for this transaction that are not equal 1000 DASH.</source>
-        <translation>Не са намерени достатъчно  средства за тази транзакция, които не са равни на 1000 DASH.</translation>
+        <source>Unable to locate enough funds for this transaction that are not equal 1000 TRIVECHAIN.</source>
+        <translation>Не са намерени достатъчно  средства за тази транзакция, които не са равни на 1000 TRIVECHAIN.</translation>
     </message>
     <message>
         <source>Use hierarchical deterministic key generation (HD) after bip39/bip44. Only has effect during wallet creation/first start</source>
@@ -4145,8 +4145,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Запазени права (C) 2009-%i Bitcoin Core разработчици</translation>
     </message>
     <message>
-        <source>Copyright (C) 2014-%i The Dash Core Developers</source>
-        <translation>Запазени права (C) 2014-%i Dash Core разработчиците</translation>
+        <source>Copyright (C) 2014-%i The Trivechain Core Developers</source>
+        <translation>Запазени права (C) 2014-%i Trivechain Core разработчиците</translation>
     </message>
     <message>
         <source>Enable the client to act as a masternode (0-1, default: %u)</source>
@@ -4165,8 +4165,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Грешка при зареждане %s: Не може да изключите HD на вече съществуващ HD портфейл</translation>
     </message>
     <message>
-        <source>Error loading wallet.dat: Wallet requires newer version of Dash Core</source>
-        <translation>Грешка при зареждане на wallet.dat: портфейлът изисква по-нова версия на Dash Core</translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of Trivechain Core</source>
+        <translation>Грешка при зареждане на wallet.dat: портфейлът изисква по-нова версия на Trivechain Core</translation>
     </message>
     <message>
         <source>Failed to load fulfilled requests cache from</source>
@@ -4225,8 +4225,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Информация</translation>
     </message>
     <message>
-        <source>Initialization sanity check failed. Dash Core is shutting down.</source>
-        <translation>Инициализационната проверка не успешна. Dash ядрото се изключва.</translation>
+        <source>Initialization sanity check failed. Trivechain Core is shutting down.</source>
+        <translation>Инициализационната проверка не успешна. Trivechain ядрото се изключва.</translation>
     </message>
     <message>
         <source>Input is not valid.</source>
@@ -4481,8 +4481,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>User Agent comment (%s) съдържа опасни символи.</translation>
     </message>
     <message>
-        <source>Wallet needed to be rewritten: restart Dash Core to complete</source>
-        <translation>Портфейлът трябва да бъде презаписан: рестартирайте Dash за да завършите</translation>
+        <source>Wallet needed to be rewritten: restart Trivechain Core to complete</source>
+        <translation>Портфейлът трябва да бъде презаписан: рестартирайте Trivechain за да завършите</translation>
     </message>
     <message>
         <source>Will retry...</source>
@@ -4525,16 +4525,16 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>KeePassHttp ключ за  AES криптирана връзка с KeePass</translation>
     </message>
     <message>
-        <source>Keep N DASH anonymized (default: %u)</source>
-        <translation>Поддържай N Dash анонимизирани (по подразбиране: %u)</translation>
+        <source>Keep N TRIVECHAIN anonymized (default: %u)</source>
+        <translation>Поддържай N Trivechain анонимизирани (по подразбиране: %u)</translation>
     </message>
     <message>
         <source>Keep at most &lt;n&gt; unconnectable transactions in memory (default: %u)</source>
         <translation>Пази поне &lt;n&gt; неосъществени транзакции в паметта (по подразбиране: %u)</translation>
     </message>
     <message>
-        <source>Disable all Dash specific functionality (Masternodes, PrivateSend, InstantSend, Governance) (0-1, default: %u)</source>
-        <translation>Изключване на всички специфични Dash функции (PrivateSend, InstantSend, Governance) (0-1, по подразбиране: %u)</translation>
+        <source>Disable all Trivechain specific functionality (Masternodes, ExclusiveSend, DirectSend, Governance) (0-1, default: %u)</source>
+        <translation>Изключване на всички специфични Trivechain функции (ExclusiveSend, DirectSend, Governance) (0-1, по подразбиране: %u)</translation>
     </message>
     <message>
         <source>Discover own IP addresses (default: 1 when listening and no -externalip or -proxy)</source>
@@ -4545,24 +4545,24 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Не дръжте в мемпула транзакции повече от &lt;n&gt; часа (по подразбиране: %u)</translation>
     </message>
     <message>
-        <source>Enable InstantSend, show confirmations for locked transactions (0-1, default: %u)</source>
-        <translation>Активиране на InstantSend, показва потвържденията за заключени транзакции (0-1, по подразбиране: %u)</translation>
+        <source>Enable DirectSend, show confirmations for locked transactions (0-1, default: %u)</source>
+        <translation>Активиране на DirectSend, показва потвържденията за заключени транзакции (0-1, по подразбиране: %u)</translation>
     </message>
     <message>
-        <source>Enable multiple PrivateSend mixing sessions per block, experimental (0-1, default: %u)</source>
-        <translation>Активиране на няколко PrivateSend миксиращи сесии за нлок, експериментално (0-1, по подразбиране: %u)</translation>
+        <source>Enable multiple ExclusiveSend mixing sessions per block, experimental (0-1, default: %u)</source>
+        <translation>Активиране на няколко ExclusiveSend миксиращи сесии за нлок, експериментално (0-1, по подразбиране: %u)</translation>
     </message>
     <message>
-        <source>Enable use of automated PrivateSend for funds stored in this wallet (0-1, default: %u)</source>
-        <translation>Активиране на автоматизирано използване на PrivateSend за средствата съхранявани в този портфейл(0-1, по подразбиране: %u)</translation>
+        <source>Enable use of automated ExclusiveSend for funds stored in this wallet (0-1, default: %u)</source>
+        <translation>Активиране на автоматизирано използване на ExclusiveSend за средствата съхранявани в този портфейл(0-1, по подразбиране: %u)</translation>
     </message>
     <message>
         <source>Error reading wallet.dat! All keys read correctly, but transaction data or address book entries might be missing or incorrect.</source>
         <translation>Грешка при четене на wallet.dat! Всички ключове са прочетени коректно, но данните за транзакциите или записите в адресната книга може да липсват или са некоректни.</translation>
     </message>
     <message>
-        <source>Execute command when a wallet InstantSend transaction is successfully locked (%s in cmd is replaced by TxID)</source>
-        <translation>Изпълнена команда когато транзакцията в  InstantSend портфейла е успешно заключена (%s в cmd е заместен от TxID)</translation>
+        <source>Execute command when a wallet DirectSend transaction is successfully locked (%s in cmd is replaced by TxID)</source>
+        <translation>Изпълнена команда когато транзакцията в  DirectSend портфейла е успешно заключена (%s в cmd е заместен от TxID)</translation>
     </message>
     <message>
         <source>Failed to create backup, file already exists! This could happen if you restarted wallet in less than 60 seconds. You can continue if you are ok with this.</source>
@@ -4585,11 +4585,11 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Ако &lt;category&gt; не е предоставена или ако &lt;category&gt; = 1, изведи цялата информация за отстраняване на грешки.</translation>
     </message>
     <message>
-        <source>InstantSend doesn't support sending values that high yet. Transactions are currently limited to %1 DASH.</source>
-        <translation>InstantSend не поддържа толкова високи стойности за изпращане все още. Транзакциите в момента са ограничени до %1 DASH.</translation>
+        <source>DirectSend doesn't support sending values that high yet. Transactions are currently limited to %1 TRIVECHAIN.</source>
+        <translation>DirectSend не поддържа толкова високи стойности за изпращане все още. Транзакциите в момента са ограничени до %1 TRIVECHAIN.</translation>
     </message>
     <message>
-        <source>InstantSend requires inputs with at least %d confirmations, you might need to wait a few minutes and try again.</source>
+        <source>DirectSend requires inputs with at least %d confirmations, you might need to wait a few minutes and try again.</source>
         <translation>InstantX изисква средства с поне %d потвърждения, може да се наложи да почакате няколко минути и да опитате отново.</translation>
     </message>
     <message>
@@ -4613,16 +4613,16 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Максимална крайна такса (в %s) използвана в единична транзакция, ако е зададена твърде малка, няма да бъдат възможни големи транзакции (по подразбиране: %s)</translation>
     </message>
     <message>
-        <source>Please check that your computer's date and time are correct! If your clock is wrong Dash Core will not work properly.</source>
-        <translation>Моля проверете дали датата и часът на вашият компютър са верни! Ако часовникът ви не е сверен, Dash Core няма да работи правилно.</translation>
+        <source>Please check that your computer's date and time are correct! If your clock is wrong Trivechain Core will not work properly.</source>
+        <translation>Моля проверете дали датата и часът на вашият компютър са верни! Ако часовникът ви не е сверен, Trivechain Core няма да работи правилно.</translation>
     </message>
     <message>
-        <source>PrivateSend uses exact denominated amounts to send funds, you might simply need to anonymize some more coins.</source>
-        <translation>PrivateSend използва всички деноминирани наличности за да изпрати сумата, може би ще е необходимо да бъдат анонимизирани  още монети.</translation>
+        <source>ExclusiveSend uses exact denominated amounts to send funds, you might simply need to anonymize some more coins.</source>
+        <translation>ExclusiveSend използва всички деноминирани наличности за да изпрати сумата, може би ще е необходимо да бъдат анонимизирани  още монети.</translation>
     </message>
     <message>
-        <source>Provide liquidity to PrivateSend by infrequently mixing coins on a continual basis (0-100, default: %u, 1=very frequent, high fees, 100=very infrequent, low fees)</source>
-        <translation>Осигуряване на ликвидност PrivateSend от рядко смесване монети непрекъснато в съответствие (0-100, по подразбиране: %u, 1=много чести, високи такси, 100=твърде редки, ниски такси)</translation>
+        <source>Provide liquidity to ExclusiveSend by infrequently mixing coins on a continual basis (0-100, default: %u, 1=very frequent, high fees, 100=very infrequent, low fees)</source>
+        <translation>Осигуряване на ликвидност ExclusiveSend от рядко смесване монети непрекъснато в съответствие (0-100, по подразбиране: %u, 1=много чести, високи такси, 100=твърде редки, ниски такси)</translation>
     </message>
     <message>
         <source>Prune configured below the minimum of %d MiB.  Please use a higher number.</source>
@@ -4669,12 +4669,12 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Опитва се да поддържа изходящият трафик по зададената цел (в MiB за 24h), 0 = без лимит (по подразбиране: %d)</translation>
     </message>
     <message>
-        <source>Unable to locate enough PrivateSend denominated funds for this transaction.</source>
-        <translation>Не са намерени достатъчно PrivateSend деноминирани средства за тази транзакция.</translation>
+        <source>Unable to locate enough ExclusiveSend denominated funds for this transaction.</source>
+        <translation>Не са намерени достатъчно ExclusiveSend деноминирани средства за тази транзакция.</translation>
     </message>
     <message>
-        <source>Unable to locate enough PrivateSend non-denominated funds for this transaction that are not equal 1000 DASH.</source>
-        <translation>Не са намерени достатъчно PrivateSend неденоминирани средства за тази транзакция, които не са равни на 1000 DASH.</translation>
+        <source>Unable to locate enough ExclusiveSend non-denominated funds for this transaction that are not equal 1000 TRIVECHAIN.</source>
+        <translation>Не са намерени достатъчно ExclusiveSend неденоминирани средства за тази транзакция, които не са равни на 1000 TRIVECHAIN.</translation>
     </message>
     <message>
         <source>Unsupported argument -socks found. Setting SOCKS version isn't possible anymore, only SOCKS5 proxies are supported.</source>
@@ -4769,8 +4769,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Включва публикуване на блок хеш в &lt;address&gt;</translation>
     </message>
     <message>
-        <source>Enable publish hash transaction (locked via InstantSend) in &lt;address&gt;</source>
-        <translation>Включва публикуване хеша на транзакцията  (заключен чрез InstantSend) в &lt;address&gt;</translation>
+        <source>Enable publish hash transaction (locked via DirectSend) in &lt;address&gt;</source>
+        <translation>Включва публикуване хеша на транзакцията  (заключен чрез DirectSend) в &lt;address&gt;</translation>
     </message>
     <message>
         <source>Enable publish hash transaction in &lt;address&gt;</source>
@@ -4781,8 +4781,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Включва публикуване необработеният блок в &lt;address&gt;</translation>
     </message>
     <message>
-        <source>Enable publish raw transaction (locked via InstantSend) in &lt;address&gt;</source>
-        <translation>Включва публикуване на необранотена транзакция (заключена чрез InstantSend) в &lt;address&gt;</translation>
+        <source>Enable publish raw transaction (locked via DirectSend) in &lt;address&gt;</source>
+        <translation>Включва публикуване на необранотена транзакция (заключена чрез DirectSend) в &lt;address&gt;</translation>
     </message>
     <message>
         <source>Enable publish raw transaction in &lt;address&gt;</source>
@@ -4821,8 +4821,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Внасяне на блокове от външен blk000??.dat  файл при стартиране</translation>
     </message>
     <message>
-        <source>InstantSend options:</source>
-        <translation>InstantSend опции:</translation>
+        <source>DirectSend options:</source>
+        <translation>DirectSend опции:</translation>
     </message>
     <message>
         <source>Invalid amount for -fallbackfee=&lt;amount&gt;: '%s'</source>
@@ -4833,12 +4833,12 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Дръж мемпула за транзакциите под &lt;n&gt; мегабайта (по подразбиране: %u)</translation>
     </message>
     <message>
-        <source>Last PrivateSend was too recent.</source>
-        <translation>Последния PrivateSend беше твърде скоро.</translation>
+        <source>Last ExclusiveSend was too recent.</source>
+        <translation>Последния ExclusiveSend беше твърде скоро.</translation>
     </message>
     <message>
-        <source>Last successful PrivateSend action was too recent.</source>
-        <translation>Последното успешно PrivateSend действие бе твърде скоро.</translation>
+        <source>Last successful ExclusiveSend action was too recent.</source>
+        <translation>Последното успешно ExclusiveSend действие бе твърде скоро.</translation>
     </message>
     <message>
         <source>Line: %d</source>
@@ -4941,20 +4941,20 @@ https://www.transifex.com/projects/p/dash/</translation>
         <translation>Версия за печат и изход</translation>
     </message>
     <message>
-        <source>PrivateSend is idle.</source>
-        <translation>PrivateSend е без работа.</translation>
+        <source>ExclusiveSend is idle.</source>
+        <translation>ExclusiveSend е без работа.</translation>
     </message>
     <message>
-        <source>PrivateSend options:</source>
-        <translation>PrivateSend опции:</translation>
+        <source>ExclusiveSend options:</source>
+        <translation>ExclusiveSend опции:</translation>
     </message>
     <message>
-        <source>PrivateSend request complete:</source>
-        <translation>PrivateSend заявката е завършена:</translation>
+        <source>ExclusiveSend request complete:</source>
+        <translation>ExclusiveSend заявката е завършена:</translation>
     </message>
     <message>
-        <source>PrivateSend request incomplete:</source>
-        <translation>PrivateSend заявката е незавършена:</translation>
+        <source>ExclusiveSend request incomplete:</source>
+        <translation>ExclusiveSend заявката е незавършена:</translation>
     </message>
     <message>
         <source>Prune cannot be configured with a negative value.</source>

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Trivechain
+Comment=Trivechain P2P Cryptocurrency
+Comment[fr]=Trivechain, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Trivechain, eşten eşe kriptografik sanal para birimi
+Exec=trivechain-qt %u
+Terminal=false
+Type=Application
+Icon=trivechain128
+MimeType=x-scheme-handler/trivechain;
+Categories=Office;Finance;

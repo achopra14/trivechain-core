@@ -1,4 +1,5 @@
 // Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2018-2019 The Trivechain Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include "exclusivesend-client.h"
@@ -16,7 +17,7 @@
 
 #include <memory>
 
-CExclusiveSendClient privateSendClient;
+CExclusiveSendClient exclusiveSendClient;
 
 void CExclusiveSendClient::ProcessMessage(CNode* pfrom, std::string& strCommand, CDataStream& vRecv, CConnman& connman)
 {
@@ -25,7 +26,7 @@ void CExclusiveSendClient::ProcessMessage(CNode* pfrom, std::string& strCommand,
     if(!masternodeSync.IsBlockchainSynced()) return;
 
     if(strCommand == NetMsgType::DSQUEUE) {
-        TRY_LOCK(cs_darksend, lockRecv);
+        TRY_LOCK(cs_exclusivesend, lockRecv);
         if(!lockRecv) return;
 
         if(pfrom->nVersion < MIN_EXCLUSIVESEND_PEER_PROTO_VERSION) {
@@ -33,11 +34,11 @@ void CExclusiveSendClient::ProcessMessage(CNode* pfrom, std::string& strCommand,
             return;
         }
 
-        CDarksendQueue dsq;
+        CExclusivesendQueue dsq;
         vRecv >> dsq;
 
         // process every dsq only once
-        BOOST_FOREACH(CDarksendQueue q, vecDarksendQueue) {
+        BOOST_FOREACH(CExclusivesendQueue q, vecExclusivesendQueue) {
             if(q == dsq) {
                 // LogPrint("exclusivesend", "DSQUEUE -- %s seen\n", dsq.ToString());
                 return;
@@ -70,7 +71,7 @@ void CExclusiveSendClient::ProcessMessage(CNode* pfrom, std::string& strCommand,
                 SubmitDenominate(connman);
             }
         } else {
-            BOOST_FOREACH(CDarksendQueue q, vecDarksendQueue) {
+            BOOST_FOREACH(CExclusivesendQueue q, vecExclusivesendQueue) {
                 if(q.vin == dsq.vin) {
                     // no way same mn can send another "not yet ready" dsq this soon
                     LogPrint("exclusivesend", "DSQUEUE -- Masternode %s is sending WAY too many dsq messages\n", infoMn.addr.ToString());
@@ -92,7 +93,7 @@ void CExclusiveSendClient::ProcessMessage(CNode* pfrom, std::string& strCommand,
             if(infoMixingMasternode.fInfoValid && infoMixingMasternode.vin.prevout == dsq.vin.prevout) {
                 dsq.fTried = true;
             }
-            vecDarksendQueue.push_back(dsq);
+            vecExclusivesendQueue.push_back(dsq);
             dsq.Relay(connman);
         }
 
@@ -285,6 +286,17 @@ std::string CExclusiveSendClient::GetStatus()
     }
 }
 
+bool CExclusiveSendClient::GetMixingMasternodeInfo(masternode_info_t& mnInfoRet)
+{
+    mnInfoRet = infoMixingMasternode.fInfoValid ? infoMixingMasternode : masternode_info_t();
+    return infoMixingMasternode.fInfoValid;
+}
+
+bool CExclusiveSendClient::IsMixingMasternode(const CNode* pnode)
+{
+    return infoMixingMasternode.fInfoValid && pnode->addr == infoMixingMasternode.addr;
+}
+
 //
 // Check the mixing progress and send client updates if a Masternode
 //
@@ -308,19 +320,7 @@ void CExclusiveSendClient::CheckPool()
 //
 void CExclusiveSendClient::CheckTimeout()
 {
-    {
-        TRY_LOCK(cs_darksend, lockDS);
-        if(!lockDS) return; // it's ok to fail here, we run this quite frequently
-
-        // check mixing queue objects for timeouts
-        std::vector<CDarksendQueue>::iterator it = vecDarksendQueue.begin();
-        while(it != vecDarksendQueue.end()) {
-            if((*it).IsExpired()) {
-                LogPrint("exclusivesend", "CExclusiveSendClient::CheckTimeout -- Removing expired queue (%s)\n", (*it).ToString());
-                it = vecDarksendQueue.erase(it);
-            } else ++it;
-        }
-    }
+    CheckQueue();
 
     if(!fEnableExclusiveSend && !fMasterNode) return;
 
@@ -359,7 +359,7 @@ void CExclusiveSendClient::CheckTimeout()
 // Execute a mixing denomination via a Masternode.
 // This is only ran from clients
 //
-bool CExclusiveSendClient::SendDenominate(const std::vector<CTxIn>& vecTxIn, const std::vector<CTxOut>& vecTxOut, CConnman& connman)
+bool CExclusiveSendClient::SendDenominate(const std::vector<CTxDSIn>& vecTxDSIn, const std::vector<CTxOut>& vecTxOut, CConnman& connman)
 {
     if(fMasterNode) {
         LogPrintf("CExclusiveSendClient::SendDenominate -- ExclusiveSend from a Masternode is not supported currently.\n");
@@ -375,8 +375,8 @@ bool CExclusiveSendClient::SendDenominate(const std::vector<CTxIn>& vecTxIn, con
     BOOST_FOREACH(CTxIn txin, txMyCollateral.vin)
         vecOutPointLocked.push_back(txin.prevout);
 
-    BOOST_FOREACH(CTxIn txin, vecTxIn)
-        vecOutPointLocked.push_back(txin.prevout);
+    for (const auto& txdsin : vecTxDSIn)
+        vecOutPointLocked.push_back(txdsin.prevout);
 
     // we should already be connected to a Masternode
     if(!nSessionID) {
@@ -406,9 +406,9 @@ bool CExclusiveSendClient::SendDenominate(const std::vector<CTxIn>& vecTxIn, con
         CValidationState validationState;
         CMutableTransaction tx;
 
-        BOOST_FOREACH(const CTxIn& txin, vecTxIn) {
-            LogPrint("exclusivesend", "CExclusiveSendClient::SendDenominate -- txin=%s\n", txin.ToString());
-            tx.vin.push_back(txin);
+        for (const auto& txdsin : vecTxDSIn) {
+            LogPrint("exclusivesend", "CExclusiveSendClient::SendDenominate -- txdsin=%s\n", txdsin.ToString());
+            tx.vin.push_back(txdsin);
         }
 
         BOOST_FOREACH(const CTxOut& txout, vecTxOut) {
@@ -430,7 +430,7 @@ bool CExclusiveSendClient::SendDenominate(const std::vector<CTxIn>& vecTxIn, con
     }
 
     // store our entry for later use
-    CDarkSendEntry entry(vecTxIn, vecTxOut, txMyCollateral);
+    CExclusiveSendEntry entry(vecTxDSIn, vecTxOut, txMyCollateral);
     vecEntries.push_back(entry);
     RelayIn(entry, connman);
     nTimeLastSuccessfulStep = GetTimeMillis();
@@ -507,7 +507,7 @@ bool CExclusiveSendClient::SignFinalTransaction(const CTransaction& finalTransac
     std::vector<CTxIn> sigs;
 
     //make sure my inputs/outputs are present, otherwise refuse to sign
-    BOOST_FOREACH(const CDarkSendEntry entry, vecEntries) {
+    BOOST_FOREACH(const CExclusiveSendEntry entry, vecEntries) {
         BOOST_FOREACH(const CTxDSIn txdsin, entry.vecTxDSIn) {
             /* Sign my transaction and all outputs */
             int nMyInputIndex = -1;
@@ -527,19 +527,19 @@ bool CExclusiveSendClient::SignFinalTransaction(const CTransaction& finalTransac
                 CAmount nValue1 = 0;
                 CAmount nValue2 = 0;
 
-                for(unsigned int i = 0; i < finalMutableTransaction.vout.size(); i++) {
-                    BOOST_FOREACH(const CTxOut& txout, entry.vecTxDSOut) {
-                        if(finalMutableTransaction.vout[i] == txout) {
+                for (const auto& txoutFinal : finalMutableTransaction.vout) {
+                    for (const auto& txout: entry.vecTxOut) {
+                        if(txoutFinal == txout) {
                             nFoundOutputsCount++;
-                            nValue1 += finalMutableTransaction.vout[i].nValue;
+                            nValue1 += txoutFinal.nValue;
                         }
                     }
                 }
 
-                BOOST_FOREACH(const CTxOut txout, entry.vecTxDSOut)
+                for (const auto& txout : entry.vecTxOut)
                     nValue2 += txout.nValue;
 
-                int nTargetOuputsCount = entry.vecTxDSOut.size();
+                int nTargetOuputsCount = entry.vecTxOut.size();
                 if(nFoundOutputsCount < nTargetOuputsCount || nValue1 != nValue2) {
                     // in this case, something went wrong and we'll refuse to sign. It's possible we'll be charged collateral. But that's
                     // better then signing if the transaction doesn't look like what we wanted.
@@ -581,18 +581,6 @@ bool CExclusiveSendClient::SignFinalTransaction(const CTransaction& finalTransac
     nTimeLastSuccessfulStep = GetTimeMillis();
 
     return true;
-}
-
-void CExclusiveSendClient::NewBlock()
-{
-    static int64_t nTimeNewBlockReceived = 0;
-
-    //we we're processing lots of blocks, we'll just leave
-    if(GetTime() - nTimeNewBlockReceived < 10) return;
-    nTimeNewBlockReceived = GetTime();
-    LogPrint("exclusivesend", "CExclusiveSendClient::NewBlock\n");
-
-    CheckTimeout();
 }
 
 // mixing transaction was completed (failed or successful)
@@ -712,7 +700,7 @@ bool CExclusiveSendClient::DoAutomaticDenominating(CConnman& connman, bool fDryR
         return false;
     }
 
-    TRY_LOCK(cs_darksend, lockDS);
+    TRY_LOCK(cs_exclusivesend, lockDS);
     if(!lockDS) {
         strAutoDenomResult = _("Lock is already in place.");
         return false;
@@ -846,7 +834,7 @@ bool CExclusiveSendClient::JoinExistingQueue(CAmount nBalanceNeedsAnonymized, CC
 {
     std::vector<CAmount> vecStandardDenoms = CExclusiveSend::GetStandardDenominations();
     // Look through the queues and see if anything matches
-    BOOST_FOREACH(CDarksendQueue& dsq, vecDarksendQueue) {
+    BOOST_FOREACH(CExclusivesendQueue& dsq, vecExclusivesendQueue) {
         // only try each queue once
         if(dsq.fTried) continue;
         dsq.fTried = true;
@@ -869,40 +857,36 @@ bool CExclusiveSendClient::JoinExistingQueue(CAmount nBalanceNeedsAnonymized, CC
         }
 
         // mixing rate limit i.e. nLastDsq check should already pass in DSQUEUE ProcessMessage
-        // in order for dsq to get into vecDarksendQueue, so we should be safe to mix already,
+        // in order for dsq to get into vecExclusivesendQueue, so we should be safe to mix already,
         // no need for additional verification here
 
         LogPrint("exclusivesend", "CExclusiveSendClient::JoinExistingQueue -- found valid queue: %s\n", dsq.ToString());
 
         CAmount nValueInTmp = 0;
-        std::vector<CTxIn> vecTxInTmp;
+        std::vector<CTxDSIn> vecTxDSInTmp;
         std::vector<COutput> vCoinsTmp;
 
         // Try to match their denominations if possible, select at least 1 denominations
-        if(!pwalletMain->SelectCoinsByDenominations(dsq.nDenom, vecStandardDenoms[vecBits.front()], nBalanceNeedsAnonymized, vecTxInTmp, vCoinsTmp, nValueInTmp, 0, nExclusiveSendRounds)) {
+        if(!pwalletMain->SelectCoinsByDenominations(dsq.nDenom, vecStandardDenoms[vecBits.front()], nBalanceNeedsAnonymized, vecTxDSInTmp, vCoinsTmp, nValueInTmp, 0, nExclusiveSendRounds)) {
             LogPrintf("CExclusiveSendClient::JoinExistingQueue -- Couldn't match denominations %d %d (%s)\n", vecBits.front(), dsq.nDenom, CExclusiveSend::GetDenominationsToString(dsq.nDenom));
             continue;
         }
 
         vecMasternodesUsed.push_back(dsq.vin.prevout);
 
-        CNode* pnodeFound = NULL;
-        bool fDisconnect = false;
-        connman.ForNode(infoMn.addr, CConnman::AllNodes, [&pnodeFound, &fDisconnect](CNode* pnode) {
-            pnodeFound = pnode;
-            if(pnodeFound->fDisconnect) {
-                fDisconnect = true;
-            } else {
-                pnodeFound->AddRef();
-            }
+        bool fSkip = false;
+        connman.ForNode(infoMn.addr, CConnman::AllNodes, [&fSkip](CNode* pnode) {
+            fSkip = pnode->fDisconnect || pnode->fMasternode;
             return true;
         });
-        if (fDisconnect)
+        if (fSkip) {
+            LogPrintf("CExclusiveSendClient::JoinExistingQueue -- skipping masternode connection, addr=%s\n", infoMn.addr.ToString());
             continue;
+        }
 
         LogPrintf("CExclusiveSendClient::JoinExistingQueue -- attempt to connect to masternode from queue, addr=%s\n", infoMn.addr.ToString());
         // connect to Masternode and submit the queue request
-        CNode* pnode = (pnodeFound && pnodeFound->fMasternode) ? pnodeFound : connman.ConnectNode(CAddress(infoMn.addr, NODE_NETWORK), NULL, true);
+        CNode* pnode = connman.ConnectNode(CAddress(infoMn.addr, NODE_NETWORK), NULL, true);
         if(pnode) {
             infoMixingMasternode = infoMn;
             nSessionDenom = dsq.nDenom;
@@ -913,9 +897,6 @@ bool CExclusiveSendClient::JoinExistingQueue(CAmount nBalanceNeedsAnonymized, CC
             strAutoDenomResult = _("Mixing in progress...");
             SetState(POOL_STATE_QUEUE);
             nTimeLastSuccessfulStep = GetTimeMillis();
-            if(pnodeFound) {
-                pnodeFound->Release();
-            }
             return true;
         } else {
             LogPrintf("CExclusiveSendClient::JoinExistingQueue -- can't connect, addr=%s\n", infoMn.addr.ToString());
@@ -960,24 +941,19 @@ bool CExclusiveSendClient::StartNewQueue(CAmount nValueMin, CAmount nBalanceNeed
             continue;
         }
 
-        CNode* pnodeFound = NULL;
-        bool fDisconnect = false;
-        connman.ForNode(infoMn.addr, CConnman::AllNodes, [&pnodeFound, &fDisconnect](CNode* pnode) {
-            pnodeFound = pnode;
-            if(pnodeFound->fDisconnect) {
-                fDisconnect = true;
-            } else {
-                pnodeFound->AddRef();
-            }
+        bool fSkip = false;
+        connman.ForNode(infoMn.addr, CConnman::AllNodes, [&fSkip](CNode* pnode) {
+            fSkip = pnode->fDisconnect || pnode->fMasternode;
             return true;
         });
-        if (fDisconnect) {
+        if (fSkip) {
+            LogPrintf("CExclusiveSendClient::StartNewQueue -- skipping masternode connection, addr=%s\n", infoMn.addr.ToString());
             nTries++;
             continue;
         }
 
         LogPrintf("CExclusiveSendClient::StartNewQueue -- attempt %d connection to Masternode %s\n", nTries, infoMn.addr.ToString());
-        CNode* pnode = (pnodeFound && pnodeFound->fMasternode) ? pnodeFound : connman.ConnectNode(CAddress(infoMn.addr, NODE_NETWORK), NULL, true);
+        CNode* pnode = connman.ConnectNode(CAddress(infoMn.addr, NODE_NETWORK), NULL, true);
         if(pnode) {
             LogPrintf("CExclusiveSendClient::StartNewQueue -- connected, addr=%s\n", infoMn.addr.ToString());
             infoMixingMasternode = infoMn;
@@ -995,9 +971,6 @@ bool CExclusiveSendClient::StartNewQueue(CAmount nValueMin, CAmount nBalanceNeed
             strAutoDenomResult = _("Mixing in progress...");
             SetState(POOL_STATE_QUEUE);
             nTimeLastSuccessfulStep = GetTimeMillis();
-            if(pnodeFound) {
-                pnodeFound->Release();
-            }
             return true;
         } else {
             LogPrintf("CExclusiveSendClient::StartNewQueue -- can't connect, addr=%s\n", infoMn.addr.ToString());
@@ -1011,23 +984,34 @@ bool CExclusiveSendClient::StartNewQueue(CAmount nValueMin, CAmount nBalanceNeed
 bool CExclusiveSendClient::SubmitDenominate(CConnman& connman)
 {
     std::string strError;
-    std::vector<CTxIn> vecTxInRet;
+    std::vector<CTxDSIn> vecTxDSInRet;
     std::vector<CTxOut> vecTxOutRet;
 
     // Submit transaction to the pool if we get here
-    // Try to use only inputs with the same number of rounds starting from the highest number of rounds possible
-    for(int i = nExclusiveSendRounds; i > 0; i--) {
-        if(PrepareDenominate(i - 1, i, strError, vecTxInRet, vecTxOutRet)) {
-            LogPrintf("CExclusiveSendClient::SubmitDenominate -- Running ExclusiveSend denominate for %d rounds, success\n", i);
-            return SendDenominate(vecTxInRet, vecTxOutRet, connman);
+    if (nLiquidityProvider) {
+        // Try to use only inputs with the same number of rounds starting from the lowest number of rounds possible
+        for(int i = 0; i< nExclusiveSendRounds; i++) {
+            if(PrepareDenominate(i, i + 1, strError, vecTxDSInRet, vecTxOutRet)) {
+                LogPrintf("CExclusiveSendClient::SubmitDenominate -- Running ExclusiveSend denominate for %d rounds, success\n", i);
+                return SendDenominate(vecTxDSInRet, vecTxOutRet, connman);
+            }
+            LogPrint("exclusivesend", "CExclusiveSendClient::SubmitDenominate -- Running ExclusiveSend denominate for %d rounds, error: %s\n", i, strError);
         }
-        LogPrint("exclusivesend", "CExclusiveSendClient::SubmitDenominate -- Running ExclusiveSend denominate for %d rounds, error: %s\n", i, strError);
+    } else {
+        // Try to use only inputs with the same number of rounds starting from the highest number of rounds possible
+        for(int i = nExclusiveSendRounds; i > 0; i--) {
+            if(PrepareDenominate(i - 1, i, strError, vecTxDSInRet, vecTxOutRet)) {
+                LogPrintf("CExclusiveSendClient::SubmitDenominate -- Running ExclusiveSend denominate for %d rounds, success\n", i);
+                return SendDenominate(vecTxDSInRet, vecTxOutRet, connman);
+            }
+            LogPrint("exclusivesend", "CExclusiveSendClient::SubmitDenominate -- Running ExclusiveSend denominate for %d rounds, error: %s\n", i, strError);
+        }
     }
 
     // We failed? That's strange but let's just make final attempt and try to mix everything
-    if(PrepareDenominate(0, nExclusiveSendRounds, strError, vecTxInRet, vecTxOutRet)) {
+    if(PrepareDenominate(0, nExclusiveSendRounds, strError, vecTxDSInRet, vecTxOutRet)) {
         LogPrintf("CExclusiveSendClient::SubmitDenominate -- Running ExclusiveSend denominate for all rounds, success\n");
-        return SendDenominate(vecTxInRet, vecTxOutRet, connman);
+        return SendDenominate(vecTxDSInRet, vecTxOutRet, connman);
     }
 
     // Should never actually get here but just in case
@@ -1036,7 +1020,7 @@ bool CExclusiveSendClient::SubmitDenominate(CConnman& connman)
     return false;
 }
 
-bool CExclusiveSendClient::PrepareDenominate(int nMinRounds, int nMaxRounds, std::string& strErrorRet, std::vector<CTxIn>& vecTxInRet, std::vector<CTxOut>& vecTxOutRet)
+bool CExclusiveSendClient::PrepareDenominate(int nMinRounds, int nMaxRounds, std::string& strErrorRet, std::vector<CTxDSIn>& vecTxDSInRet, std::vector<CTxOut>& vecTxOutRet)
 {
     if(!pwalletMain) {
         strErrorRet = "Wallet is not initialized";
@@ -1054,11 +1038,11 @@ bool CExclusiveSendClient::PrepareDenominate(int nMinRounds, int nMaxRounds, std
     }
 
     // make sure returning vectors are empty before filling them up
-    vecTxInRet.clear();
+    vecTxDSInRet.clear();
     vecTxOutRet.clear();
 
     // ** find the coins we'll use
-    std::vector<CTxIn> vecTxIn;
+    std::vector<CTxDSIn> vecTxDSIn;
     std::vector<COutput> vCoins;
     CAmount nValueIn = 0;
 
@@ -1073,7 +1057,7 @@ bool CExclusiveSendClient::PrepareDenominate(int nMinRounds, int nMaxRounds, std
         return false;
     }
     std::vector<CAmount> vecStandardDenoms = CExclusiveSend::GetStandardDenominations();
-    bool fSelected = pwalletMain->SelectCoinsByDenominations(nSessionDenom, vecStandardDenoms[vecBits.front()], CExclusiveSend::GetMaxPoolAmount(), vecTxIn, vCoins, nValueIn, nMinRounds, nMaxRounds);
+    bool fSelected = pwalletMain->SelectCoinsByDenominations(nSessionDenom, vecStandardDenoms[vecBits.front()], CExclusiveSend::GetMaxPoolAmount(), vecTxDSIn, vCoins, nValueIn, nMinRounds, nMaxRounds);
     if (nMinRounds >= 0 && !fSelected) {
         strErrorRet = "Can't select current denominated inputs";
         return false;
@@ -1083,7 +1067,7 @@ bool CExclusiveSendClient::PrepareDenominate(int nMinRounds, int nMaxRounds, std
 
     {
         LOCK(pwalletMain->cs_wallet);
-        BOOST_FOREACH(CTxIn txin, vecTxIn) {
+        for (auto& txin : vecTxDSIn) {
             pwalletMain->LockCoin(txin.prevout);
         }
     }
@@ -1102,18 +1086,18 @@ bool CExclusiveSendClient::PrepareDenominate(int nMinRounds, int nMaxRounds, std
             if (nValueLeft - nValueDenom < 0) continue;
 
             // Note: this relies on a fact that both vectors MUST have same size
-            std::vector<CTxIn>::iterator it = vecTxIn.begin();
+            std::vector<CTxDSIn>::iterator it = vecTxDSIn.begin();
             std::vector<COutput>::iterator it2 = vCoins.begin();
             while (it2 != vCoins.end()) {
                 // we have matching inputs
                 if ((*it2).tx->vout[(*it2).i].nValue == nValueDenom) {
                     // add new input in resulting vector
-                    vecTxInRet.push_back(*it);
+                    vecTxDSInRet.push_back(*it);
                     // remove corresponting items from initial vectors
-                    vecTxIn.erase(it);
+                    vecTxDSIn.erase(it);
                     vCoins.erase(it2);
 
-                    CScript scriptDenom = keyHolderStorage.AddKey(pwalletMain).GetScriptForDestination();
+                    CScript scriptDenom = keyHolderStorage.AddKey(pwalletMain);
 
                     // add new output
                     CTxOut txout(nValueDenom, scriptDenom);
@@ -1136,7 +1120,7 @@ bool CExclusiveSendClient::PrepareDenominate(int nMinRounds, int nMaxRounds, std
     {
         // unlock unused coins
         LOCK(pwalletMain->cs_wallet);
-        BOOST_FOREACH(CTxIn txin, vecTxIn) {
+        for (auto& txin : vecTxDSIn) {
             pwalletMain->UnlockCoin(txin.prevout);
         }
     }
@@ -1144,7 +1128,7 @@ bool CExclusiveSendClient::PrepareDenominate(int nMinRounds, int nMaxRounds, std
     if (CExclusiveSend::GetDenominations(vecTxOutRet) != nSessionDenom) {
         // unlock used coins on failure
         LOCK(pwalletMain->cs_wallet);
-        BOOST_FOREACH(CTxIn txin, vecTxInRet) {
+        for (auto& txin : vecTxDSInRet) {
             pwalletMain->UnlockCoin(txin.prevout);
         }
         keyHolderStorage.ReturnAll();
@@ -1188,7 +1172,7 @@ bool CExclusiveSendClient::MakeCollateralAmounts(const CompactTallyItem& tallyIt
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
     // denominated input is always a single one, so we can check its amount directly and return early
-    if(!fTryDenominated && tallyItem.vecTxIn.size() == 1 && pwalletMain->IsDenominatedAmount(tallyItem.nAmount))
+    if(!fTryDenominated && tallyItem.vecTxIn.size() == 1 && CExclusiveSend::IsDenominatedAmount(tallyItem.nAmount))
         return false;
 
     CWalletTx wtx;
@@ -1219,16 +1203,15 @@ bool CExclusiveSendClient::MakeCollateralAmounts(const CompactTallyItem& tallyIt
         coinControl.Select(txin.prevout);
 
     bool fSuccess = pwalletMain->CreateTransaction(vecSend, wtx, reservekeyChange,
-            nFeeRet, nChangePosRet, strFail, &coinControl, true, ONLY_NONDENOMINATED_NOT10000IFMN);
+            nFeeRet, nChangePosRet, strFail, &coinControl, true, ONLY_NONDENOMINATED);
     if(!fSuccess) {
-        LogPrintf("CExclusiveSendClient::MakeCollateralAmounts -- ONLY_NONDENOMINATED_NOT10000IFMN Error: %s\n", strFail);
+        LogPrintf("CExclusiveSendClient::MakeCollateralAmounts -- ONLY_NONDENOMINATED: %s\n", strFail);
         // If we failed then most likeky there are not enough funds on this address.
         if(fTryDenominated) {
             // Try to also use denominated coins (we can't mix denominated without collaterals anyway).
-            // MN-like funds should not be touched in any case.
             if(!pwalletMain->CreateTransaction(vecSend, wtx, reservekeyChange,
-                                nFeeRet, nChangePosRet, strFail, &coinControl, true, ONLY_NOT10000IFMN)) {
-                LogPrintf("CExclusiveSendClient::MakeCollateralAmounts -- ONLY_NOT10000IFMN Error: %s\n", strFail);
+                                nFeeRet, nChangePosRet, strFail, &coinControl, true, ALL_COINS)) {
+                LogPrintf("CExclusiveSendClient::MakeCollateralAmounts -- ALL_COINS Error: %s\n", strFail);
                 reservekeyCollateral.ReturnKey();
                 return false;
             }
@@ -1290,7 +1273,7 @@ bool CExclusiveSendClient::CreateDenominated(const CompactTallyItem& tallyItem, 
     // ****** Add an output for mixing collaterals ************ /
 
     if(fCreateMixingCollaterals) {
-        CScript scriptCollateral = keyHolderStorageDenom.AddKey(pwalletMain).GetScriptForDestination();
+        CScript scriptCollateral = keyHolderStorageDenom.AddKey(pwalletMain);
         vecSend.push_back((CRecipient){ scriptCollateral, CExclusiveSend::GetMaxCollateralAmount(), false });
         nValueLeft -= CExclusiveSend::GetMaxCollateralAmount();
     }
@@ -1325,7 +1308,7 @@ bool CExclusiveSendClient::CreateDenominated(const CompactTallyItem& tallyItem, 
 
             // add each output up to 11 times until it can't be added again
             while(nValueLeft - nDenomValue >= 0 && nOutputs <= 10) {
-                CScript scriptDenom = keyHolderStorageDenom.AddKey(pwalletMain).GetScriptForDestination();
+                CScript scriptDenom = keyHolderStorageDenom.AddKey(pwalletMain);
 
                 vecSend.push_back((CRecipient){ scriptDenom, nDenomValue, false });
 
@@ -1362,7 +1345,7 @@ bool CExclusiveSendClient::CreateDenominated(const CompactTallyItem& tallyItem, 
     CReserveKey reservekeyChange(pwalletMain);
 
     bool fSuccess = pwalletMain->CreateTransaction(vecSend, wtx, reservekeyChange,
-            nFeeRet, nChangePosRet, strFail, &coinControl, true, ONLY_NONDENOMINATED_NOT10000IFMN);
+            nFeeRet, nChangePosRet, strFail, &coinControl, true, ONLY_NONDENOMINATED);
     if(!fSuccess) {
         LogPrintf("CExclusiveSendClient::CreateDenominated -- Error: %s\n", strFail);
         keyHolderStorageDenom.ReturnAll();
@@ -1383,7 +1366,7 @@ bool CExclusiveSendClient::CreateDenominated(const CompactTallyItem& tallyItem, 
     return true;
 }
 
-void CExclusiveSendClient::RelayIn(const CDarkSendEntry& entry, CConnman& connman)
+void CExclusiveSendClient::RelayIn(const CExclusiveSendEntry& entry, CConnman& connman)
 {
     if(!infoMixingMasternode.fInfoValid) return;
 
@@ -1405,17 +1388,13 @@ void CExclusiveSendClient::UpdatedBlockTip(const CBlockIndex *pindex)
     nCachedBlockHeight = pindex->nHeight;
     LogPrint("exclusivesend", "CExclusiveSendClient::UpdatedBlockTip -- nCachedBlockHeight: %d\n", nCachedBlockHeight);
 
-    if(!fLiteMode && masternodeSync.IsMasternodeListSynced()) {
-        NewBlock();
-    }
-
-    CExclusiveSend::CheckDSTXes(pindex->nHeight);
 }
 
 //TODO: Rename/move to core
 void ThreadCheckExclusiveSendClient(CConnman& connman)
 {
     if(fLiteMode) return; // disable all Trivechain specific functionality
+    if(fMasterNode) return; // no client-side mixing on masternodes
 
     static bool fOneThread;
     if(fOneThread) return;
@@ -1433,9 +1412,9 @@ void ThreadCheckExclusiveSendClient(CConnman& connman)
 
         if(masternodeSync.IsBlockchainSynced() && !ShutdownRequested()) {
             nTick++;
-            privateSendClient.CheckTimeout();
+            exclusiveSendClient.CheckTimeout();
             if(nDoAutoNextRun == nTick) {
-                privateSendClient.DoAutomaticDenominating(connman);
+                exclusiveSendClient.DoAutomaticDenominating(connman);
                 nDoAutoNextRun = nTick + EXCLUSIVESEND_AUTO_TIMEOUT_MIN + GetRandInt(EXCLUSIVESEND_AUTO_TIMEOUT_MAX - EXCLUSIVESEND_AUTO_TIMEOUT_MIN);
             }
         }

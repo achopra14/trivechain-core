@@ -40,8 +40,8 @@ NOTE: Building with Qt4 is still supported, however, doing so could result in a 
 
 1. Clone the GitHub tree to get the source code and go into the directory.
 
-        git clone https://github.com/trvc/trivechaincore.git
-        cd trivechaincore
+        git clone https://github.com/trivechain/trivechain-core.git
+        cd trivechain-core
 
 2.  Build Trivechain Core:
     This will configure and build the headless trivechain binaries as well as the gui (if Qt is found).
@@ -102,14 +102,14 @@ directory. We have to first create the RPC configuration file, though.
 Run `./trivechaind` to get the filename where it should be put, or just try these
 commands:
 
-    echo -e "rpcuser=trvc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/trvc/trivechain.conf"
-    chmod 600 "/Users/${USER}/Library/Application Support/trvc/trivechain.conf"
+    echo -e "rpcuser=trivechainrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/Trivechain/trivechain.conf"
+    chmod 600 "/Users/${USER}/Library/Application Support/Trivechain/trivechain.conf"
 
 The next time you run it, it will start downloading the blockchain, but it won't
 output anything while it's doing this. This process may take several hours;
 you can monitor its process by looking at the debug.log file, like this:
 
-    tail -f $HOME/Library/Application\ Support/trvc/debug.log
+    tail -f $HOME/Library/Application\ Support/Trivechain/debug.log
 
 Other commands:
 -------

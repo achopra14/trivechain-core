@@ -1,5 +1,6 @@
 // Copyright (c) 2011-2015 The Bitcoin Core developers
 // Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2018-2019 The Trivechain Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -143,13 +144,13 @@ void WalletModel::pollBalanceChanged()
     if(!lockWallet)
         return;
 
-    if(fForceCheckBalanceChanged || chainActive.Height() != cachedNumBlocks || privateSendClient.nExclusiveSendRounds != cachedExclusiveSendRounds || cachedTxLocks != nCompleteTXLocks)
+    if(fForceCheckBalanceChanged || chainActive.Height() != cachedNumBlocks || exclusiveSendClient.nExclusiveSendRounds != cachedExclusiveSendRounds || cachedTxLocks != nCompleteTXLocks)
     {
         fForceCheckBalanceChanged = false;
 
         // Balance and number of transactions might have changed
         cachedNumBlocks = chainActive.Height();
-        cachedExclusiveSendRounds = privateSendClient.nExclusiveSendRounds;
+        cachedExclusiveSendRounds = exclusiveSendClient.nExclusiveSendRounds;
 
         checkBalanceChanged();
         if(transactionTableModel)
@@ -307,7 +308,7 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
         CReserveKey *keyChange = transaction.getPossibleKeyChange();
 
         if(recipients[0].fUseDirectSend && total > sporkManager.GetSporkValue(SPORK_5_DIRECTSEND_MAX_VALUE)*COIN){
-            Q_EMIT message(tr("Send Coins"), tr("DirectSend doesn't support sending values that high yet. Transactions are currently limited to %1 TRVC.").arg(sporkManager.GetSporkValue(SPORK_5_DIRECTSEND_MAX_VALUE)),
+            Q_EMIT message(tr("Send Coins"), tr("DirectSend doesn't support sending values that high yet. Transactions are currently limited to %1 TRIVECHAIN.").arg(sporkManager.GetSporkValue(SPORK_5_DIRECTSEND_MAX_VALUE)),
                          CClientUIInterface::MSG_ERROR);
             return TransactionCreationFailed;
         }
@@ -319,7 +320,7 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
 
         if(recipients[0].fUseDirectSend) {
             if(newTx->GetValueOut() > sporkManager.GetSporkValue(SPORK_5_DIRECTSEND_MAX_VALUE)*COIN) {
-                Q_EMIT message(tr("Send Coins"), tr("DirectSend doesn't support sending values that high yet. Transactions are currently limited to %1 TRVC.").arg(sporkManager.GetSporkValue(SPORK_5_DIRECTSEND_MAX_VALUE)),
+                Q_EMIT message(tr("Send Coins"), tr("DirectSend doesn't support sending values that high yet. Transactions are currently limited to %1 TRIVECHAIN.").arg(sporkManager.GetSporkValue(SPORK_5_DIRECTSEND_MAX_VALUE)),
                              CClientUIInterface::MSG_ERROR);
                 return TransactionCreationFailed;
             }

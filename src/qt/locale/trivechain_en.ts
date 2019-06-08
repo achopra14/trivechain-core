@@ -80,13 +80,13 @@
     </message>
     <message>
         <location line="+7"/>
-        <source>These are your Dash addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>These are your Dash addresses for sending payments. Always check the amount and the receiving address before sending coins.</translation>
+        <source>These are your Trivechain addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>These are your Trivechain addresses for sending payments. Always check the amount and the receiving address before sending coins.</translation>
     </message>
     <message>
         <location line="+4"/>
-        <source>These are your Dash addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>These are your Dash addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</translation>
+        <source>These are your Trivechain addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>These are your Trivechain addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</translation>
     </message>
     <message>
         <location line="+6"/>
@@ -171,8 +171,8 @@
     </message>
     <message>
         <location line="+3"/>
-        <source>Only for mixing via PrivateSend</source>
-        <translation>Only for mixing via PrivateSend</translation>
+        <source>Only for mixing via ExclusiveSend</source>
+        <translation>Only for mixing via ExclusiveSend</translation>
     </message>
     <message>
         <location filename="../askpassphrasedialog.cpp" line="+43"/>
@@ -221,8 +221,8 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR DASH&lt;/b&gt;!</source>
-        <translation>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR DASH&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR TRIVECHAIN&lt;/b&gt;!</source>
+        <translation>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR TRIVECHAIN&lt;/b&gt;!</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -237,8 +237,8 @@
     </message>
     <message>
         <location line="-57"/>
-        <source>Dash Core will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your dashs from being stolen by malware infecting your computer.</source>
-        <translation>Dash Core will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your dashs from being stolen by malware infecting your computer.</translation>
+        <source>Trivechain Core will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your trivechains from being stolen by malware infecting your computer.</source>
+        <translation>Trivechain Core will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your trivechains from being stolen by malware infecting your computer.</translation>
     </message>
     <message>
         <location line="+4"/>
@@ -309,15 +309,15 @@
 <context>
     <name>BitcoinGUI</name>
     <message>
-        <location filename="../dash.cpp" line="+542"/>
-        <source>A fatal error occurred. Dash Core can no longer continue safely and will quit.</source>
-        <translation>A fatal error occurred. Dash Core can no longer continue safely and will quit.</translation>
+        <location filename="../trivechain.cpp" line="+542"/>
+        <source>A fatal error occurred. Trivechain Core can no longer continue safely and will quit.</source>
+        <translation>A fatal error occurred. Trivechain Core can no longer continue safely and will quit.</translation>
     </message>
     <message>
         <location filename="../bitcoingui.cpp" line="+130"/>
         <location line="+988"/>
-        <source>Dash Core</source>
-        <translation>Dash Core</translation>
+        <source>Trivechain Core</source>
+        <translation>Trivechain Core</translation>
     </message>
     <message>
         <location line="-979"/>
@@ -346,8 +346,8 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>Send coins to a Dash address</source>
-        <translation>Send coins to a Dash address</translation>
+        <source>Send coins to a Trivechain address</source>
+        <translation>Send coins to a Trivechain address</translation>
     </message>
     <message>
         <location line="+14"/>
@@ -356,8 +356,8 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>Request payments (generates QR codes and dash: URIs)</source>
-        <translation>Request payments (generates QR codes and dash: URIs)</translation>
+        <source>Request payments (generates QR codes and trivechain: URIs)</source>
+        <translation>Request payments (generates QR codes and trivechain: URIs)</translation>
     </message>
     <message>
         <location line="+14"/>
@@ -391,13 +391,13 @@
     </message>
     <message>
         <location line="+3"/>
-        <source>&amp;About Dash Core</source>
-        <translation>&amp;About Dash Core</translation>
+        <source>&amp;About Trivechain Core</source>
+        <translation>&amp;About Trivechain Core</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Show information about Dash Core</source>
-        <translation>Show information about Dash Core</translation>
+        <source>Show information about Trivechain Core</source>
+        <translation>Show information about Trivechain Core</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -416,8 +416,8 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>Modify configuration options for Dash Core</source>
-        <translation>Modify configuration options for Dash Core</translation>
+        <source>Modify configuration options for Trivechain Core</source>
+        <translation>Modify configuration options for Trivechain Core</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -481,8 +481,8 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>Sign messages with your Dash addresses to prove you own them</source>
-        <translation>Sign messages with your Dash addresses to prove you own them</translation>
+        <source>Sign messages with your Trivechain addresses to prove you own them</source>
+        <translation>Sign messages with your Trivechain addresses to prove you own them</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -491,8 +491,8 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>Verify messages to ensure they were signed with specified Dash addresses</source>
-        <translation>Verify messages to ensure they were signed with specified Dash addresses</translation>
+        <source>Verify messages to ensure they were signed with specified Trivechain addresses</source>
+        <translation>Verify messages to ensure they were signed with specified Trivechain addresses</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -601,8 +601,8 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>Open a dash: URI or payment request</source>
-        <translation>Open a dash: URI or payment request</translation>
+        <source>Open a trivechain: URI or payment request</source>
+        <translation>Open a trivechain: URI or payment request</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -611,18 +611,18 @@
     </message>
     <message>
         <location line="+2"/>
-        <source>Show the Dash Core help message to get a list with possible Dash Core command-line options</source>
-        <translation>Show the Dash Core help message to get a list with possible Dash Core command-line options</translation>
+        <source>Show the Trivechain Core help message to get a list with possible Trivechain Core command-line options</source>
+        <translation>Show the Trivechain Core help message to get a list with possible Trivechain Core command-line options</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>&amp;PrivateSend information</source>
-        <translation>&amp;PrivateSend information</translation>
+        <source>&amp;ExclusiveSend information</source>
+        <translation>&amp;ExclusiveSend information</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Show the PrivateSend basic information</source>
-        <translation>Show the PrivateSend basic information</translation>
+        <source>Show the ExclusiveSend basic information</source>
+        <translation>Show the ExclusiveSend basic information</translation>
     </message>
     <message>
         <location line="+62"/>
@@ -651,15 +651,15 @@
     </message>
     <message>
         <location line="+168"/>
-        <source>Dash Core client</source>
-        <translation>Dash Core client</translation>
+        <source>Trivechain Core client</source>
+        <translation>Trivechain Core client</translation>
     </message>
     <message numerus="yes">
         <location line="+200"/>
-        <source>%n active connection(s) to Dash network</source>
+        <source>%n active connection(s) to Trivechain network</source>
         <translation>
-            <numerusform>%n active connection to Dash network</numerusform>
-            <numerusform>%n active connections to Dash network</numerusform>
+            <numerusform>%n active connection to Trivechain network</numerusform>
+            <numerusform>%n active connections to Trivechain network</numerusform>
         </translation>
     </message>
     <message>
@@ -1004,8 +1004,8 @@
     </message>
     <message>
         <location line="+198"/>
-        <source>Non-anonymized input selected. &lt;b&gt;PrivateSend will be disabled.&lt;/b&gt;&lt;br&gt;&lt;br&gt;If you still want to use PrivateSend, please deselect all non-nonymized inputs first and then check PrivateSend checkbox again.</source>
-        <translation>Non-anonymized input selected. &lt;b&gt;PrivateSend will be disabled.&lt;/b&gt;&lt;br&gt;&lt;br&gt;If you still want to use PrivateSend, please deselect all non-nonymized inputs first and then check PrivateSend checkbox again.</translation>
+        <source>Non-anonymized input selected. &lt;b&gt;ExclusiveSend will be disabled.&lt;/b&gt;&lt;br&gt;&lt;br&gt;If you still want to use ExclusiveSend, please deselect all non-nonymized inputs first and then check ExclusiveSend checkbox again.</source>
+        <translation>Non-anonymized input selected. &lt;b&gt;ExclusiveSend will be disabled.&lt;/b&gt;&lt;br&gt;&lt;br&gt;If you still want to use ExclusiveSend, please deselect all non-nonymized inputs first and then check ExclusiveSend checkbox again.</translation>
     </message>
     <message>
         <location line="+29"/>
@@ -1055,11 +1055,11 @@
     </message>
 </context>
 <context>
-    <name>DarksendConfig</name>
+    <name>ExclusivesendConfig</name>
     <message>
-        <location filename="../forms/darksendconfig.ui" line="+14"/>
-        <source>Configure PrivateSend</source>
-        <translation>Configure PrivateSend</translation>
+        <location filename="../forms/exclusivesendconfig.ui" line="+14"/>
+        <source>Configure ExclusiveSend</source>
+        <translation>Configure ExclusiveSend</translation>
     </message>
     <message>
         <location line="+12"/>
@@ -1083,13 +1083,13 @@
     </message>
     <message>
         <location line="+13"/>
-        <source>Use 2 separate masternodes to mix funds up to 1000 DASH</source>
-        <translation>Use 2 separate masternodes to mix funds up to 1000 DASH</translation>
+        <source>Use 2 separate masternodes to mix funds up to 1000 TRIVECHAIN</source>
+        <translation>Use 2 separate masternodes to mix funds up to 1000 TRIVECHAIN</translation>
     </message>
     <message>
         <location line="+13"/>
-        <source>Use 8 separate masternodes to mix funds up to 1000 DASH</source>
-        <translation>Use 8 separate masternodes to mix funds up to 1000 DASH</translation>
+        <source>Use 8 separate masternodes to mix funds up to 1000 TRIVECHAIN</source>
+        <translation>Use 8 separate masternodes to mix funds up to 1000 TRIVECHAIN</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -1098,18 +1098,18 @@
     </message>
     <message>
         <location line="+13"/>
-        <source>This option is the quickest and will cost about ~0.025 DASH to anonymize 1000 DASH</source>
-        <translation>This option is the quickest and will cost about ~0.025 DASH to anonymize 1000 DASH</translation>
+        <source>This option is the quickest and will cost about ~0.025 TRIVECHAIN to anonymize 1000 TRIVECHAIN</source>
+        <translation>This option is the quickest and will cost about ~0.025 TRIVECHAIN to anonymize 1000 TRIVECHAIN</translation>
     </message>
     <message>
         <location line="+13"/>
-        <source>This option is moderately fast and will cost about 0.05 DASH to anonymize 1000 DASH</source>
-        <translation>This option is moderately fast and will cost about 0.05 DASH to anonymize 1000 DASH</translation>
+        <source>This option is moderately fast and will cost about 0.05 TRIVECHAIN to anonymize 1000 TRIVECHAIN</source>
+        <translation>This option is moderately fast and will cost about 0.05 TRIVECHAIN to anonymize 1000 TRIVECHAIN</translation>
     </message>
     <message>
         <location line="+26"/>
-        <source>0.1 DASH per 1000 DASH you anonymize.</source>
-        <translation>0.1 DASH per 1000 DASH you anonymize.</translation>
+        <source>0.1 TRIVECHAIN per 1000 TRIVECHAIN you anonymize.</source>
+        <translation>0.1 TRIVECHAIN per 1000 TRIVECHAIN you anonymize.</translation>
     </message>
     <message>
         <location line="-13"/>
@@ -1117,26 +1117,26 @@
         <translation>This is the slowest and most secure option. Using maximum anonymity will cost</translation>
     </message>
     <message>
-        <location filename="../darksendconfig.cpp" line="+43"/>
+        <location filename="../exclusivesendconfig.cpp" line="+43"/>
         <location line="+15"/>
         <location line="+15"/>
-        <source>PrivateSend Configuration</source>
-        <translation>PrivateSend Configuration</translation>
+        <source>ExclusiveSend Configuration</source>
+        <translation>ExclusiveSend Configuration</translation>
     </message>
     <message>
         <location line="-29"/>
-        <source>PrivateSend was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening Dash&apos;s configuration screen.</source>
-        <translation>PrivateSend was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening Dash&apos;s configuration screen.</translation>
+        <source>ExclusiveSend was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening Trivechain&apos;s configuration screen.</source>
+        <translation>ExclusiveSend was successfully set to basic (%1 and 2 rounds). You can change this at any time by opening Trivechain&apos;s configuration screen.</translation>
     </message>
     <message>
         <location line="+15"/>
-        <source>PrivateSend was successfully set to high (%1 and 8 rounds). You can change this at any time by opening Dash&apos;s configuration screen.</source>
-        <translation>PrivateSend was successfully set to high (%1 and 8 rounds). You can change this at any time by opening Dash&apos;s configuration screen.</translation>
+        <source>ExclusiveSend was successfully set to high (%1 and 8 rounds). You can change this at any time by opening Trivechain&apos;s configuration screen.</source>
+        <translation>ExclusiveSend was successfully set to high (%1 and 8 rounds). You can change this at any time by opening Trivechain&apos;s configuration screen.</translation>
     </message>
     <message>
         <location line="+15"/>
-        <source>PrivateSend was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening Dash&apos;s configuration screen.</source>
-        <translation>PrivateSend was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening Dash&apos;s configuration screen.</translation>
+        <source>ExclusiveSend was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening Trivechain&apos;s configuration screen.</source>
+        <translation>ExclusiveSend was successfully set to maximum (%1 and 16 rounds). You can change this at any time by opening Trivechain&apos;s configuration screen.</translation>
     </message>
 </context>
 <context>
@@ -1188,8 +1188,8 @@
     </message>
     <message>
         <location line="+71"/>
-        <source>The entered address &quot;%1&quot; is not a valid Dash address.</source>
-        <translation>The entered address &quot;%1&quot; is not a valid Dash address.</translation>
+        <source>The entered address &quot;%1&quot; is not a valid Trivechain address.</source>
+        <translation>The entered address &quot;%1&quot; is not a valid Trivechain address.</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -1239,8 +1239,8 @@
     <name>HelpMessageDialog</name>
     <message>
         <location filename="../utilitydialog.cpp" line="+37"/>
-        <source>Dash Core</source>
-        <translation>Dash Core</translation>
+        <source>Trivechain Core</source>
+        <translation>Trivechain Core</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -1255,8 +1255,8 @@
     </message>
     <message>
         <location line="+5"/>
-        <source>About Dash Core</source>
-        <translation>About Dash Core</translation>
+        <source>About Trivechain Core</source>
+        <translation>About Trivechain Core</translation>
     </message>
     <message>
         <location line="+20"/>
@@ -1310,13 +1310,13 @@
     </message>
     <message>
         <location line="+42"/>
-        <source>PrivateSend information</source>
-        <translation>PrivateSend information</translation>
+        <source>ExclusiveSend information</source>
+        <translation>ExclusiveSend information</translation>
     </message>
     <message>
         <location line="+4"/>
-        <source>&lt;h3&gt;PrivateSend Basics&lt;/h3&gt; PrivateSend gives you true financial privacy by obscuring the origins of your funds. All the Dash in your wallet is comprised of different &quot;inputs&quot; which you can think of as separate, discrete coins.&lt;br&gt; PrivateSend uses an innovative process to mix your inputs with the inputs of two other people, without having your coins ever leave your wallet. You retain control of your money at all times..&lt;hr&gt; &lt;b&gt;The PrivateSend process works like this:&lt;/b&gt;&lt;ol type=&quot;1&quot;&gt; &lt;li&gt;PrivateSend begins by breaking your transaction inputs down into standard denominations. These denominations are 0.01 DASH, 0.1 DASH, 1 DASH and 10 DASH -- sort of like the paper money you use every day.&lt;/li&gt; &lt;li&gt;Your wallet then sends requests to specially configured software nodes on the network, called &quot;masternodes.&quot; These masternodes are informed then that you are interested in mixing a certain denomination. No identifiable information is sent to the masternodes, so they never know &quot;who&quot; you are.&lt;/li&gt; &lt;li&gt;When two other people send similar messages, indicating that they wish to mix the same denomination, a mixing session begins. The masternode mixes up the inputs and instructs all three users&apos; wallets to pay the now-transformed input back to themselves. Your wallet pays that denomination directly to itself, but in a different address (called a change address).&lt;/li&gt; &lt;li&gt;In order to fully obscure your funds, your wallet must repeat this process a number of times with each denomination. Each time the process is completed, it&apos;s called a &quot;round.&quot; Each round of PrivateSend makes it exponentially more difficult to determine where your funds originated.&lt;/li&gt; &lt;li&gt;This mixing process happens in the background without any intervention on your part. When you wish to make a transaction, your funds will already be anonymized. No additional waiting is required.&lt;/li&gt; &lt;/ol&gt; &lt;hr&gt;&lt;b&gt;IMPORTANT:&lt;/b&gt; Your wallet only contains 1000 of these &quot;change addresses.&quot; Every time a mixing event happens, up to 9 of your addresses are used up. This means those 1000 addresses last for about 100 mixing events. When 900 of them are used, your wallet must create more addresses. It can only do this, however, if you have automatic backups enabled.&lt;br&gt; Consequently, users who have backups disabled will also have PrivateSend disabled. &lt;hr&gt;For more info see &lt;a href=&quot;https://dashpay.atlassian.net/wiki/display/DOC/PrivateSend&quot;&gt;https://dashpay.atlassian.net/wiki/display/DOC/PrivateSend&lt;/a&gt;         </source>
-        <translation>&lt;h3&gt;PrivateSend Basics&lt;/h3&gt; PrivateSend gives you true financial privacy by obscuring the origins of your funds. All the Dash in your wallet is comprised of different &quot;inputs&quot; which you can think of as separate, discrete coins.&lt;br&gt; PrivateSend uses an innovative process to mix your inputs with the inputs of two other people, without having your coins ever leave your wallet. You retain control of your money at all times..&lt;hr&gt; &lt;b&gt;The PrivateSend process works like this:&lt;/b&gt;&lt;ol type=&quot;1&quot;&gt; &lt;li&gt;PrivateSend begins by breaking your transaction inputs down into standard denominations. These denominations are 0.01 DASH, 0.1 DASH, 1 DASH and 10 DASH -- sort of like the paper money you use every day.&lt;/li&gt; &lt;li&gt;Your wallet then sends requests to specially configured software nodes on the network, called &quot;masternodes.&quot; These masternodes are informed then that you are interested in mixing a certain denomination. No identifiable information is sent to the masternodes, so they never know &quot;who&quot; you are.&lt;/li&gt; &lt;li&gt;When two other people send similar messages, indicating that they wish to mix the same denomination, a mixing session begins. The masternode mixes up the inputs and instructs all three users&apos; wallets to pay the now-transformed input back to themselves. Your wallet pays that denomination directly to itself, but in a different address (called a change address).&lt;/li&gt; &lt;li&gt;In order to fully obscure your funds, your wallet must repeat this process a number of times with each denomination. Each time the process is completed, it&apos;s called a &quot;round.&quot; Each round of PrivateSend makes it exponentially more difficult to determine where your funds originated.&lt;/li&gt; &lt;li&gt;This mixing process happens in the background without any intervention on your part. When you wish to make a transaction, your funds will already be anonymized. No additional waiting is required.&lt;/li&gt; &lt;/ol&gt; &lt;hr&gt;&lt;b&gt;IMPORTANT:&lt;/b&gt; Your wallet only contains 1000 of these &quot;change addresses.&quot; Every time a mixing event happens, up to 9 of your addresses are used up. This means those 1000 addresses last for about 100 mixing events. When 900 of them are used, your wallet must create more addresses. It can only do this, however, if you have automatic backups enabled.&lt;br&gt; Consequently, users who have backups disabled will also have PrivateSend disabled. &lt;hr&gt;For more info see &lt;a href=&quot;https://dashpay.atlassian.net/wiki/display/DOC/PrivateSend&quot;&gt;https://dashpay.atlassian.net/wiki/display/DOC/PrivateSend&lt;/a&gt;         </translation>
+        <source>&lt;h3&gt;ExclusiveSend Basics&lt;/h3&gt; ExclusiveSend gives you true financial privacy by obscuring the origins of your funds. All the Trivechain in your wallet is comprised of different &quot;inputs&quot; which you can think of as separate, discrete coins.&lt;br&gt; ExclusiveSend uses an innovative process to mix your inputs with the inputs of two other people, without having your coins ever leave your wallet. You retain control of your money at all times..&lt;hr&gt; &lt;b&gt;The ExclusiveSend process works like this:&lt;/b&gt;&lt;ol type=&quot;1&quot;&gt; &lt;li&gt;ExclusiveSend begins by breaking your transaction inputs down into standard denominations. These denominations are 0.01 TRIVECHAIN, 0.1 TRIVECHAIN, 1 TRIVECHAIN and 10 TRIVECHAIN -- sort of like the paper money you use every day.&lt;/li&gt; &lt;li&gt;Your wallet then sends requests to specially configured software nodes on the network, called &quot;masternodes.&quot; These masternodes are informed then that you are interested in mixing a certain denomination. No identifiable information is sent to the masternodes, so they never know &quot;who&quot; you are.&lt;/li&gt; &lt;li&gt;When two other people send similar messages, indicating that they wish to mix the same denomination, a mixing session begins. The masternode mixes up the inputs and instructs all three users&apos; wallets to pay the now-transformed input back to themselves. Your wallet pays that denomination directly to itself, but in a different address (called a change address).&lt;/li&gt; &lt;li&gt;In order to fully obscure your funds, your wallet must repeat this process a number of times with each denomination. Each time the process is completed, it&apos;s called a &quot;round.&quot; Each round of ExclusiveSend makes it exponentially more difficult to determine where your funds originated.&lt;/li&gt; &lt;li&gt;This mixing process happens in the background without any intervention on your part. When you wish to make a transaction, your funds will already be anonymized. No additional waiting is required.&lt;/li&gt; &lt;/ol&gt; &lt;hr&gt;&lt;b&gt;IMPORTANT:&lt;/b&gt; Your wallet only contains 1000 of these &quot;change addresses.&quot; Every time a mixing event happens, up to 9 of your addresses are used up. This means those 1000 addresses last for about 100 mixing events. When 900 of them are used, your wallet must create more addresses. It can only do this, however, if you have automatic backups enabled.&lt;br&gt; Consequently, users who have backups disabled will also have ExclusiveSend disabled. &lt;hr&gt;For more info see &lt;a href=&quot;https://trivechain.atlassian.net/wiki/display/DOC/ExclusiveSend&quot;&gt;https://trivechain.atlassian.net/wiki/display/DOC/ExclusiveSend&lt;/a&gt;         </source>
+        <translation>&lt;h3&gt;ExclusiveSend Basics&lt;/h3&gt; ExclusiveSend gives you true financial privacy by obscuring the origins of your funds. All the Trivechain in your wallet is comprised of different &quot;inputs&quot; which you can think of as separate, discrete coins.&lt;br&gt; ExclusiveSend uses an innovative process to mix your inputs with the inputs of two other people, without having your coins ever leave your wallet. You retain control of your money at all times..&lt;hr&gt; &lt;b&gt;The ExclusiveSend process works like this:&lt;/b&gt;&lt;ol type=&quot;1&quot;&gt; &lt;li&gt;ExclusiveSend begins by breaking your transaction inputs down into standard denominations. These denominations are 0.01 TRIVECHAIN, 0.1 TRIVECHAIN, 1 TRIVECHAIN and 10 TRIVECHAIN -- sort of like the paper money you use every day.&lt;/li&gt; &lt;li&gt;Your wallet then sends requests to specially configured software nodes on the network, called &quot;masternodes.&quot; These masternodes are informed then that you are interested in mixing a certain denomination. No identifiable information is sent to the masternodes, so they never know &quot;who&quot; you are.&lt;/li&gt; &lt;li&gt;When two other people send similar messages, indicating that they wish to mix the same denomination, a mixing session begins. The masternode mixes up the inputs and instructs all three users&apos; wallets to pay the now-transformed input back to themselves. Your wallet pays that denomination directly to itself, but in a different address (called a change address).&lt;/li&gt; &lt;li&gt;In order to fully obscure your funds, your wallet must repeat this process a number of times with each denomination. Each time the process is completed, it&apos;s called a &quot;round.&quot; Each round of ExclusiveSend makes it exponentially more difficult to determine where your funds originated.&lt;/li&gt; &lt;li&gt;This mixing process happens in the background without any intervention on your part. When you wish to make a transaction, your funds will already be anonymized. No additional waiting is required.&lt;/li&gt; &lt;/ol&gt; &lt;hr&gt;&lt;b&gt;IMPORTANT:&lt;/b&gt; Your wallet only contains 1000 of these &quot;change addresses.&quot; Every time a mixing event happens, up to 9 of your addresses are used up. This means those 1000 addresses last for about 100 mixing events. When 900 of them are used, your wallet must create more addresses. It can only do this, however, if you have automatic backups enabled.&lt;br&gt; Consequently, users who have backups disabled will also have ExclusiveSend disabled. &lt;hr&gt;For more info see &lt;a href=&quot;https://trivechain.atlassian.net/wiki/display/DOC/ExclusiveSend&quot;&gt;https://trivechain.atlassian.net/wiki/display/DOC/ExclusiveSend&lt;/a&gt;         </translation>
     </message>
 </context>
 <context>
@@ -1328,18 +1328,18 @@
     </message>
     <message>
         <location line="+9"/>
-        <source>Welcome to Dash Core.</source>
-        <translation>Welcome to Dash Core.</translation>
+        <source>Welcome to Trivechain Core.</source>
+        <translation>Welcome to Trivechain Core.</translation>
     </message>
     <message>
         <location line="+26"/>
-        <source>As this is the first time the program is launched, you can choose where Dash Core will store its data.</source>
-        <translation>As this is the first time the program is launched, you can choose where Dash Core will store its data.</translation>
+        <source>As this is the first time the program is launched, you can choose where Trivechain Core will store its data.</source>
+        <translation>As this is the first time the program is launched, you can choose where Trivechain Core will store its data.</translation>
     </message>
     <message>
         <location line="+10"/>
-        <source>Dash Core will download and store a copy of the Dash block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>Dash Core will download and store a copy of the Dash block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</translation>
+        <source>Trivechain Core will download and store a copy of the Trivechain block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <translation>Trivechain Core will download and store a copy of the Trivechain block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1353,8 +1353,8 @@
     </message>
     <message>
         <location filename="../intro.cpp" line="+88"/>
-        <source>Dash Core</source>
-        <translation>Dash Core</translation>
+        <source>Trivechain Core</source>
+        <translation>Trivechain Core</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1541,13 +1541,13 @@
     </message>
     <message>
         <location line="+117"/>
-        <source>Recent transactions may not yet be visible, and therefore your wallet&apos;s balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the Dash network, as detailed below.</source>
-        <translation>Recent transactions may not yet be visible, and therefore your wallet&apos;s balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the Dash network, as detailed below.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet&apos;s balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the Trivechain network, as detailed below.</source>
+        <translation>Recent transactions may not yet be visible, and therefore your wallet&apos;s balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the Trivechain network, as detailed below.</translation>
     </message>
     <message>
         <location line="+19"/>
-        <source>Attempting to spend Dash that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation>Attempting to spend Dash that are affected by not-yet-displayed transactions will not be accepted by the network.</translation>
+        <source>Attempting to spend Trivechain that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
+        <translation>Attempting to spend Trivechain that are affected by not-yet-displayed transactions will not be accepted by the network.</translation>
     </message>
     <message>
         <location line="+63"/>
@@ -1665,8 +1665,8 @@
     </message>
     <message>
         <location line="+155"/>
-        <source>Amount of Dash to keep anonymized</source>
-        <translation>Amount of Dash to keep anonymized</translation>
+        <source>Amount of Trivechain to keep anonymized</source>
+        <translation>Amount of Trivechain to keep anonymized</translation>
     </message>
     <message>
         <location line="-119"/>
@@ -1675,13 +1675,13 @@
     </message>
     <message>
         <location line="-104"/>
-        <source>Automatically start Dash Core after logging in to the system.</source>
-        <translation>Automatically start Dash Core after logging in to the system.</translation>
+        <source>Automatically start Trivechain Core after logging in to the system.</source>
+        <translation>Automatically start Trivechain Core after logging in to the system.</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>&amp;Start Dash Core on system login</source>
-        <translation>&amp;Start Dash Core on system login</translation>
+        <source>&amp;Start Trivechain Core on system login</source>
+        <translation>&amp;Start Trivechain Core on system login</translation>
     </message>
     <message>
         <location line="+123"/>
@@ -1695,33 +1695,33 @@
     </message>
     <message>
         <location line="+7"/>
-        <source>Show additional information and buttons for PrivateSend on overview screen.</source>
-        <translation>Show additional information and buttons for PrivateSend on overview screen.</translation>
+        <source>Show additional information and buttons for ExclusiveSend on overview screen.</source>
+        <translation>Show additional information and buttons for ExclusiveSend on overview screen.</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Enable advanced PrivateSend interface</source>
-        <translation>Enable advanced PrivateSend interface</translation>
+        <source>Enable advanced ExclusiveSend interface</source>
+        <translation>Enable advanced ExclusiveSend interface</translation>
     </message>
     <message>
         <location line="+7"/>
-        <source>Show warning dialog when PrivateSend detects that wallet has very low number of keys left.</source>
-        <translation>Show warning dialog when PrivateSend detects that wallet has very low number of keys left.</translation>
+        <source>Show warning dialog when ExclusiveSend detects that wallet has very low number of keys left.</source>
+        <translation>Show warning dialog when ExclusiveSend detects that wallet has very low number of keys left.</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Warn if PrivateSend is running out of keys</source>
-        <translation>Warn if PrivateSend is running out of keys</translation>
+        <source>Warn if ExclusiveSend is running out of keys</source>
+        <translation>Warn if ExclusiveSend is running out of keys</translation>
     </message>
     <message>
         <location line="+7"/>
-        <source>Whether to use experimental PrivateSend mode with multiple mixing sessions per block.&lt;br/&gt;Note: You must use this feature carefully.&lt;br/&gt;Make sure you always have recent wallet (auto)backup in a safe place!</source>
-        <translation>Whether to use experimental PrivateSend mode with multiple mixing sessions per block.&lt;br/&gt;Note: You must use this feature carefully.&lt;br/&gt;Make sure you always have recent wallet (auto)backup in a safe place!</translation>
+        <source>Whether to use experimental ExclusiveSend mode with multiple mixing sessions per block.&lt;br/&gt;Note: You must use this feature carefully.&lt;br/&gt;Make sure you always have recent wallet (auto)backup in a safe place!</source>
+        <translation>Whether to use experimental ExclusiveSend mode with multiple mixing sessions per block.&lt;br/&gt;Note: You must use this feature carefully.&lt;br/&gt;Make sure you always have recent wallet (auto)backup in a safe place!</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Enable PrivateSend &amp;multi-session</source>
-        <translation>Enable PrivateSend &amp;multi-session</translation>
+        <source>Enable ExclusiveSend &amp;multi-session</source>
+        <translation>Enable ExclusiveSend &amp;multi-session</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -1730,18 +1730,18 @@
     </message>
     <message>
         <location line="+18"/>
-        <source>PrivateSend rounds to use</source>
-        <translation>PrivateSend rounds to use</translation>
+        <source>ExclusiveSend rounds to use</source>
+        <translation>ExclusiveSend rounds to use</translation>
     </message>
     <message>
         <location line="+24"/>
-        <source>This amount acts as a threshold to turn off PrivateSend once it&apos;s reached.</source>
-        <translation>This amount acts as a threshold to turn off PrivateSend once it&apos;s reached.</translation>
+        <source>This amount acts as a threshold to turn off ExclusiveSend once it&apos;s reached.</source>
+        <translation>This amount acts as a threshold to turn off ExclusiveSend once it&apos;s reached.</translation>
     </message>
     <message>
         <location line="+60"/>
-        <source>Automatically open the Dash Core client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Automatically open the Dash Core client port on the router. This only works when your router supports UPnP and it is enabled.</translation>
+        <source>Automatically open the Trivechain Core client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Automatically open the Trivechain Core client port on the router. This only works when your router supports UPnP and it is enabled.</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1755,8 +1755,8 @@
     </message>
     <message>
         <location line="+7"/>
-        <source>Connect to the Dash network through a SOCKS5 proxy.</source>
-        <translation>Connect to the Dash network through a SOCKS5 proxy.</translation>
+        <source>Connect to the Trivechain network through a SOCKS5 proxy.</source>
+        <translation>Connect to the Trivechain network through a SOCKS5 proxy.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1770,8 +1770,8 @@
     </message>
     <message>
         <location line="+45"/>
-        <source>The user interface language can be set here. This setting will take effect after restarting Dash Core.</source>
-        <translation>The user interface language can be set here. This setting will take effect after restarting Dash Core.</translation>
+        <source>The user interface language can be set here. This setting will take effect after restarting Trivechain Core.</source>
+        <translation>The user interface language can be set here. This setting will take effect after restarting Trivechain Core.</translation>
     </message>
     <message>
         <location line="+99"/>
@@ -1867,8 +1867,8 @@
     </message>
     <message>
         <location line="+25"/>
-        <source>Connect to the Dash network through a separate SOCKS5 proxy for Tor hidden services.</source>
-        <translation>Connect to the Dash network through a separate SOCKS5 proxy for Tor hidden services.</translation>
+        <source>Connect to the Trivechain network through a separate SOCKS5 proxy for Tor hidden services.</source>
+        <translation>Connect to the Trivechain network through a separate SOCKS5 proxy for Tor hidden services.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1918,9 +1918,9 @@
     <message>
         <location line="+34"/>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/projects/p/dash/</source>
+https://www.transifex.com/projects/p/trivechain/</source>
         <translation>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/projects/p/dash/</translation>
+https://www.transifex.com/projects/p/trivechain/</translation>
     </message>
     <message>
         <location line="+19"/>
@@ -2020,8 +2020,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <location line="+53"/>
         <location line="+355"/>
         <location line="+258"/>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Dash network after a connection is established, but this process has not completed yet.</source>
-        <translation>The displayed information may be out of date. Your wallet automatically synchronizes with the Dash network after a connection is established, but this process has not completed yet.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Trivechain network after a connection is established, but this process has not completed yet.</source>
+        <translation>The displayed information may be out of date. Your wallet automatically synchronizes with the Trivechain network after a connection is established, but this process has not completed yet.</translation>
     </message>
     <message>
         <location line="-364"/>
@@ -2107,8 +2107,8 @@ https://www.transifex.com/projects/p/dash/</translation>
         <location line="+15"/>
         <location line="+9"/>
         <location line="+14"/>
-        <source>PrivateSend</source>
-        <translation>PrivateSend</translation>
+        <source>ExclusiveSend</source>
+        <translation>ExclusiveSend</translation>
     </message>
     <message>
         <location line="+49"/>
@@ -2127,18 +2127,18 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+109"/>
-        <source>Try to manually submit a PrivateSend request.</source>
-        <translation>Try to manually submit a PrivateSend request.</translation>
+        <source>Try to manually submit a ExclusiveSend request.</source>
+        <translation>Try to manually submit a ExclusiveSend request.</translation>
     </message>
     <message>
         <location line="+16"/>
-        <source>Reset the current status of PrivateSend (can interrupt PrivateSend if it&apos;s in the process of Mixing, which can cost you money!)</source>
-        <translation>Reset the current status of PrivateSend (can interrupt PrivateSend if it&apos;s in the process of Mixing, which can cost you money!)</translation>
+        <source>Reset the current status of ExclusiveSend (can interrupt ExclusiveSend if it&apos;s in the process of Mixing, which can cost you money!)</source>
+        <translation>Reset the current status of ExclusiveSend (can interrupt ExclusiveSend if it&apos;s in the process of Mixing, which can cost you money!)</translation>
     </message>
     <message>
         <location line="+19"/>
-        <source>Information about PrivateSend and Mixing</source>
-        <translation>Information about PrivateSend and Mixing</translation>
+        <source>Information about ExclusiveSend and Mixing</source>
+        <translation>Information about ExclusiveSend and Mixing</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2152,8 +2152,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+7"/>
-        <source>0 DASH / 0 Rounds</source>
-        <translation>0 DASH / 0 Rounds</translation>
+        <source>0 TRIVECHAIN / 0 Rounds</source>
+        <translation>0 TRIVECHAIN / 0 Rounds</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -2177,8 +2177,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="-74"/>
-        <source>PrivateSend Balance:</source>
-        <translation>PrivateSend Balance:</translation>
+        <source>ExclusiveSend Balance:</source>
+        <translation>ExclusiveSend Balance:</translation>
     </message>
     <message>
         <location line="+41"/>
@@ -2343,9 +2343,9 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+13"/>
-        <source>Last PrivateSend message:
+        <source>Last ExclusiveSend message:
 </source>
-        <translation>Last PrivateSend message:
+        <translation>Last ExclusiveSend message:
 </translation>
     </message>
     <message>
@@ -2355,23 +2355,23 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+16"/>
-        <source>PrivateSend was successfully reset.</source>
-        <translation>PrivateSend was successfully reset.</translation>
+        <source>ExclusiveSend was successfully reset.</source>
+        <translation>ExclusiveSend was successfully reset.</translation>
     </message>
     <message>
         <location line="+15"/>
-        <source>If you don&apos;t want to see internal PrivateSend fees/transactions select &quot;Most Common&quot; as Type on the &quot;Transactions&quot; tab.</source>
-        <translation>If you don&apos;t want to see internal PrivateSend fees/transactions select &quot;Most Common&quot; as Type on the &quot;Transactions&quot; tab.</translation>
+        <source>If you don&apos;t want to see internal ExclusiveSend fees/transactions select &quot;Most Common&quot; as Type on the &quot;Transactions&quot; tab.</source>
+        <translation>If you don&apos;t want to see internal ExclusiveSend fees/transactions select &quot;Most Common&quot; as Type on the &quot;Transactions&quot; tab.</translation>
     </message>
     <message>
         <location line="+9"/>
-        <source>PrivateSend requires at least %1 to use.</source>
-        <translation>PrivateSend requires at least %1 to use.</translation>
+        <source>ExclusiveSend requires at least %1 to use.</source>
+        <translation>ExclusiveSend requires at least %1 to use.</translation>
     </message>
     <message>
         <location line="+14"/>
-        <source>Wallet is locked and user declined to unlock. Disabling PrivateSend.</source>
-        <translation>Wallet is locked and user declined to unlock. Disabling PrivateSend.</translation>
+        <source>Wallet is locked and user declined to unlock. Disabling ExclusiveSend.</source>
+        <translation>Wallet is locked and user declined to unlock. Disabling ExclusiveSend.</translation>
     </message>
 </context>
 <context>
@@ -2388,8 +2388,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="-402"/>
-        <source>Cannot start dash: click-to-pay handler</source>
-        <translation>Cannot start dash: click-to-pay handler</translation>
+        <source>Cannot start trivechain: click-to-pay handler</source>
+        <translation>Cannot start trivechain: click-to-pay handler</translation>
     </message>
     <message>
         <location line="+103"/>
@@ -2410,8 +2410,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+8"/>
-        <source>URI cannot be parsed! This can be caused by an invalid Dash address or malformed URI parameters.</source>
-        <translation>URI cannot be parsed! This can be caused by an invalid Dash address or malformed URI parameters.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid Trivechain address or malformed URI parameters.</source>
+        <translation>URI cannot be parsed! This can be caused by an invalid Trivechain address or malformed URI parameters.</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -2526,12 +2526,12 @@ https://www.transifex.com/projects/p/dash/</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../dash.cpp" line="+86"/>
+        <location filename="../trivechain.cpp" line="+86"/>
         <location line="+7"/>
         <location line="+15"/>
         <location line="+19"/>
-        <source>Dash Core</source>
-        <translation>Dash Core</translation>
+        <source>Trivechain Core</source>
+        <translation>Trivechain Core</translation>
     </message>
     <message>
         <location line="-40"/>
@@ -2555,8 +2555,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+48"/>
-        <source>Dash Core didn&apos;t yet exit safely...</source>
-        <translation>Dash Core didn&apos;t yet exit safely...</translation>
+        <source>Trivechain Core didn&apos;t yet exit safely...</source>
+        <translation>Trivechain Core didn&apos;t yet exit safely...</translation>
     </message>
     <message>
         <location filename="../bitcoinunits.cpp" line="+233"/>
@@ -2565,8 +2565,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location filename="../guiutil.cpp" line="+120"/>
-        <source>Enter a Dash address (e.g. %1)</source>
-        <translation>Enter a Dash address (e.g. %1)</translation>
+        <source>Enter a Trivechain address (e.g. %1)</source>
+        <translation>Enter a Trivechain address (e.g. %1)</translation>
     </message>
     <message>
         <location line="+855"/>
@@ -2821,8 +2821,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+48"/>
-        <source>Open the Dash Core debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Open the Dash Core debug log file from the current data directory. This can take a few seconds for large log files.</translation>
+        <source>Open the Trivechain Core debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <translation>Open the Trivechain Core debug log file from the current data directory. This can take a few seconds for large log files.</translation>
     </message>
     <message>
         <location line="+29"/>
@@ -3099,8 +3099,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+188"/>
-        <source>Welcome to the Dash Core RPC console.</source>
-        <translation>Welcome to the Dash Core RPC console.</translation>
+        <source>Welcome to the Trivechain Core RPC console.</source>
+        <translation>Welcome to the Trivechain Core RPC console.</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -3204,8 +3204,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+14"/>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Dash network.</source>
-        <translation>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Dash network.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Trivechain network.</source>
+        <translation>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Trivechain network.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -3220,8 +3220,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="-14"/>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the Dash network.</source>
-        <translation>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the Dash network.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the Trivechain network.</source>
+        <translation>An optional message to attach to the payment request, which will be displayed when the request is opened.&lt;br&gt;Note: The message will not be sent with the payment over the Trivechain network.</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -3261,8 +3261,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+32"/>
-        <source>Request InstantSend</source>
-        <translation>Request InstantSend</translation>
+        <source>Request DirectSend</source>
+        <translation>Request DirectSend</translation>
     </message>
     <message>
         <location line="+49"/>
@@ -3369,8 +3369,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>InstantSend</source>
-        <translation>InstantSend</translation>
+        <source>DirectSend</source>
+        <translation>DirectSend</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -3521,13 +3521,13 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+520"/>
-        <source>PrivateSend</source>
-        <translation>PrivateSend</translation>
+        <source>ExclusiveSend</source>
+        <translation>ExclusiveSend</translation>
     </message>
     <message>
         <location line="+19"/>
-        <source>InstantSend</source>
-        <translation>InstantSend</translation>
+        <source>DirectSend</source>
+        <translation>DirectSend</translation>
     </message>
     <message>
         <location line="-488"/>
@@ -3542,8 +3542,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     <message>
         <location line="+33"/>
         <location line="+13"/>
-        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for dash transactions than the network can process.</source>
-        <translation>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for dash transactions than the network can process.</translation>
+        <source>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for trivechain transactions than the network can process.</source>
+        <translation>Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks.&lt;br /&gt;But be aware that this can end up in a never confirming transaction once there is more demand for trivechain transactions than the network can process.</translation>
     </message>
     <message>
         <location line="-59"/>
@@ -3690,8 +3690,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+4"/>
-        <source>(privatesend requires this amount to be rounded up to the nearest %1).</source>
-        <translation>(privatesend requires this amount to be rounded up to the nearest %1).</translation>
+        <source>(exclusivesend requires this amount to be rounded up to the nearest %1).</source>
+        <translation>(exclusivesend requires this amount to be rounded up to the nearest %1).</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -3700,8 +3700,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+6"/>
-        <source>and InstantSend</source>
-        <translation>and InstantSend</translation>
+        <source>and DirectSend</source>
+        <translation>and DirectSend</translation>
     </message>
     <message>
         <location line="+67"/>
@@ -3796,8 +3796,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+100"/>
-        <source>Warning: Invalid Dash address</source>
-        <translation>Warning: Invalid Dash address</translation>
+        <source>Warning: Invalid Trivechain address</source>
+        <translation>Warning: Invalid Trivechain address</translation>
     </message>
     <message>
         <location line="+8"/>
@@ -3824,8 +3824,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+18"/>
-        <source>The Dash address to send the payment to</source>
-        <translation>The Dash address to send the payment to</translation>
+        <source>The Trivechain address to send the payment to</source>
+        <translation>The Trivechain address to send the payment to</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -3873,8 +3873,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="-1046"/>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive a lower amount of Dash than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>The fee will be deducted from the amount being sent. The recipient will receive a lower amount of Dash than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</translation>
+        <source>The fee will be deducted from the amount being sent. The recipient will receive a lower amount of Trivechain than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
+        <translation>The fee will be deducted from the amount being sent. The recipient will receive a lower amount of Trivechain than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -3888,8 +3888,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+10"/>
-        <source>A message that was attached to the dash: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Dash network.</source>
-        <translation>A message that was attached to the dash: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Dash network.</translation>
+        <source>A message that was attached to the trivechain: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Trivechain network.</source>
+        <translation>A message that was attached to the trivechain: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Trivechain network.</translation>
     </message>
     <message>
         <location line="+433"/>
@@ -3923,8 +3923,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     <name>ShutdownWindow</name>
     <message>
         <location filename="../utilitydialog.cpp" line="+71"/>
-        <source>Dash Core is shutting down...</source>
-        <translation>Dash Core is shutting down...</translation>
+        <source>Trivechain Core is shutting down...</source>
+        <translation>Trivechain Core is shutting down...</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -3946,13 +3946,13 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+6"/>
-        <source>You can sign messages/agreements with your addresses to prove you can receive Dash sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
-        <translation>You can sign messages/agreements with your addresses to prove you can receive Dash sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</translation>
+        <source>You can sign messages/agreements with your addresses to prove you can receive Trivechain sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
+        <translation>You can sign messages/agreements with your addresses to prove you can receive Trivechain sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</translation>
     </message>
     <message>
         <location line="+18"/>
-        <source>The Dash address to sign the message with</source>
-        <translation>The Dash address to sign the message with</translation>
+        <source>The Trivechain address to sign the message with</source>
+        <translation>The Trivechain address to sign the message with</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -3993,8 +3993,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+17"/>
-        <source>Sign the message to prove you own this Dash address</source>
-        <translation>Sign the message to prove you own this Dash address</translation>
+        <source>Sign the message to prove you own this Trivechain address</source>
+        <translation>Sign the message to prove you own this Trivechain address</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -4024,13 +4024,13 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+21"/>
-        <source>The Dash address the message was signed with</source>
-        <translation>The Dash address the message was signed with</translation>
+        <source>The Trivechain address the message was signed with</source>
+        <translation>The Trivechain address the message was signed with</translation>
     </message>
     <message>
         <location line="+33"/>
-        <source>Verify the message to ensure it was signed with the specified Dash address</source>
-        <translation>Verify the message to ensure it was signed with the specified Dash address</translation>
+        <source>Verify the message to ensure it was signed with the specified Trivechain address</source>
+        <translation>Verify the message to ensure it was signed with the specified Trivechain address</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -4123,8 +4123,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location filename="../splashscreen.cpp" line="+45"/>
-        <source>Dash Core</source>
-        <translation>Dash Core</translation>
+        <source>Trivechain Core</source>
+        <translation>Trivechain Core</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -4138,8 +4138,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>The Dash Core developers</source>
-        <translation>The Dash Core developers</translation>
+        <source>The Trivechain Core developers</source>
+        <translation>The Trivechain Core developers</translation>
     </message>
 </context>
 <context>
@@ -4207,18 +4207,18 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+10"/>
-        <source>verified via InstantSend</source>
-        <translation>verified via InstantSend</translation>
+        <source>verified via DirectSend</source>
+        <translation>verified via DirectSend</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>InstantSend verification in progress - %1 of %2 signatures</source>
-        <translation>InstantSend verification in progress - %1 of %2 signatures</translation>
+        <source>DirectSend verification in progress - %1 of %2 signatures</source>
+        <translation>DirectSend verification in progress - %1 of %2 signatures</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>InstantSend verification failed</source>
-        <translation>InstantSend verification failed</translation>
+        <source>DirectSend verification failed</source>
+        <translation>DirectSend verification failed</translation>
     </message>
     <message>
         <location line="+21"/>
@@ -4501,8 +4501,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Received via PrivateSend</source>
-        <translation>Received via PrivateSend</translation>
+        <source>Received via ExclusiveSend</source>
+        <translation>Received via ExclusiveSend</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -4521,28 +4521,28 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>PrivateSend Denominate</source>
-        <translation>PrivateSend Denominate</translation>
+        <source>ExclusiveSend Denominate</source>
+        <translation>ExclusiveSend Denominate</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>PrivateSend Collateral Payment</source>
-        <translation>PrivateSend Collateral Payment</translation>
+        <source>ExclusiveSend Collateral Payment</source>
+        <translation>ExclusiveSend Collateral Payment</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>PrivateSend Make Collateral Inputs</source>
-        <translation>PrivateSend Make Collateral Inputs</translation>
+        <source>ExclusiveSend Make Collateral Inputs</source>
+        <translation>ExclusiveSend Make Collateral Inputs</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>PrivateSend Create Denominations</source>
-        <translation>PrivateSend Create Denominations</translation>
+        <source>ExclusiveSend Create Denominations</source>
+        <translation>ExclusiveSend Create Denominations</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>PrivateSend</source>
-        <translation>PrivateSend</translation>
+        <source>ExclusiveSend</source>
+        <translation>ExclusiveSend</translation>
     </message>
     <message>
         <location line="+31"/>
@@ -4645,28 +4645,28 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>PrivateSend</source>
-        <translation>PrivateSend</translation>
+        <source>ExclusiveSend</source>
+        <translation>ExclusiveSend</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>PrivateSend Make Collateral Inputs</source>
-        <translation>PrivateSend Make Collateral Inputs</translation>
+        <source>ExclusiveSend Make Collateral Inputs</source>
+        <translation>ExclusiveSend Make Collateral Inputs</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>PrivateSend Create Denominations</source>
-        <translation>PrivateSend Create Denominations</translation>
+        <source>ExclusiveSend Create Denominations</source>
+        <translation>ExclusiveSend Create Denominations</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>PrivateSend Denominate</source>
-        <translation>PrivateSend Denominate</translation>
+        <source>ExclusiveSend Denominate</source>
+        <translation>ExclusiveSend Denominate</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>PrivateSend Collateral Payment</source>
-        <translation>PrivateSend Collateral Payment</translation>
+        <source>ExclusiveSend Collateral Payment</source>
+        <translation>ExclusiveSend Collateral Payment</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -4843,13 +4843,13 @@ https://www.transifex.com/projects/p/dash/</translation>
     <message>
         <location line="-28"/>
         <location line="+12"/>
-        <source>InstantSend doesn&apos;t support sending values that high yet. Transactions are currently limited to %1 DASH.</source>
-        <translation>InstantSend doesn&apos;t support sending values that high yet. Transactions are currently limited to %1 DASH.</translation>
+        <source>DirectSend doesn&apos;t support sending values that high yet. Transactions are currently limited to %1 TRIVECHAIN.</source>
+        <translation>DirectSend doesn&apos;t support sending values that high yet. Transactions are currently limited to %1 TRIVECHAIN.</translation>
     </message>
     <message>
         <location line="+5"/>
-        <source>Used way too many inputs (&gt;%1) for this InstantSend transaction, fees could be huge.</source>
-        <translation>Used way too many inputs (&gt;%1) for this InstantSend transaction, fees could be huge.</translation>
+        <source>Used way too many inputs (&gt;%1) for this DirectSend transaction, fees could be huge.</source>
+        <translation>Used way too many inputs (&gt;%1) for this DirectSend transaction, fees could be huge.</translation>
     </message>
 </context>
 <context>
@@ -4901,16 +4901,16 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
 </context>
 <context>
-    <name>dash-core</name>
+    <name>trivechain-core</name>
     <message>
-        <location filename="../dashstrings.cpp" line="+34"/>
+        <location filename="../trivechainstrings.cpp" line="+34"/>
         <source>Bind to given address and always listen on it. Use [host]:port notation for IPv6</source>
         <translation>Bind to given address and always listen on it. Use [host]:port notation for IPv6</translation>
     </message>
     <message>
         <location line="+10"/>
-        <source>Cannot obtain a lock on data directory %s. Dash Core is probably already running.</source>
-        <translation>Cannot obtain a lock on data directory %s. Dash Core is probably already running.</translation>
+        <source>Cannot obtain a lock on data directory %s. Trivechain Core is probably already running.</source>
+        <translation>Cannot obtain a lock on data directory %s. Trivechain Core is probably already running.</translation>
     </message>
     <message>
         <location line="+34"/>
@@ -4959,8 +4959,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+13"/>
-        <source>Unable to bind to %s on this computer. Dash Core is probably already running.</source>
-        <translation>Unable to bind to %s on this computer. Dash Core is probably already running.</translation>
+        <source>Unable to bind to %s on this computer. Trivechain Core is probably already running.</source>
+        <translation>Unable to bind to %s on this computer. Trivechain Core is probably already running.</translation>
     </message>
     <message>
         <location line="+45"/>
@@ -5264,8 +5264,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+17"/>
-        <source>Unable to locate enough funds for this transaction that are not equal 1000 DASH.</source>
-        <translation>Unable to locate enough funds for this transaction that are not equal 1000 DASH.</translation>
+        <source>Unable to locate enough funds for this transaction that are not equal 1000 TRIVECHAIN.</source>
+        <translation>Unable to locate enough funds for this transaction that are not equal 1000 TRIVECHAIN.</translation>
     </message>
     <message>
         <location line="+14"/>
@@ -5354,8 +5354,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Copyright (C) 2014-%i The Dash Core Developers</source>
-        <translation>Copyright (C) 2014-%i The Dash Core Developers</translation>
+        <source>Copyright (C) 2014-%i The Trivechain Core Developers</source>
+        <translation>Copyright (C) 2014-%i The Trivechain Core Developers</translation>
     </message>
     <message>
         <location line="+14"/>
@@ -5379,8 +5379,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+4"/>
-        <source>Error loading wallet.dat: Wallet requires newer version of Dash Core</source>
-        <translation>Error loading wallet.dat: Wallet requires newer version of Dash Core</translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of Trivechain Core</source>
+        <translation>Error loading wallet.dat: Wallet requires newer version of Trivechain Core</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -5454,8 +5454,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Initialization sanity check failed. Dash Core is shutting down.</source>
-        <translation>Initialization sanity check failed. Dash Core is shutting down.</translation>
+        <source>Initialization sanity check failed. Trivechain Core is shutting down.</source>
+        <translation>Initialization sanity check failed. Trivechain Core is shutting down.</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -5774,8 +5774,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+7"/>
-        <source>Wallet needed to be rewritten: restart Dash Core to complete</source>
-        <translation>Wallet needed to be rewritten: restart Dash Core to complete</translation>
+        <source>Wallet needed to be rewritten: restart Trivechain Core to complete</source>
+        <translation>Wallet needed to be rewritten: restart Trivechain Core to complete</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -5829,8 +5829,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Keep N DASH anonymized (default: %u)</source>
-        <translation>Keep N DASH anonymized (default: %u)</translation>
+        <source>Keep N TRIVECHAIN anonymized (default: %u)</source>
+        <translation>Keep N TRIVECHAIN anonymized (default: %u)</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -5839,8 +5839,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="-354"/>
-        <source>Disable all Dash specific functionality (Masternodes, PrivateSend, InstantSend, Governance) (0-1, default: %u)</source>
-        <translation>Disable all Dash specific functionality (Masternodes, PrivateSend, InstantSend, Governance) (0-1, default: %u)</translation>
+        <source>Disable all Trivechain specific functionality (Masternodes, ExclusiveSend, DirectSend, Governance) (0-1, default: %u)</source>
+        <translation>Disable all Trivechain specific functionality (Masternodes, ExclusiveSend, DirectSend, Governance) (0-1, default: %u)</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -5854,18 +5854,18 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Enable InstantSend, show confirmations for locked transactions (0-1, default: %u)</source>
-        <translation>Enable InstantSend, show confirmations for locked transactions (0-1, default: %u)</translation>
+        <source>Enable DirectSend, show confirmations for locked transactions (0-1, default: %u)</source>
+        <translation>Enable DirectSend, show confirmations for locked transactions (0-1, default: %u)</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Enable multiple PrivateSend mixing sessions per block, experimental (0-1, default: %u)</source>
-        <translation>Enable multiple PrivateSend mixing sessions per block, experimental (0-1, default: %u)</translation>
+        <source>Enable multiple ExclusiveSend mixing sessions per block, experimental (0-1, default: %u)</source>
+        <translation>Enable multiple ExclusiveSend mixing sessions per block, experimental (0-1, default: %u)</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Enable use of automated PrivateSend for funds stored in this wallet (0-1, default: %u)</source>
-        <translation>Enable use of automated PrivateSend for funds stored in this wallet (0-1, default: %u)</translation>
+        <source>Enable use of automated ExclusiveSend for funds stored in this wallet (0-1, default: %u)</source>
+        <translation>Enable use of automated ExclusiveSend for funds stored in this wallet (0-1, default: %u)</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -5874,8 +5874,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+8"/>
-        <source>Execute command when a wallet InstantSend transaction is successfully locked (%s in cmd is replaced by TxID)</source>
-        <translation>Execute command when a wallet InstantSend transaction is successfully locked (%s in cmd is replaced by TxID)</translation>
+        <source>Execute command when a wallet DirectSend transaction is successfully locked (%s in cmd is replaced by TxID)</source>
+        <translation>Execute command when a wallet DirectSend transaction is successfully locked (%s in cmd is replaced by TxID)</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -5904,13 +5904,13 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+10"/>
-        <source>InstantSend doesn&apos;t support sending values that high yet. Transactions are currently limited to %1 DASH.</source>
-        <translation>InstantSend doesn&apos;t support sending values that high yet. Transactions are currently limited to %1 DASH.</translation>
+        <source>DirectSend doesn&apos;t support sending values that high yet. Transactions are currently limited to %1 TRIVECHAIN.</source>
+        <translation>DirectSend doesn&apos;t support sending values that high yet. Transactions are currently limited to %1 TRIVECHAIN.</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>InstantSend requires inputs with at least %d confirmations, you might need to wait a few minutes and try again.</source>
-        <translation>InstantSend requires inputs with at least %d confirmations, you might need to wait a few minutes and try again.</translation>
+        <source>DirectSend requires inputs with at least %d confirmations, you might need to wait a few minutes and try again.</source>
+        <translation>DirectSend requires inputs with at least %d confirmations, you might need to wait a few minutes and try again.</translation>
     </message>
     <message>
         <location line="+6"/>
@@ -5939,18 +5939,18 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+9"/>
-        <source>Please check that your computer&apos;s date and time are correct! If your clock is wrong Dash Core will not work properly.</source>
-        <translation>Please check that your computer&apos;s date and time are correct! If your clock is wrong Dash Core will not work properly.</translation>
+        <source>Please check that your computer&apos;s date and time are correct! If your clock is wrong Trivechain Core will not work properly.</source>
+        <translation>Please check that your computer&apos;s date and time are correct! If your clock is wrong Trivechain Core will not work properly.</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>PrivateSend uses exact denominated amounts to send funds, you might simply need to anonymize some more coins.</source>
-        <translation>PrivateSend uses exact denominated amounts to send funds, you might simply need to anonymize some more coins.</translation>
+        <source>ExclusiveSend uses exact denominated amounts to send funds, you might simply need to anonymize some more coins.</source>
+        <translation>ExclusiveSend uses exact denominated amounts to send funds, you might simply need to anonymize some more coins.</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Provide liquidity to PrivateSend by infrequently mixing coins on a continual basis (0-100, default: %u, 1=very frequent, high fees, 100=very infrequent, low fees)</source>
-        <translation>Provide liquidity to PrivateSend by infrequently mixing coins on a continual basis (0-100, default: %u, 1=very frequent, high fees, 100=very infrequent, low fees)</translation>
+        <source>Provide liquidity to ExclusiveSend by infrequently mixing coins on a continual basis (0-100, default: %u, 1=very frequent, high fees, 100=very infrequent, low fees)</source>
+        <translation>Provide liquidity to ExclusiveSend by infrequently mixing coins on a continual basis (0-100, default: %u, 1=very frequent, high fees, 100=very infrequent, low fees)</translation>
     </message>
     <message>
         <location line="+4"/>
@@ -6009,13 +6009,13 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+5"/>
-        <source>Unable to locate enough PrivateSend denominated funds for this transaction.</source>
-        <translation>Unable to locate enough PrivateSend denominated funds for this transaction.</translation>
+        <source>Unable to locate enough ExclusiveSend denominated funds for this transaction.</source>
+        <translation>Unable to locate enough ExclusiveSend denominated funds for this transaction.</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Unable to locate enough PrivateSend non-denominated funds for this transaction that are not equal 1000 DASH.</source>
-        <translation>Unable to locate enough PrivateSend non-denominated funds for this transaction that are not equal 1000 DASH.</translation>
+        <source>Unable to locate enough ExclusiveSend non-denominated funds for this transaction that are not equal 1000 TRIVECHAIN.</source>
+        <translation>Unable to locate enough ExclusiveSend non-denominated funds for this transaction that are not equal 1000 TRIVECHAIN.</translation>
     </message>
     <message>
         <location line="+6"/>
@@ -6134,8 +6134,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Enable publish hash transaction (locked via InstantSend) in &lt;address&gt;</source>
-        <translation>Enable publish hash transaction (locked via InstantSend) in &lt;address&gt;</translation>
+        <source>Enable publish hash transaction (locked via DirectSend) in &lt;address&gt;</source>
+        <translation>Enable publish hash transaction (locked via DirectSend) in &lt;address&gt;</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6149,8 +6149,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Enable publish raw transaction (locked via InstantSend) in &lt;address&gt;</source>
-        <translation>Enable publish raw transaction (locked via InstantSend) in &lt;address&gt;</translation>
+        <source>Enable publish raw transaction (locked via DirectSend) in &lt;address&gt;</source>
+        <translation>Enable publish raw transaction (locked via DirectSend) in &lt;address&gt;</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6199,8 +6199,8 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+8"/>
-        <source>InstantSend options:</source>
-        <translation>InstantSend options:</translation>
+        <source>DirectSend options:</source>
+        <translation>DirectSend options:</translation>
     </message>
     <message>
         <location line="+4"/>
@@ -6214,13 +6214,13 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Last PrivateSend was too recent.</source>
-        <translation>Last PrivateSend was too recent.</translation>
+        <source>Last ExclusiveSend was too recent.</source>
+        <translation>Last ExclusiveSend was too recent.</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Last successful PrivateSend action was too recent.</source>
-        <translation>Last successful PrivateSend action was too recent.</translation>
+        <source>Last successful ExclusiveSend action was too recent.</source>
+        <translation>Last successful ExclusiveSend action was too recent.</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6349,23 +6349,23 @@ https://www.transifex.com/projects/p/dash/</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>PrivateSend is idle.</source>
-        <translation>PrivateSend is idle.</translation>
+        <source>ExclusiveSend is idle.</source>
+        <translation>ExclusiveSend is idle.</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>PrivateSend options:</source>
-        <translation>PrivateSend options:</translation>
+        <source>ExclusiveSend options:</source>
+        <translation>ExclusiveSend options:</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>PrivateSend request complete:</source>
-        <translation>PrivateSend request complete:</translation>
+        <source>ExclusiveSend request complete:</source>
+        <translation>ExclusiveSend request complete:</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>PrivateSend request incomplete:</source>
-        <translation>PrivateSend request incomplete:</translation>
+        <source>ExclusiveSend request incomplete:</source>
+        <translation>ExclusiveSend request incomplete:</translation>
     </message>
     <message>
         <location line="+1"/>

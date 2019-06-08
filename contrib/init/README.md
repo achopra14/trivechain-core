@@ -5,7 +5,7 @@ Upstart: trivechaind.conf
 OpenRC:  trivechaind.openrc
          trivechaind.openrcconf
 CentOS:  trivechaind.init
-OS X:    org.trivechain.trivechaind.plist
+OS X:    com.trivechain.trivechaind.plist
 
 have been made available to assist packagers in creating node packages here.
 

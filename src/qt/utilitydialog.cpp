@@ -1,5 +1,6 @@
 // Copyright (c) 2011-2015 The Bitcoin Core developers
 // Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2018-2019 The Trivechain Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -34,7 +35,7 @@ HelpMessageDialog::HelpMessageDialog(QWidget *parent, HelpMode helpMode) :
 {
     ui->setupUi(this);
 
-    QString version = tr("Trivechain") + " " + tr("version") + " " + QString::fromStdString(FormatFullVersion());
+    QString version = tr("Trivechain Core") + " " + tr("version") + " " + QString::fromStdString(FormatFullVersion());
     /* On x86 add a bit specifier to the version so that users can distinguish between
      * 32 and 64 bit builds. On other architectures, 32/64 bit may be more ambigious.
      */
@@ -46,7 +47,7 @@ HelpMessageDialog::HelpMessageDialog(QWidget *parent, HelpMode helpMode) :
 
     if (helpMode == about)
     {
-        setWindowTitle(tr("About Trivechain"));
+        setWindowTitle(tr("About Trivechain Core"));
 
         /// HTML-format the license message from the core
         QString licenseInfo = QString::fromStdString(LicenseInfo());
@@ -141,7 +142,7 @@ You retain control of your money at all times..<hr> \
 <b>The ExclusiveSend process works like this:</b>\
 <ol type=\"1\"> \
 <li>ExclusiveSend begins by breaking your transaction inputs down into standard denominations. \
-These denominations are 0.01 TRVC, 0.1 TRVC, 1 TRVC and 10 TRVC -- sort of like the paper money you use every day.</li> \
+These denominations are 0.01 TRIVECHAIN, 0.1 TRIVECHAIN, 1 TRIVECHAIN and 10 TRIVECHAIN -- sort of like the paper money you use every day.</li> \
 <li>Your wallet then sends requests to specially configured software nodes on the network, called \"masternodes.\" \
 These masternodes are informed then that you are interested in mixing a certain denomination. \
 No identifiable information is sent to the masternodes, so they never know \"who\" you are.</li> \
@@ -156,7 +157,9 @@ your funds will already be anonymized. No additional waiting is required.</li> \
 <b>IMPORTANT:</b> Your wallet only contains 1000 of these \"change addresses.\" Every time a mixing event happens, up to 9 of your addresses are used up. \
 This means those 1000 addresses last for about 100 mixing events. When 900 of them are used, your wallet must create more addresses. \
 It can only do this, however, if you have automatic backups enabled.<br> \
-Consequently, users who have backups disabled will also have ExclusiveSend disabled. <hr>"));
+Consequently, users who have backups disabled will also have ExclusiveSend disabled. <hr>\
+For more info see <a href=\"https://trivechain.atlassian.net/wiki/display/DOC/ExclusiveSend\">https://trivechain.atlassian.net/wiki/display/DOC/ExclusiveSend</a> \
+        "));
         ui->aboutMessage->setWordWrap(true);
         ui->helpMessage->setVisible(false);
         ui->aboutLogo->setVisible(false);
@@ -201,7 +204,7 @@ ShutdownWindow::ShutdownWindow(QWidget *parent, Qt::WindowFlags f):
 {
     QVBoxLayout *layout = new QVBoxLayout();
     layout->addWidget(new QLabel(
-        tr("Trivechain is shutting down...") + "<br /><br />" +
+        tr("Trivechain Core is shutting down...") + "<br /><br />" +
         tr("Do not shut down the computer until this window disappears.")));
     setLayout(layout);
 }
