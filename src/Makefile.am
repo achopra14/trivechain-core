@@ -51,8 +51,6 @@ endif
 if BUILD_BITCOIN_LIBS
 lib_LTLIBRARIES = libtrivechainconsensus.la
 LIBBITCOIN_CONSENSUS=libtrivechainconsensus.la
-else
-LIBBITCOIN_CONSENSUS=
 endif
 
 bin_PROGRAMS =
