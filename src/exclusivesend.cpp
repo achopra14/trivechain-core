@@ -1,4 +1,5 @@
 // Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2018-2019 The Trivechain Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include "exclusivesend.h"
@@ -19,23 +20,13 @@
 
 #include <boost/lexical_cast.hpp>
 
-CDarkSendEntry::CDarkSendEntry(const std::vector<CTxIn>& vecTxIn, const std::vector<CTxOut>& vecTxOut, const CTransaction& txCollateral) :
-    txCollateral(txCollateral), addr(CService())
-{
-    BOOST_FOREACH(CTxIn txin, vecTxIn)
-        vecTxDSIn.push_back(txin);
-    BOOST_FOREACH(CTxOut txout, vecTxOut)
-        vecTxDSOut.push_back(txout);
-}
-
-bool CDarkSendEntry::AddScriptSig(const CTxIn& txin)
+bool CExclusiveSendEntry::AddScriptSig(const CTxIn& txin)
 {
     BOOST_FOREACH(CTxDSIn& txdsin, vecTxDSIn) {
         if(txdsin.prevout == txin.prevout && txdsin.nSequence == txin.nSequence) {
             if(txdsin.fHasSig) return false;
 
             txdsin.scriptSig = txin.scriptSig;
-            txdsin.prevPubKey = txin.prevPubKey;
             txdsin.fHasSig = true;
 
             return true;
@@ -45,34 +36,34 @@ bool CDarkSendEntry::AddScriptSig(const CTxIn& txin)
     return false;
 }
 
-bool CDarksendQueue::Sign()
+bool CExclusivesendQueue::Sign()
 {
     if(!fMasterNode) return false;
 
     std::string strMessage = vin.ToString() + boost::lexical_cast<std::string>(nDenom) + boost::lexical_cast<std::string>(nTime) + boost::lexical_cast<std::string>(fReady);
 
     if(!CMessageSigner::SignMessage(strMessage, vchSig, activeMasternode.keyMasternode)) {
-        LogPrintf("CDarksendQueue::Sign -- SignMessage() failed, %s\n", ToString());
+        LogPrintf("CExclusivesendQueue::Sign -- SignMessage() failed, %s\n", ToString());
         return false;
     }
 
     return CheckSignature(activeMasternode.pubKeyMasternode);
 }
 
-bool CDarksendQueue::CheckSignature(const CPubKey& pubKeyMasternode)
+bool CExclusivesendQueue::CheckSignature(const CPubKey& pubKeyMasternode)
 {
     std::string strMessage = vin.ToString() + boost::lexical_cast<std::string>(nDenom) + boost::lexical_cast<std::string>(nTime) + boost::lexical_cast<std::string>(fReady);
     std::string strError = "";
 
     if(!CMessageSigner::VerifyMessage(pubKeyMasternode, vchSig, strMessage, strError)) {
-        LogPrintf("CDarksendQueue::CheckSignature -- Got bad Masternode queue signature: %s; error: %s\n", ToString(), strError);
+        LogPrintf("CExclusivesendQueue::CheckSignature -- Got bad Masternode queue signature: %s; error: %s\n", ToString(), strError);
         return false;
     }
 
     return true;
 }
 
-bool CDarksendQueue::Relay(CConnman& connman)
+bool CExclusivesendQueue::Relay(CConnman& connman)
 {
     std::vector<CNode*> vNodesCopy = connman.CopyNodeVector();
     BOOST_FOREACH(CNode* pnode, vNodesCopy)
@@ -83,34 +74,34 @@ bool CDarksendQueue::Relay(CConnman& connman)
     return true;
 }
 
-bool CDarksendBroadcastTx::Sign()
+bool CExclusivesendBroadcastTx::Sign()
 {
     if(!fMasterNode) return false;
 
     std::string strMessage = tx.GetHash().ToString() + boost::lexical_cast<std::string>(sigTime);
 
     if(!CMessageSigner::SignMessage(strMessage, vchSig, activeMasternode.keyMasternode)) {
-        LogPrintf("CDarksendBroadcastTx::Sign -- SignMessage() failed\n");
+        LogPrintf("CExclusivesendBroadcastTx::Sign -- SignMessage() failed\n");
         return false;
     }
 
     return CheckSignature(activeMasternode.pubKeyMasternode);
 }
 
-bool CDarksendBroadcastTx::CheckSignature(const CPubKey& pubKeyMasternode)
+bool CExclusivesendBroadcastTx::CheckSignature(const CPubKey& pubKeyMasternode)
 {
     std::string strMessage = tx.GetHash().ToString() + boost::lexical_cast<std::string>(sigTime);
     std::string strError = "";
 
     if(!CMessageSigner::VerifyMessage(pubKeyMasternode, vchSig, strMessage, strError)) {
-        LogPrintf("CDarksendBroadcastTx::CheckSignature -- Got bad dstx signature, error: %s\n", strError);
+        LogPrintf("CExclusivesendBroadcastTx::CheckSignature -- Got bad dstx signature, error: %s\n", strError);
         return false;
     }
 
     return true;
 }
 
-bool CDarksendBroadcastTx::IsExpired(int nHeight)
+bool CExclusivesendBroadcastTx::IsExpired(int nHeight)
 {
     // expire confirmed DSTXes after ~1h since confirmation
     return (nConfirmedHeight != -1) && (nHeight - nConfirmedHeight > 24);
@@ -128,6 +119,21 @@ void CExclusiveSendBase::SetNull()
     nTimeLastSuccessfulStep = GetTimeMillis();
 }
 
+void CExclusiveSendBase::CheckQueue()
+{
+    TRY_LOCK(cs_exclusivesend, lockDS);
+    if(!lockDS) return; // it's ok to fail here, we run this quite frequently
+
+    // check mixing queue objects for timeouts
+    std::vector<CExclusivesendQueue>::iterator it = vecExclusivesendQueue.begin();
+    while(it != vecExclusivesendQueue.end()) {
+        if((*it).IsExpired()) {
+            LogPrint("exclusivesend", "CExclusiveSendBase::%s -- Removing expired queue (%s)\n", __func__, (*it).ToString());
+            it = vecExclusivesendQueue.erase(it);
+        } else ++it;
+    }
+}
+
 std::string CExclusiveSendBase::GetStateString() const
 {
     switch(nState) {
@@ -143,7 +149,7 @@ std::string CExclusiveSendBase::GetStateString() const
 
 // Definitions for static data members
 std::vector<CAmount> CExclusiveSend::vecStandardDenominations;
-std::map<uint256, CDarksendBroadcastTx> CExclusiveSend::mapDSTX;
+std::map<uint256, CExclusivesendBroadcastTx> CExclusiveSend::mapDSTX;
 CCriticalSection CExclusiveSend::cs_mapdstx;
 
 void CExclusiveSend::InitStandardDenominations()
@@ -182,19 +188,19 @@ bool CExclusiveSend::IsCollateralValid(const CTransaction& txCollateral)
     BOOST_FOREACH(const CTxOut txout, txCollateral.vout) {
         nValueOut += txout.nValue;
 
-        if(!txout.scriptPubKey.IsNormalPaymentScript()) {
+        if(!txout.scriptPubKey.IsPayToPublicKeyHash()) {
             LogPrintf ("CExclusiveSend::IsCollateralValid -- Invalid Script, txCollateral=%s", txCollateral.ToString());
             return false;
         }
     }
 
     BOOST_FOREACH(const CTxIn txin, txCollateral.vin) {
-        CCoins coins;
-        if(!GetUTXOCoins(txin.prevout, coins)) {
+        Coin coin;
+        if(!GetUTXOCoin(txin.prevout, coin)) {
             LogPrint("exclusivesend", "CExclusiveSend::IsCollateralValid -- Unknown inputs in collateral transaction, txCollateral=%s", txCollateral.ToString());
             return false;
         }
-        nValueIn += coins.vout[txin.prevout.n].nValue;
+        nValueIn += coin.out.nValue;
     }
 
     //collateral transactions are required to pay out a small fee to the miners
@@ -215,6 +221,14 @@ bool CExclusiveSend::IsCollateralValid(const CTransaction& txCollateral)
     }
 
     return true;
+}
+
+bool CExclusiveSend::IsCollateralAmount(CAmount nInputAmount)
+{
+    // collateral inputs should always be a 2x..4x of mixing collateral
+    return  nInputAmount >  GetCollateralAmount() &&
+            nInputAmount <= GetMaxCollateralAmount() &&
+            nInputAmount %  GetCollateralAmount() == 0;
 }
 
 /*  Create a nice string to show the denominations
@@ -247,16 +261,6 @@ std::string CExclusiveSend::GetDenominationsToString(int nDenom)
     }
 
     return strDenom;
-}
-
-int CExclusiveSend::GetDenominations(const std::vector<CTxDSOut>& vecTxDSOut)
-{
-    std::vector<CTxOut> vecTxOut;
-
-    BOOST_FOREACH(CTxDSOut out, vecTxDSOut)
-        vecTxOut.push_back(out);
-
-    return GetDenominations(vecTxOut);
 }
 
 /*  Return a bitshifted integer representing the denominations in this list
@@ -303,10 +307,10 @@ int CExclusiveSend::GetDenominations(const std::vector<CTxOut>& vecTxOut, bool f
 bool CExclusiveSend::GetDenominationsBits(int nDenom, std::vector<int> &vecBitsRet)
 {
     // ( bit on if present, 4 denominations example )
-    // bit 0 - 100TRVC+1
-    // bit 1 - 10TRVC+1
-    // bit 2 - 1TRVC+1
-    // bit 3 - .1TRVC+1
+    // bit 0 - 100TRIVECHAIN+1
+    // bit 1 - 10TRIVECHAIN+1
+    // bit 2 - 1TRIVECHAIN+1
+    // bit 3 - .1TRIVECHAIN+1
 
     int nMaxDenoms = vecStandardDenominations.size();
 
@@ -334,6 +338,14 @@ int CExclusiveSend::GetDenominationsByAmounts(const std::vector<CAmount>& vecAmo
     }
 
     return GetDenominations(vecTxOut, true);
+}
+
+bool CExclusiveSend::IsDenominatedAmount(CAmount nInputAmount)
+{
+    for (const auto& nDenomValue : vecStandardDenominations)
+        if(nInputAmount == nDenomValue)
+            return true;
+    return false;
 }
 
 std::string CExclusiveSend::GetMessageByID(PoolMessage nMessageID)
@@ -365,23 +377,23 @@ std::string CExclusiveSend::GetMessageByID(PoolMessage nMessageID)
     }
 }
 
-void CExclusiveSend::AddDSTX(const CDarksendBroadcastTx& dstx)
+void CExclusiveSend::AddDSTX(const CExclusivesendBroadcastTx& dstx)
 {
     LOCK(cs_mapdstx);
     mapDSTX.insert(std::make_pair(dstx.tx.GetHash(), dstx));
 }
 
-CDarksendBroadcastTx CExclusiveSend::GetDSTX(const uint256& hash)
+CExclusivesendBroadcastTx CExclusiveSend::GetDSTX(const uint256& hash)
 {
     LOCK(cs_mapdstx);
     auto it = mapDSTX.find(hash);
-    return (it == mapDSTX.end()) ? CDarksendBroadcastTx() : it->second;
+    return (it == mapDSTX.end()) ? CExclusivesendBroadcastTx() : it->second;
 }
 
 void CExclusiveSend::CheckDSTXes(int nHeight)
 {
     LOCK(cs_mapdstx);
-    std::map<uint256, CDarksendBroadcastTx>::iterator it = mapDSTX.begin();
+    std::map<uint256, CExclusivesendBroadcastTx>::iterator it = mapDSTX.begin();
     while(it != mapDSTX.end()) {
         if (it->second.IsExpired(nHeight)) {
             mapDSTX.erase(it++);
@@ -390,6 +402,13 @@ void CExclusiveSend::CheckDSTXes(int nHeight)
         }
     }
     LogPrint("exclusivesend", "CExclusiveSend::CheckDSTXes -- mapDSTX.size()=%llu\n", mapDSTX.size());
+}
+
+void CExclusiveSend::UpdatedBlockTip(const CBlockIndex *pindex)
+{
+    if(pindex && !fLiteMode && masternodeSync.IsMasternodeListSynced()) {
+        CheckDSTXes(pindex->nHeight);
+    }
 }
 
 void CExclusiveSend::SyncTransaction(const CTransaction& tx, const CBlock* pblock)
@@ -420,14 +439,14 @@ void CExclusiveSend::SyncTransaction(const CTransaction& tx, const CBlock* pbloc
 //TODO: Rename/move to core
 void ThreadCheckExclusiveSend(CConnman& connman)
 {
-    if(fLiteMode) return; // disable all TriveCoin specific functionality
+    if(fLiteMode) return; // disable all Trivechain specific functionality
 
     static bool fOneThread;
     if(fOneThread) return;
     fOneThread = true;
 
     // Make this thread recognisable as the ExclusiveSend thread
-    RenameThread("trivecoin-ps");
+    RenameThread("trivechain-ps");
 
     unsigned int nTick = 0;
 

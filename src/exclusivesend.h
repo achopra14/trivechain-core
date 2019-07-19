@@ -1,10 +1,12 @@
 // Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2018-2019 The Trivechain Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef EXCLUSIVESEND_H
 #define EXCLUSIVESEND_H
 
+#include "chain.h"
 #include "chainparams.h"
 #include "primitives/transaction.h"
 #include "pubkey.h"
@@ -77,58 +79,49 @@ enum PoolStatusUpdate {
 class CTxDSIn : public CTxIn
 {
 public:
+    // memory only
+    CScript prevPubKey;
     bool fHasSig; // flag to indicate if signed
     int nSentTimes; //times we've sent this anonymously
 
-    CTxDSIn(const CTxIn& txin) :
+    CTxDSIn(const CTxIn& txin, const CScript& script) :
         CTxIn(txin),
+        prevPubKey(script),
         fHasSig(false),
         nSentTimes(0)
         {}
 
     CTxDSIn() :
         CTxIn(),
+        prevPubKey(),
         fHasSig(false),
         nSentTimes(0)
         {}
 };
 
-/** Holds an mixing output
- */
-class CTxDSOut : public CTxOut
-{
-public:
-    int nSentTimes; //times we've sent this anonymously
-
-    CTxDSOut(const CTxOut& out) :
-        CTxOut(out),
-        nSentTimes(0)
-        {}
-
-    CTxDSOut() :
-        CTxOut(),
-        nSentTimes(0)
-        {}
-};
-
 // A clients transaction in the mixing pool
-class CDarkSendEntry
+class CExclusiveSendEntry
 {
 public:
     std::vector<CTxDSIn> vecTxDSIn;
-    std::vector<CTxDSOut> vecTxDSOut;
+    std::vector<CTxOut> vecTxOut;
     CTransaction txCollateral;
     // memory only
     CService addr;
 
-    CDarkSendEntry() :
+    CExclusiveSendEntry() :
         vecTxDSIn(std::vector<CTxDSIn>()),
-        vecTxDSOut(std::vector<CTxDSOut>()),
+        vecTxOut(std::vector<CTxOut>()),
         txCollateral(CTransaction()),
         addr(CService())
         {}
 
-    CDarkSendEntry(const std::vector<CTxIn>& vecTxIn, const std::vector<CTxOut>& vecTxOut, const CTransaction& txCollateral);
+    CExclusiveSendEntry(const std::vector<CTxDSIn>& vecTxDSIn, const std::vector<CTxOut>& vecTxOut, const CTransaction& txCollateral) :
+        vecTxDSIn(vecTxDSIn),
+        vecTxOut(vecTxOut),
+        txCollateral(txCollateral),
+        addr(CService())
+        {}
 
     ADD_SERIALIZE_METHODS;
 
@@ -136,7 +129,7 @@ public:
     inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion) {
         READWRITE(vecTxDSIn);
         READWRITE(txCollateral);
-        READWRITE(vecTxDSOut);
+        READWRITE(vecTxOut);
     }
 
     bool AddScriptSig(const CTxIn& txin);
@@ -146,7 +139,7 @@ public:
 /**
  * A currently inprogress mixing merge and denomination information
  */
-class CDarksendQueue
+class CExclusivesendQueue
 {
 public:
     int nDenom;
@@ -157,7 +150,7 @@ public:
     // memory only
     bool fTried;
 
-    CDarksendQueue() :
+    CExclusivesendQueue() :
         nDenom(0),
         vin(CTxIn()),
         nTime(0),
@@ -166,7 +159,7 @@ public:
         fTried(false)
         {}
 
-    CDarksendQueue(int nDenom, COutPoint outpoint, int64_t nTime, bool fReady) :
+    CExclusivesendQueue(int nDenom, COutPoint outpoint, int64_t nTime, bool fReady) :
         nDenom(nDenom),
         vin(CTxIn(outpoint)),
         nTime(nTime),
@@ -208,7 +201,7 @@ public:
                         nDenom, nTime, fReady ? "true" : "false", fTried ? "true" : "false", vin.prevout.ToStringShort());
     }
 
-    friend bool operator==(const CDarksendQueue& a, const CDarksendQueue& b)
+    friend bool operator==(const CExclusivesendQueue& a, const CExclusivesendQueue& b)
     {
         return a.nDenom == b.nDenom && a.vin.prevout == b.vin.prevout && a.nTime == b.nTime && a.fReady == b.fReady;
     }
@@ -216,7 +209,7 @@ public:
 
 /** Helper class to store mixing transaction (tx) information.
  */
-class CDarksendBroadcastTx
+class CExclusivesendBroadcastTx
 {
 private:
     // memory only
@@ -229,7 +222,7 @@ public:
     std::vector<unsigned char> vchSig;
     int64_t sigTime;
 
-    CDarksendBroadcastTx() :
+    CExclusivesendBroadcastTx() :
         nConfirmedHeight(-1),
         tx(),
         vin(),
@@ -237,7 +230,7 @@ public:
         sigTime(0)
         {}
 
-    CDarksendBroadcastTx(CTransaction tx, COutPoint outpoint, int64_t sigTime) :
+    CExclusivesendBroadcastTx(CTransaction tx, COutPoint outpoint, int64_t sigTime) :
         nConfirmedHeight(-1),
         tx(tx),
         vin(CTxIn(outpoint)),
@@ -255,17 +248,17 @@ public:
         READWRITE(sigTime);
     }
 
-    friend bool operator==(const CDarksendBroadcastTx& a, const CDarksendBroadcastTx& b)
+    friend bool operator==(const CExclusivesendBroadcastTx& a, const CExclusivesendBroadcastTx& b)
     {
         return a.tx == b.tx;
     }
-    friend bool operator!=(const CDarksendBroadcastTx& a, const CDarksendBroadcastTx& b)
+    friend bool operator!=(const CExclusivesendBroadcastTx& a, const CExclusivesendBroadcastTx& b)
     {
         return !(a == b);
     }
     explicit operator bool() const
     {
-        return *this != CDarksendBroadcastTx();
+        return *this != CExclusivesendBroadcastTx();
     }
 
     bool Sign();
@@ -279,10 +272,12 @@ public:
 class CExclusiveSendBase
 {
 protected:
-    // The current mixing sessions in progress on the network
-    std::vector<CDarksendQueue> vecDarksendQueue;
+    mutable CCriticalSection cs_exclusivesend;
 
-    std::vector<CDarkSendEntry> vecEntries; // Masternode/clients entries
+    // The current mixing sessions in progress on the network
+    std::vector<CExclusivesendQueue> vecExclusivesendQueue;
+
+    std::vector<CExclusiveSendEntry> vecEntries; // Masternode/clients entries
 
     PoolState nState; // should be one of the POOL_STATE_XXX values
     int64_t nTimeLastSuccessfulStep; // the time when last successful mixing step was performed, in UTC milliseconds
@@ -292,13 +287,14 @@ protected:
     CMutableTransaction finalMutableTransaction; // the finalized transaction ready for signing
 
     void SetNull();
+    void CheckQueue();
 
 public:
     int nSessionDenom; //Users must submit an denom matching this
 
     CExclusiveSendBase() { SetNull(); }
 
-    int GetQueueSize() const { return vecDarksendQueue.size(); }
+    int GetQueueSize() const { return vecExclusivesendQueue.size(); }
     int GetState() const { return nState; }
     std::string GetStateString() const;
 
@@ -319,21 +315,24 @@ private:
 
     // static members
     static std::vector<CAmount> vecStandardDenominations;
-    static std::map<uint256, CDarksendBroadcastTx> mapDSTX;
+    static std::map<uint256, CExclusivesendBroadcastTx> mapDSTX;
 
     static CCriticalSection cs_mapdstx;
+
+    static void CheckDSTXes(int nHeight);
 
 public:
     static void InitStandardDenominations();
     static std::vector<CAmount> GetStandardDenominations() { return vecStandardDenominations; }
     static CAmount GetSmallestDenomination() { return vecStandardDenominations.back(); }
 
-    /// Get the denominations for a specific amount of trivecoin.
+    /// Get the denominations for a specific amount of trivechain.
     static int GetDenominationsByAmounts(const std::vector<CAmount>& vecAmount);
+
+    static bool IsDenominatedAmount(CAmount nInputAmount);
 
     /// Get the denominations for a list of outputs (returns a bitshifted integer)
     static int GetDenominations(const std::vector<CTxOut>& vecTxOut, bool fSingleRandomDenom = false);
-    static int GetDenominations(const std::vector<CTxDSOut>& vecTxDSOut);
     static std::string GetDenominationsToString(int nDenom);
     static bool GetDenominationsBits(int nDenom, std::vector<int> &vecBitsRet);
 
@@ -349,10 +348,12 @@ public:
     static CAmount GetCollateralAmount() { return COLLATERAL; }
     static CAmount GetMaxCollateralAmount() { return COLLATERAL*4; }
 
-    static void AddDSTX(const CDarksendBroadcastTx& dstx);
-    static CDarksendBroadcastTx GetDSTX(const uint256& hash);
-    static void CheckDSTXes(int nHeight);
+    static bool IsCollateralAmount(CAmount nInputAmount);
 
+    static void AddDSTX(const CExclusivesendBroadcastTx& dstx);
+    static CExclusivesendBroadcastTx GetDSTX(const uint256& hash);
+
+    static void UpdatedBlockTip(const CBlockIndex *pindex);
     static void SyncTransaction(const CTransaction& tx, const CBlock* pblock);
 };
 

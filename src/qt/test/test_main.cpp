@@ -1,10 +1,11 @@
 // Copyright (c) 2009-2015 The Bitcoin Core developers
 // Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2018-2019 The Trivechain Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/trivecoin-config.h"
+#include "config/trivechain-config.h"
 #endif
 
 #include "util.h"
@@ -39,7 +40,7 @@ int main(int argc, char *argv[])
     // Don't remove this, it's needed to access
     // QCoreApplication:: in the tests
     QCoreApplication app(argc, argv);
-    app.setApplicationName("TriveCoin-Qt-test");
+    app.setApplicationName("Trivechain-Qt-test");
 
     SSL_library_init();
 

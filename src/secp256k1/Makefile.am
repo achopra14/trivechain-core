@@ -75,6 +75,7 @@ TESTS = tests
 endif
 
 if USE_ECMULT_STATIC_PRECOMPUTATION
+CC_FOR_BUILD = $(CC)
 CPPFLAGS_FOR_BUILD =-I$(top_srcdir)
 CFLAGS_FOR_BUILD = -Wall -Wextra -Wno-unused-function
 

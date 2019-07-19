@@ -1,6 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
 // Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2018-2019 The Trivechain Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -21,11 +22,12 @@
 #include "spork.h"
 #include "txmempool.h"
 #include "util.h"
-#ifdef ENABLE_WALLET
-#include "masternode-sync.h"
-#endif
 #include "utilstrencodings.h"
 #include "validationinterface.h"
+
+#include "governance-classes.h"
+#include "masternode-payments.h"
+#include "masternode-sync.h"
 
 #include <stdint.h>
 
@@ -245,11 +247,12 @@ UniValue getmininginfo(const UniValue& params, bool fHelp)
             "  \"currentblocktx\": nnn,     (numeric) The last block transaction\n"
             "  \"difficulty\": xxx.xxxxx    (numeric) The current difficulty\n"
             "  \"errors\": \"...\"          (string) Current errors\n"
-            "  \"generate\": true|false     (boolean) If the generation is on or off (see getgenerate or setgenerate calls)\n"
             "  \"genproclimit\": n          (numeric) The processor limit for generation. -1 if no generation. (see getgenerate or setgenerate calls)\n"
+            "  \"networkhashps\": n         (numeric) An estimate of the number of hashes per second the network is generating to maintain the current difficulty\n"
             "  \"pooledtx\": n              (numeric) The size of the mem pool\n"
             "  \"testnet\": true|false      (boolean) If using testnet or not\n"
             "  \"chain\": \"xxxx\",         (string) current network name as defined in BIP70 (main, test, regtest)\n"
+            "  \"generate\": true|false     (boolean) If the generation is on or off (see getgenerate or setgenerate calls)\n"
             "}\n"
             "\nExamples:\n"
             + HelpExampleCli("getmininginfo", "")
@@ -358,6 +361,7 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
 
             "\nResult:\n"
             "{\n"
+            "  \"capabilities\" : [ \"capability\", ... ],    (array of strings) specific client side supported features\n"
             "  \"version\" : n,                    (numeric) The block version\n"
             "  \"rules\" : [ \"rulename\", ... ],    (array of strings) specific block rules that are to be enforced\n"
             "  \"vbavailable\" : {                 (json object) set of pending, supported versionbit (BIP 9) softfork deployments\n"
@@ -493,13 +497,23 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
         throw JSONRPCError(RPC_CLIENT_P2P_DISABLED, "Error: Peer-to-peer functionality missing or disabled");
 
     if (g_connman->GetNodeCount(CConnman::CONNECTIONS_ALL) == 0)
-        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "TriveCoin is not connected!");
+        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "Trivechain Core is not connected!");
 
     if (IsInitialBlockDownload())
-        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "TriveCoin is downloading blocks...");
+        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Trivechain Core is downloading blocks...");
 
-    if (!masternodeSync.IsSynced())
-        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "TriveCoin is syncing with network...");
+    // when enforcement is on we need information about a masternode payee or otherwise our block is going to be orphaned by the network
+    CScript payee;
+    if (sporkManager.IsSporkActive(SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT)
+        && !masternodeSync.IsWinnersListSynced()
+        && !mnpayments.GetBlockPayee(chainActive.Height() + 1, payee))
+            throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Trivechain Core is downloading masternode winners...");
+
+    // next bock is a superblock and we need governance info to correctly construct it
+    if (sporkManager.IsSporkActive(SPORK_9_SUPERBLOCKS_ENABLED)
+        && !masternodeSync.IsSynced()
+        && CSuperblock::IsValidBlockHeight(chainActive.Height() + 1))
+            throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Trivechain Core is syncing with network...");
 
     static unsigned int nTransactionsUpdatedLast;
 

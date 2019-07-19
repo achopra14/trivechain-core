@@ -1,6 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
 // Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2018-2019 The Trivechain Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -189,7 +190,7 @@ UniValue getrawtransaction(const UniValue& params, bool fHelp)
             "         \"reqSigs\" : n,            (numeric) The required sigs\n"
             "         \"type\" : \"pubkeyhash\",  (string) The type, eg 'pubkeyhash'\n"
             "         \"addresses\" : [           (json array of string)\n"
-            "           \"trivecoinaddress\"        (string) trivecoin address\n"
+            "           \"trivechainaddress\"        (string) trivechain address\n"
             "           ,...\n"
             "         ]\n"
             "       }\n"
@@ -285,9 +286,10 @@ UniValue gettxoutproof(const UniValue& params, bool fHelp)
             throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Block not found");
         pblockindex = mapBlockIndex[hashBlock];
     } else {
-        CCoins coins;
-        if (pcoinsTip->GetCoins(oneTxid, coins) && coins.nHeight > 0 && coins.nHeight <= chainActive.Height())
-            pblockindex = chainActive[coins.nHeight];
+        const Coin& coin = AccessByTxid(*pcoinsTip, oneTxid);
+        if (!coin.IsSpent() && coin.nHeight > 0 && coin.nHeight <= chainActive.Height()) {
+            pblockindex = chainActive[coin.nHeight];
+        }
     }
 
     if (pblockindex == NULL)
@@ -377,7 +379,7 @@ UniValue createrawtransaction(const UniValue& params, bool fHelp)
             "     ]\n"
             "2. \"outputs\"             (string, required) a json object with outputs\n"
             "    {\n"
-            "      \"address\": x.xxx   (numeric or string, required) The key is the trivecoin address, the numeric value (can be string) is the " + CURRENCY_UNIT + " amount\n"
+            "      \"address\": x.xxx   (numeric or string, required) The key is the trivechain address, the numeric value (can be string) is the " + CURRENCY_UNIT + " amount\n"
             "      \"data\": \"hex\",     (string, required) The key is \"data\", the value is hex encoded data\n"
             "      ...\n"
             "    }\n"
@@ -440,7 +442,7 @@ UniValue createrawtransaction(const UniValue& params, bool fHelp)
         } else {
             CBitcoinAddress address(name_);
             if (!address.IsValid())
-                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, string("Invalid TriveCoin address: ")+name_);
+                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, string("Invalid Trivechain address: ")+name_);
 
             if (setAddress.count(address))
                 throw JSONRPCError(RPC_INVALID_PARAMETER, string("Invalid parameter, duplicated address: ")+name_);
@@ -495,7 +497,7 @@ UniValue decoderawtransaction(const UniValue& params, bool fHelp)
             "         \"reqSigs\" : n,            (numeric) The required sigs\n"
             "         \"type\" : \"pubkeyhash\",  (string) The type, eg 'pubkeyhash'\n"
             "         \"addresses\" : [           (json array of string)\n"
-            "           \"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\"   (string) TriveCoin address\n"
+            "           \"XwnLY9Tf7Zsef8gMGL2fhWA9ZmMjt4KPwg\"   (string) Trivechain address\n"
             "           ,...\n"
             "         ]\n"
             "       }\n"
@@ -538,7 +540,7 @@ UniValue decodescript(const UniValue& params, bool fHelp)
             "  \"type\":\"type\", (string) The output type\n"
             "  \"reqSigs\": n,    (numeric) The required signatures\n"
             "  \"addresses\": [   (json array of string)\n"
-            "     \"address\"     (string) trivecoin address\n"
+            "     \"address\"     (string) trivechain address\n"
             "     ,...\n"
             "  ],\n"
             "  \"p2sh\",\"address\" (string) address of P2SH script wrapping this redeem script (not returned if the script is already a P2SH).\n"
@@ -683,9 +685,7 @@ UniValue signrawtransaction(const UniValue& params, bool fHelp)
         view.SetBackend(viewMempool); // temporarily switch cache backend to db+mempool view
 
         BOOST_FOREACH(const CTxIn& txin, mergedTx.vin) {
-            const uint256& prevHash = txin.prevout.hash;
-            CCoins coins;
-            view.AccessCoins(prevHash); // this is certainly allowed to fail
+            view.AccessCoin(txin.prevout); // Load entries from viewChain into view; can fail.
         }
 
         view.SetBackend(viewDummy); // switch back to avoid locking mempool for too long
@@ -731,21 +731,23 @@ UniValue signrawtransaction(const UniValue& params, bool fHelp)
             if (nOut < 0)
                 throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "vout must be positive");
 
+            COutPoint out(txid, nOut);
             vector<unsigned char> pkData(ParseHexO(prevOut, "scriptPubKey"));
             CScript scriptPubKey(pkData.begin(), pkData.end());
 
             {
-                CCoinsModifier coins = view.ModifyCoins(txid);
-                if (coins->IsAvailable(nOut) && coins->vout[nOut].scriptPubKey != scriptPubKey) {
+                const Coin& coin = view.AccessCoin(out);
+                if (!coin.IsSpent() && coin.out.scriptPubKey != scriptPubKey) {
                     string err("Previous output scriptPubKey mismatch:\n");
-                    err = err + ScriptToAsmStr(coins->vout[nOut].scriptPubKey) + "\nvs:\n"+
+                    err = err + ScriptToAsmStr(coin.out.scriptPubKey) + "\nvs:\n"+
                         ScriptToAsmStr(scriptPubKey);
                     throw JSONRPCError(RPC_DESERIALIZATION_ERROR, err);
                 }
-                if ((unsigned int)nOut >= coins->vout.size())
-                    coins->vout.resize(nOut+1);
-                coins->vout[nOut].scriptPubKey = scriptPubKey;
-                coins->vout[nOut].nValue = 0; // we don't know the actual output value
+                Coin newcoin;
+                newcoin.out.scriptPubKey = scriptPubKey;
+                newcoin.out.nValue = 0;
+                newcoin.nHeight = 1;
+                view.AddCoin(out, std::move(newcoin), true);
             }
 
             // if redeemScript given and not using the local wallet (private keys
@@ -794,12 +796,12 @@ UniValue signrawtransaction(const UniValue& params, bool fHelp)
     // Sign what we can:
     for (unsigned int i = 0; i < mergedTx.vin.size(); i++) {
         CTxIn& txin = mergedTx.vin[i];
-        const CCoins* coins = view.AccessCoins(txin.prevout.hash);
-        if (coins == NULL || !coins->IsAvailable(txin.prevout.n)) {
+        const Coin& coin = view.AccessCoin(txin.prevout);
+        if (coin.IsSpent()) {
             TxInErrorToJSON(txin, vErrors, "Input not found or already spent");
             continue;
         }
-        const CScript& prevPubKey = coins->vout[txin.prevout.n].scriptPubKey;
+        const CScript& prevPubKey = coin.out.scriptPubKey;
 
         txin.scriptSig.clear();
         // Only sign SIGHASH_SINGLE if there's a corresponding output:
@@ -869,9 +871,12 @@ UniValue sendrawtransaction(const UniValue& params, bool fHelp)
         fDirectSend = params[2].get_bool();
 
     CCoinsViewCache &view = *pcoinsTip;
-    const CCoins* existingCoins = view.AccessCoins(hashTx);
+    bool fHaveChain = false;
+    for (size_t o = 0; !fHaveChain && o < tx.vout.size(); o++) {
+        const Coin& existingCoin = view.AccessCoin(COutPoint(hashTx, o));
+        fHaveChain = !existingCoin.IsSpent();
+    }
     bool fHaveMempool = mempool.exists(hashTx);
-    bool fHaveChain = existingCoins && existingCoins->nHeight < 1000000000;
     if (!fHaveMempool && !fHaveChain) {
         // push to local node and sync with wallets
         if (fDirectSend && !directsend.ProcessTxLockRequest(tx, *g_connman)) {

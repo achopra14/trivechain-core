@@ -1,10 +1,11 @@
 // Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2018-2019 The Trivechain Core developers
 
 #include "governance-validators.h"
 #include "univalue.h"
 #include "utilstrencodings.h"
 
-#include "test/test_trivecoin.h"
+#include "test/test_trivechain.h"
 
 #include <boost/test/unit_test.hpp>
 

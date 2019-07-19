@@ -35,7 +35,9 @@
 #include "masternode-payments.h"
 #include "masternode-sync.h"
 #include "masternodeman.h"
+#ifdef ENABLE_WALLET
 #include "exclusivesend-client.h"
+#endif // ENABLE_WALLET
 #include "exclusivesend-server.h"
 
 #include <boost/thread.hpp>
@@ -43,7 +45,7 @@
 using namespace std;
 
 #if defined(NDEBUG)
-# error "TriveCoin cannot be compiled without assertions."
+# error "Trivechain Core cannot be compiled without assertions."
 #endif
 
 int64_t nTimeBestReceived = 0; // Used only to inform the wallet of when we last received a block
@@ -694,14 +696,15 @@ bool static AlreadyHave(const CInv& inv) EXCLUSIVE_LOCKS_REQUIRED(cs_main)
             return recentRejects->contains(inv.hash) ||
                    mempool.exists(inv.hash) ||
                    mapOrphanTransactions.count(inv.hash) ||
-                   pcoinsTip->HaveCoins(inv.hash);
+                   pcoinsTip->HaveCoinInCache(COutPoint(inv.hash, 0)) || // Best effort: only try output 0 and 1
+                   pcoinsTip->HaveCoinInCache(COutPoint(inv.hash, 1));
         }
 
     case MSG_BLOCK:
         return mapBlockIndex.count(inv.hash);
 
     /* 
-        TriveCoin Related Inventory Messages
+        Trivechain Related Inventory Messages
 
         --
 
@@ -988,7 +991,7 @@ void static ProcessGetData(CNode* pfrom, const Consensus::Params& consensusParam
                 }
 
                 if (!pushed && inv.type == MSG_DSTX) {
-                    CDarksendBroadcastTx dstx = CExclusiveSend::GetDSTX(inv.hash);
+                    CExclusivesendBroadcastTx dstx = CExclusiveSend::GetDSTX(inv.hash);
                     if(dstx) {
                         CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
                         ss.reserve(1000);
@@ -1557,7 +1560,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         vector<uint256> vEraseQueue;
         CTransaction tx;
         CTxLockRequest txLockRequest;
-        CDarksendBroadcastTx dstx;
+        CExclusivesendBroadcastTx dstx;
         int nInvType = MSG_TX;
 
         // Read data and assign inv type
@@ -1632,6 +1635,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                 LogPrintf("TXLOCKREQUEST -- Transaction Lock Request accepted, txid=%s, peer=%d\n",
                         tx.GetHash().ToString(), pfrom->id);
                 directsend.AcceptLockRequest(txLockRequest);
+                directsend.Vote(tx.GetHash(), connman);
             }
 
             mempool.check(pcoinsTip);
@@ -2162,8 +2166,10 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         if (found)
         {
             //probably one the extensions
-            privateSendClient.ProcessMessage(pfrom, strCommand, vRecv, connman);
-            privateSendServer.ProcessMessage(pfrom, strCommand, vRecv, connman);
+#ifdef ENABLE_WALLET
+            exclusiveSendClient.ProcessMessage(pfrom, strCommand, vRecv, connman);
+#endif // ENABLE_WALLET
+            exclusiveSendServer.ProcessMessage(pfrom, strCommand, vRecv, connman);
             mnodeman.ProcessMessage(pfrom, strCommand, vRecv, connman);
             mnpayments.ProcessMessage(pfrom, strCommand, vRecv, connman);
             directsend.ProcessMessage(pfrom, strCommand, vRecv, connman);

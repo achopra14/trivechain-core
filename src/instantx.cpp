@@ -1,4 +1,5 @@
 // Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2018-2019 The Trivechain Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -16,11 +17,17 @@
 #include "txmempool.h"
 #include "util.h"
 #include "consensus/validation.h"
+#include "validationinterface.h"
+#ifdef ENABLE_WALLET
+#include "wallet/wallet.h"
+#endif // ENABLE_WALLET
 
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/thread.hpp>
 
+#ifdef ENABLE_WALLET
 extern CWallet* pwalletMain;
+#endif // ENABLE_WALLET
 extern CTxMemPool mempool;
 
 bool fEnableDirectSend = true;
@@ -42,11 +49,8 @@ CDirectSend directsend;
 
 void CDirectSend::ProcessMessage(CNode* pfrom, std::string& strCommand, CDataStream& vRecv, CConnman& connman)
 {
-    if(fLiteMode) return; // disable all TriveCoin specific functionality
+    if(fLiteMode) return; // disable all Trivechain specific functionality
     if(!sporkManager.IsSporkActive(SPORK_2_DIRECTSEND_ENABLED)) return;
-
-    // Ignore any DirectSend messages until masternode list is synced
-    if(!masternodeSync.IsMasternodeListSynced()) return;
 
     // NOTE: NetMsgType::TXLOCKREQUEST is handled via ProcessMessage() in main.cpp
 
@@ -57,16 +61,20 @@ void CDirectSend::ProcessMessage(CNode* pfrom, std::string& strCommand, CDataStr
         CTxLockVote vote;
         vRecv >> vote;
 
+
+        uint256 nVoteHash = vote.GetHash();
+
+        pfrom->setAskFor.erase(nVoteHash);
+
+        // Ignore any DirectSend messages until masternode list is synced
+        if(!masternodeSync.IsMasternodeListSynced()) return;
+
         LOCK(cs_main);
 #ifdef ENABLE_WALLET
         if (pwalletMain)
             LOCK(pwalletMain->cs_wallet);
 #endif
         LOCK(cs_directsend);
-
-        uint256 nVoteHash = vote.GetHash();
-
-        pfrom->setAskFor.erase(nVoteHash);
 
         if(mapTxLockVotes.count(nVoteHash)) return;
         mapTxLockVotes.insert(std::make_pair(nVoteHash, vote));
@@ -115,15 +123,11 @@ bool CDirectSend::ProcessTxLockRequest(const CTxLockRequest& txLockRequest, CCon
     }
     LogPrintf("CDirectSend::ProcessTxLockRequest -- accepted, txid=%s\n", txHash.ToString());
 
-    std::map<uint256, CTxLockCandidate>::iterator itLockCandidate = mapTxLockCandidates.find(txHash);
-    CTxLockCandidate& txLockCandidate = itLockCandidate->second;
-    Vote(txLockCandidate, connman);
-    ProcessOrphanTxLockVotes(connman);
-
     // Masternodes will sometimes propagate votes before the transaction is known to the client.
     // If this just happened - lock inputs, resolve conflicting locks, update transaction status
     // forcing external script notification.
-    TryToFinalizeLockCandidate(txLockCandidate);
+    std::map<uint256, CTxLockCandidate>::iterator itLockCandidate = mapTxLockCandidates.find(txHash);
+    TryToFinalizeLockCandidate(itLockCandidate->second);
 
     return true;
 }
@@ -175,6 +179,18 @@ void CDirectSend::CreateEmptyTxLockCandidate(const uint256& txHash)
     mapTxLockCandidates.insert(std::make_pair(txHash, CTxLockCandidate(txLockRequest)));
 }
 
+void CDirectSend::Vote(const uint256& txHash, CConnman& connman)
+{
+    AssertLockHeld(cs_main);
+    LOCK(cs_directsend);
+
+    std::map<uint256, CTxLockCandidate>::iterator itLockCandidate = mapTxLockCandidates.find(txHash);
+    if (itLockCandidate == mapTxLockCandidates.end()) return;
+    Vote(itLockCandidate->second, connman);
+    // Let's see if our vote changed smth
+    TryToFinalizeLockCandidate(itLockCandidate->second);
+}
+
 void CDirectSend::Vote(CTxLockCandidate& txLockCandidate, CConnman& connman)
 {
     if(!fMasterNode) return;
@@ -183,6 +199,8 @@ void CDirectSend::Vote(CTxLockCandidate& txLockCandidate, CConnman& connman)
     LOCK2(cs_main, cs_directsend);
 
     uint256 txHash = txLockCandidate.GetHash();
+    // We should never vote on a Transaction Lock Request that was not (yet) accepted by the mempool
+    if(mapLockRequestAccepted.find(txHash) == mapLockRequestAccepted.end()) return;
     // check if we need to vote on this candidate's outpoints,
     // it's possible that we need to vote for several of them
     std::map<COutPoint, COutPointLock>::iterator itOutpointLock = txLockCandidate.mapOutPointLocks.begin();
@@ -599,8 +617,8 @@ bool CDirectSend::ResolveConflicts(const CTxLockCandidate& txLockCandidate)
     }
     // Not in block yet, make sure all its inputs are still unspent
     BOOST_FOREACH(const CTxIn& txin, txLockCandidate.txLockRequest.vin) {
-        CCoins coins;
-        if(!GetUTXOCoins(txin.prevout, coins)) {
+        Coin coin;
+        if(!GetUTXOCoin(txin.prevout, coin)) {
             // Not in UTXO anymore? A conflicting tx was mined while we were waiting for votes.
             LogPrintf("CDirectSend::ResolveConflicts -- ERROR: Failed to find UTXO %s, can't complete Transaction Lock\n", txin.prevout.ToStringShort());
             return false;
@@ -934,28 +952,17 @@ bool CTxLockRequest::IsValid() const
     }
 
     CAmount nValueIn = 0;
-    CAmount nValueOut = 0;
-
-    BOOST_FOREACH(const CTxOut& txout, vout) {
-        // DirectSend supports normal scripts and unspendable (i.e. data) scripts.
-        // TODO: Look into other script types that are normal and can be included
-        if(!txout.scriptPubKey.IsNormalPaymentScript() && !txout.scriptPubKey.IsUnspendable()) {
-            LogPrint("directsend", "CTxLockRequest::IsValid -- Invalid Script %s", ToString());
-            return false;
-        }
-        nValueOut += txout.nValue;
-    }
 
     BOOST_FOREACH(const CTxIn& txin, vin) {
 
-        CCoins coins;
+        Coin coin;
 
-        if(!GetUTXOCoins(txin.prevout, coins)) {
+        if(!GetUTXOCoin(txin.prevout, coin)) {
             LogPrint("directsend", "CTxLockRequest::IsValid -- Failed to find UTXO %s\n", txin.prevout.ToStringShort());
             return false;
         }
 
-        int nTxAge = chainActive.Height() - coins.nHeight + 1;
+        int nTxAge = chainActive.Height() - coin.nHeight + 1;
         // 1 less than the "send IX" gui requires, in case of a block propagating the network at the time
         int nConfirmationsRequired = DIRECTSEND_CONFIRMATIONS_REQUIRED - 1;
 
@@ -965,13 +972,15 @@ bool CTxLockRequest::IsValid() const
             return false;
         }
 
-        nValueIn += coins.vout[txin.prevout.n].nValue;
+        nValueIn += coin.out.nValue;
     }
 
     if(nValueIn > sporkManager.GetSporkValue(SPORK_5_DIRECTSEND_MAX_VALUE)*COIN) {
         LogPrint("directsend", "CTxLockRequest::IsValid -- Transaction value too high: nValueIn=%d, tx=%s", nValueIn, ToString());
         return false;
     }
+
+    CAmount nValueOut = GetValueOut();
 
     if(nValueIn - nValueOut < GetMinFee()) {
         LogPrint("directsend", "CTxLockRequest::IsValid -- did not include enough fees in transaction: fees=%d, tx=%s", nValueOut - nValueIn, ToString());
@@ -983,7 +992,7 @@ bool CTxLockRequest::IsValid() const
 
 CAmount CTxLockRequest::GetMinFee() const
 {
-    CAmount nMinFee = fDIP0001ActiveAtTip ? MIN_FEE / 10 : MIN_FEE;
+    CAmount nMinFee = MIN_FEE;
     return std::max(nMinFee, CAmount(vin.size() * nMinFee));
 }
 
@@ -1004,13 +1013,13 @@ bool CTxLockVote::IsValid(CNode* pnode, CConnman& connman) const
         return false;
     }
 
-    CCoins coins;
-    if(!GetUTXOCoins(outpoint, coins)) {
+    Coin coin;
+    if(!GetUTXOCoin(outpoint, coin)) {
         LogPrint("directsend", "CTxLockVote::IsValid -- Failed to find UTXO %s\n", outpoint.ToStringShort());
         return false;
     }
 
-    int nLockInputHeight = coins.nHeight + 4;
+    int nLockInputHeight = coin.nHeight + 4;
 
     int nRank;
     if(!mnodeman.GetMasternodeRank(outpointMasternode, nRank, nLockInputHeight, MIN_DIRECTSEND_PROTO_VERSION)) {

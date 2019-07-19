@@ -1,5 +1,6 @@
 // Copyright (c) 2011-2015 The Bitcoin Core developers
 // Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2018-2019 The Trivechain Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -64,14 +65,14 @@ SendCoinsDialog::SendCoinsDialog(const PlatformStyle *platformStyle, QWidget *pa
     connect(ui->checkBoxCoinControlChange, SIGNAL(stateChanged(int)), this, SLOT(coinControlChangeChecked(int)));
     connect(ui->lineEditCoinControlChange, SIGNAL(textEdited(const QString &)), this, SLOT(coinControlChangeEdited(const QString &)));
 
-    // TriveCoin specific
+    // Trivechain specific
     QSettings settings;
-    if (!settings.contains("bUseDarkSend"))
-        settings.setValue("bUseDarkSend", false);
+    if (!settings.contains("bUseExclusiveSend"))
+        settings.setValue("bUseExclusiveSend", false);
     if (!settings.contains("bUseInstantX"))
         settings.setValue("bUseInstantX", false);
 
-    bool fUseExclusiveSend = settings.value("bUseDarkSend").toBool();
+    bool fUseExclusiveSend = settings.value("bUseExclusiveSend").toBool();
     bool fUseDirectSend = settings.value("bUseInstantX").toBool();
     if(fLiteMode) {
         ui->checkUseExclusiveSend->setChecked(false);
@@ -576,7 +577,7 @@ void SendCoinsDialog::setBalance(const CAmount& balance, const CAmount& unconfir
     {
 	    uint64_t bal = 0;
         QSettings settings;
-        settings.setValue("bUseDarkSend", ui->checkUseExclusiveSend->isChecked());
+        settings.setValue("bUseExclusiveSend", ui->checkUseExclusiveSend->isChecked());
 	    if(ui->checkUseExclusiveSend->isChecked()) {
 		    bal = anonymizedBalance;
 	    } else {
@@ -863,7 +864,7 @@ void SendCoinsDialog::coinControlChangeEdited(const QString& text)
         }
         else if (!addr.IsValid()) // Invalid address
         {
-            ui->labelCoinControlChangeLabel->setText(tr("Warning: Invalid TriveCoin address"));
+            ui->labelCoinControlChangeLabel->setText(tr("Warning: Invalid Trivechain address"));
         }
         else // Valid address
         {

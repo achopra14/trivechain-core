@@ -1,4 +1,5 @@
 // Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2018-2019 The Trivechain Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -87,7 +88,7 @@ public:
     std::map<uint256, CMasternodePing> mapSeenMasternodePing;
     // Keep track of all verifications I've seen
     std::map<uint256, CMasternodeVerification> mapSeenMasternodeVerification;
-    // keep track of dsq count to prevent masternodes from gaming darksend queue
+    // keep track of dsq count to prevent masternodes from gaming exclusivesend queue
     int64_t nDsqCount;
 
 
@@ -177,7 +178,6 @@ public:
 
     bool GetMasternodeRanks(rank_pair_vec_t& vecMasternodeRanksRet, int nBlockHeight = -1, int nMinProtocol = 0);
     bool GetMasternodeRank(const COutPoint &outpoint, int& nRankRet, int nBlockHeight = -1, int nMinProtocol = 0);
-    bool GetMasternodeByRank(int nRank, masternode_info_t& mnInfoRet, int nBlockHeight = -1, int nMinProtocol = 0);
 
     void ProcessMasternodeConnections(CConnman& connman);
     std::pair<CService, std::set<uint256> > PopScheduledMnbRequestConnection();

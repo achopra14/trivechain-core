@@ -1,5 +1,6 @@
 // Copyright (c) 2011-2015 The Bitcoin Core developers
 // Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2018-2019 The Trivechain Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -63,7 +64,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
                 sub.involvesWatchAddress = mine & ISMINE_WATCH_ONLY;
                 if (ExtractDestination(txout.scriptPubKey, address) && IsMine(*wallet, address))
                 {
-                    // Received by TriveCoin Address
+                    // Received by Trivechain Address
                     sub.type = TransactionRecord::RecvWithAddress;
                     sub.address = CBitcoinAddress(address).ToString();
                 }
@@ -105,7 +106,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
         int nToMe = 0;
         BOOST_FOREACH(const CTxOut& txout, wtx.vout) {
             if(wallet->IsMine(txout)) {
-                fAllToMeDenom = fAllToMeDenom && wallet->IsDenominatedAmount(txout.nValue);
+                fAllToMeDenom = fAllToMeDenom && CExclusiveSend::IsDenominatedAmount(txout.nValue);
                 nToMe++;
             }
             isminetype mine = wallet->IsMine(txout);
@@ -134,7 +135,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
                 CTxDestination address;
                 if (ExtractDestination(wtx.vout[0].scriptPubKey, address))
                 {
-                    // Sent to TriveCoin Address
+                    // Sent to Trivechain Address
                     sub.address = CBitcoinAddress(address).ToString();
                 }
                 else
@@ -150,8 +151,8 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
                     const CTxOut& txout = wtx.vout[nOut];
                     sub.idx = parts.size();
 
-                    if(wallet->IsCollateralAmount(txout.nValue)) sub.type = TransactionRecord::ExclusiveSendMakeCollaterals;
-                    if(wallet->IsDenominatedAmount(txout.nValue)) sub.type = TransactionRecord::ExclusiveSendCreateDenominations;
+                    if(CExclusiveSend::IsCollateralAmount(txout.nValue)) sub.type = TransactionRecord::ExclusiveSendMakeCollaterals;
+                    if(CExclusiveSend::IsDenominatedAmount(txout.nValue)) sub.type = TransactionRecord::ExclusiveSendCreateDenominations;
                     if(nDebit - wtx.GetValueOut() == CExclusiveSend::GetCollateralAmount()) sub.type = TransactionRecord::ExclusiveSendCollateralPayment;
                 }
             }
@@ -187,7 +188,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
                 CTxDestination address;
                 if (ExtractDestination(txout.scriptPubKey, address))
                 {
-                    // Sent to TriveCoin Address
+                    // Sent to Trivechain Address
                     sub.type = TransactionRecord::SendToAddress;
                     sub.address = CBitcoinAddress(address).ToString();
                 }

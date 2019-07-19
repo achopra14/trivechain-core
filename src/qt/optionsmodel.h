@@ -100,7 +100,7 @@ private:
 
 Q_SIGNALS:
     void displayUnitChanged(int unit);
-    void privateSendRoundsChanged();
+    void exclusiveSendRoundsChanged();
     void privateSentAmountChanged();
     void advancedPSUIChanged(bool);
     void coinControlFeaturesChanged(bool);

@@ -70,7 +70,7 @@
             <item>
              <widget class="QLabel" name="labelWalletStatus">
               <property name="toolTip">
-               <string>The displayed information may be out of date. Your wallet automatically synchronizes with the TriveCoin network after a connection is established, but this process has not completed yet.</string>
+               <string>The displayed information may be out of date. Your wallet automatically synchronizes with the Trivechain network after a connection is established, but this process has not completed yet.</string>
               </property>
               <property name="styleSheet">
                <string notr="true">QLabel { color: red; }</string>
@@ -425,7 +425,7 @@
             <item>
              <widget class="QLabel" name="labelExclusiveSendSyncStatus">
               <property name="toolTip">
-               <string>The displayed information may be out of date. Your wallet automatically synchronizes with the TriveCoin network after a connection is established, but this process has not completed yet.</string>
+               <string>The displayed information may be out of date. Your wallet automatically synchronizes with the Trivechain network after a connection is established, but this process has not completed yet.</string>
               </property>
               <property name="styleSheet">
                <string notr="true">QLabel { color: red; }</string>
@@ -454,7 +454,7 @@
            </layout>
           </item>
           <item>
-           <layout class="QFormLayout" name="privateSendFormLayout">
+           <layout class="QFormLayout" name="exclusiveSendFormLayout">
             <property name="fieldGrowthPolicy">
              <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
             </property>
@@ -486,7 +486,7 @@
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QProgressBar" name="privateSendProgress">
+             <widget class="QProgressBar" name="exclusiveSendProgress">
               <property name="maximumSize">
                <size>
                 <width>154</width>
@@ -514,7 +514,7 @@
                </font>
               </property>
               <property name="text">
-               <string notr="true">0 TRVC</string>
+               <string notr="true">0 TRIVECHAIN</string>
               </property>
              </widget>
             </item>
@@ -528,7 +528,7 @@
             <item row="3" column="1">
              <widget class="QLabel" name="labelAmountRounds">
               <property name="text">
-               <string>0 TRVC / 0 Rounds</string>
+               <string>0 TRIVECHAIN / 0 Rounds</string>
               </property>
              </widget>
             </item>
@@ -582,7 +582,7 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_debugbuttons">
               <item>
-               <widget class="QPushButton" name="privateSendAuto">
+               <widget class="QPushButton" name="exclusiveSendAuto">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -598,7 +598,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="privateSendReset">
+               <widget class="QPushButton" name="exclusiveSendReset">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -617,7 +617,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="privateSendInfo">
+               <widget class="QPushButton" name="exclusiveSendInfo">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -683,7 +683,7 @@
             <item>
              <widget class="QLabel" name="labelTransactionsStatus">
               <property name="toolTip">
-               <string>The displayed information may be out of date. Your wallet automatically synchronizes with the TriveCoin network after a connection is established, but this process has not completed yet.</string>
+               <string>The displayed information may be out of date. Your wallet automatically synchronizes with the Trivechain network after a connection is established, but this process has not completed yet.</string>
               </property>
               <property name="styleSheet">
                <string notr="true">QLabel { color: red; }</string>

@@ -1,11 +1,12 @@
 // Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2018-2019 The Trivechain Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef GOVERNANCE_OBJECT_H
 #define GOVERNANCE_OBJECT_H
 
-//#define ENABLE_TRVC_DEBUG
+//#define ENABLE_TRIVECHAIN_DEBUG
 
 #include "cachemultimap.h"
 #include "governance-exceptions.h"
@@ -34,7 +35,7 @@ static const int GOVERNANCE_OBJECT_PROPOSAL = 1;
 static const int GOVERNANCE_OBJECT_TRIGGER = 2;
 static const int GOVERNANCE_OBJECT_WATCHDOG = 3;
 
-static const CAmount GOVERNANCE_PROPOSAL_FEE_TX = (5.0*COIN);
+static const CAmount GOVERNANCE_PROPOSAL_FEE_TX = (50.0*COIN);
 
 static const int64_t GOVERNANCE_FEE_CONFIRMATIONS = 6;
 static const int64_t GOVERNANCE_MIN_RELAY_FEE_CONFIRMATIONS = 1;
@@ -43,7 +44,7 @@ static const int64_t GOVERNANCE_DELETION_DELAY = 10*60;
 static const int64_t GOVERNANCE_ORPHAN_EXPIRATION_TIME = 10*60;
 static const int64_t GOVERNANCE_WATCHDOG_EXPIRATION_TIME = 2*60*60;
 
-static const int GOVERNANCE_TRIGGER_EXPIRATION_BLOCKS = 576;
+static const int GOVERNANCE_TRIGGER_EXPIRATION_BLOCKS = 1440;
 
 // FOR SEEN MAP ARRAYS - GOVERNANCE OBJECTS AND VOTES
 static const int SEEN_OBJECT_IS_VALID = 0;
@@ -162,7 +163,7 @@ private:
     /// true == minimum network support has been reached for this object to be funded (doesn't mean it will for sure though)
     bool fCachedFunding;
 
-    /// true == minimum network has been reached flagging this object as a valid and understood goverance object (e.g, the serialized data is correct format, etc)
+    /// true == minimum network has been reached flagging this object as a valid and understood governance object (e.g, the serialized data is correct format, etc)
     bool fCachedValid;
 
     /// true == minimum network support has been reached saying this object should be deleted from the system entirely

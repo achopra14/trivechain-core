@@ -1,0 +1,3 @@
+debian/manpages/trivechaind.1
+debian/manpages/trivechain.conf.5
+debian/manpages/trivechain-cli.1

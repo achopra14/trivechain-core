@@ -3,7 +3,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/trivecoin-config.h"
+#include "config/trivechain-config.h"
 #endif
 
 #include "optionsdialog.h"
@@ -19,9 +19,9 @@
 
 #ifdef ENABLE_WALLET
 #include "wallet/wallet.h" // for CWallet::GetRequiredFee()
-#endif
 
 #include "exclusivesend-client.h"
+#endif // ENABLE_WALLET
 
 #include <boost/thread.hpp>
 
@@ -32,7 +32,9 @@
 #include <QMessageBox>
 #include <QTimer>
 
+#ifdef ENABLE_WALLET
 extern CWallet* pwalletMain;
+#endif // ENABLE_WALLET
 
 OptionsDialog::OptionsDialog(QWidget *parent, bool enableWallet) :
     QDialog(parent),
@@ -90,7 +92,11 @@ OptionsDialog::OptionsDialog(QWidget *parent, bool enableWallet) :
     }
     
     /* Theme selector */
-    ui->theme->addItem(QString("TRVC-default"), QVariant("trvc"));
+    ui->theme->addItem(QString("TRIVECHAIN-light"), QVariant("light"));
+    ui->theme->addItem(QString("TRIVECHAIN-light-hires"), QVariant("light-hires"));
+    ui->theme->addItem(QString("TRIVECHAIN-blue"), QVariant("drkblue"));
+    ui->theme->addItem(QString("TRIVECHAIN-Crownium"), QVariant("crownium"));
+    ui->theme->addItem(QString("TRIVECHAIN-traditional"), QVariant("trad"));
     
     /* Language selector */
     QDir translations(":translations");
@@ -199,10 +205,10 @@ void OptionsDialog::setMapper()
     mapper->addMapping(ui->showMasternodesTab, OptionsModel::ShowMasternodesTab);
     mapper->addMapping(ui->showAdvancedPSUI, OptionsModel::ShowAdvancedPSUI);
     mapper->addMapping(ui->lowKeysWarning, OptionsModel::LowKeysWarning);
-    mapper->addMapping(ui->privateSendMultiSession, OptionsModel::ExclusiveSendMultiSession);
+    mapper->addMapping(ui->exclusiveSendMultiSession, OptionsModel::ExclusiveSendMultiSession);
     mapper->addMapping(ui->spendZeroConfChange, OptionsModel::SpendZeroConfChange);
-    mapper->addMapping(ui->privateSendRounds, OptionsModel::ExclusiveSendRounds);
-    mapper->addMapping(ui->privateSendAmount, OptionsModel::ExclusiveSendAmount);
+    mapper->addMapping(ui->exclusiveSendRounds, OptionsModel::ExclusiveSendRounds);
+    mapper->addMapping(ui->exclusiveSendAmount, OptionsModel::ExclusiveSendAmount);
 
     /* Network */
     mapper->addMapping(ui->mapPortUpnp, OptionsModel::MapPortUPnP);
@@ -258,8 +264,11 @@ void OptionsDialog::on_resetButton_clicked()
 void OptionsDialog::on_okButton_clicked()
 {
     mapper->submit();
-    privateSendClient.nCachedNumBlocks = std::numeric_limits<int>::max();
-    pwalletMain->MarkDirty();
+#ifdef ENABLE_WALLET
+    exclusiveSendClient.nCachedNumBlocks = std::numeric_limits<int>::max();
+    if(pwalletMain)
+        pwalletMain->MarkDirty();
+#endif // ENABLE_WALLET
     accept();
     updateDefaultProxyNets();
 }

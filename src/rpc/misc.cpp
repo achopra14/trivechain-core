@@ -1,26 +1,28 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
 // Copyright (c) 2014-2017 The Dash Core developers
+// Copyright (c) 2018-2019 The Trivechain Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "base58.h"
 #include "clientversion.h"
 #include "init.h"
-#include "validation.h"
 #include "net.h"
 #include "netbase.h"
 #include "rpc/server.h"
 #include "timedata.h"
 #include "txmempool.h"
 #include "util.h"
-#include "spork.h"
 #include "utilstrencodings.h"
+#include "validation.h"
 #ifdef ENABLE_WALLET
-#include "masternode-sync.h"
 #include "wallet/wallet.h"
 #include "wallet/walletdb.h"
 #endif
+
+#include "masternode-sync.h"
+#include "spork.h"
 
 #include <stdint.h>
 
@@ -55,8 +57,8 @@ UniValue getinfo(const UniValue& params, bool fHelp)
             "  \"version\": xxxxx,           (numeric) the server version\n"
             "  \"protocolversion\": xxxxx,   (numeric) the protocol version\n"
             "  \"walletversion\": xxxxx,     (numeric) the wallet version\n"
-            "  \"balance\": xxxxxxx,         (numeric) the total trivecoin balance of the wallet\n"
-            "  \"exclusivesend_balance\": xxxxxx, (numeric) the anonymized trivecoin balance of the wallet\n"
+            "  \"balance\": xxxxxxx,         (numeric) the total trivechain balance of the wallet\n"
+            "  \"exclusivesend_balance\": xxxxxx, (numeric) the anonymized trivechain balance of the wallet\n"
             "  \"blocks\": xxxxxx,           (numeric) the current number of blocks processed in the server\n"
             "  \"timeoffset\": xxxxx,        (numeric) the time offset\n"
             "  \"connections\": xxxxx,       (numeric) the number of connections\n"
@@ -122,11 +124,11 @@ UniValue debug(const UniValue& params, bool fHelp)
         throw runtime_error(
             "debug ( 0|1|addrman|alert|bench|coindb|db|lock|rand|rpc|selectcoins|mempool"
             "|mempoolrej|net|proxy|prune|http|libevent|tor|zmq|"
-            "trivecoin|exclusivesend|directsend|masternode|spork|keepass|mnpayments|gobject )\n"
+            "trivechain|exclusivesend|directsend|masternode|spork|keepass|mnpayments|gobject )\n"
             "Change debug category on the fly. Specify single category or use comma to specify many.\n"
             "\nExamples:\n"
-            + HelpExampleCli("debug", "trivecoin")
-            + HelpExampleRpc("debug", "trivecoin,net")
+            + HelpExampleCli("debug", "trivechain")
+            + HelpExampleRpc("debug", "trivechain,net")
         );
 
     std::string strMode = params[0].get_str();
@@ -238,7 +240,9 @@ UniValue spork(const UniValue& params, bool fHelp)
                 ret.push_back(Pair(sporkManager.GetSporkNameByID(nSporkID), sporkManager.IsSporkActive(nSporkID)));
         }
         return ret;
-    } else if (params.size() == 2){
+    }
+#ifdef ENABLE_WALLET
+    else if (params.size() == 2){
         int nSporkID = sporkManager.GetSporkIDByName(params[0].get_str());
         if(nSporkID == -1){
             return "Invalid spork name";
@@ -262,23 +266,29 @@ UniValue spork(const UniValue& params, bool fHelp)
 
     throw runtime_error(
         "spork <name> [<value>]\n"
-        "<name> is the corresponding spork name, or 'show' to show all current spork settings, active to show which sporks are active"
-        "<value> is a epoch datetime to enable or disable spork"
+        "<name> is the corresponding spork name, or 'show' to show all current spork settings, active to show which sporks are active\n"
+        "<value> is a epoch datetime to enable or disable spork\n"
         + HelpRequiringPassphrase());
+#else // ENABLE_WALLET
+    throw runtime_error(
+        "spork <name>\n"
+        "<name> is the corresponding spork name, or 'show' to show all current spork settings, active to show which sporks are active\n");
+#endif // ENABLE_WALLET
+
 }
 
 UniValue validateaddress(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() != 1)
         throw runtime_error(
-            "validateaddress \"trivecoinaddress\"\n"
-            "\nReturn information about the given trivecoin address.\n"
+            "validateaddress \"trivechainaddress\"\n"
+            "\nReturn information about the given trivechain address.\n"
             "\nArguments:\n"
-            "1. \"trivecoinaddress\"     (string, required) The trivecoin address to validate\n"
+            "1. \"trivechainaddress\"     (string, required) The trivechain address to validate\n"
             "\nResult:\n"
             "{\n"
             "  \"isvalid\" : true|false,       (boolean) If the address is valid or not. If not, this is the only property returned.\n"
-            "  \"address\" : \"trivecoinaddress\", (string) The trivecoin address validated\n"
+            "  \"address\" : \"trivechainaddress\", (string) The trivechain address validated\n"
             "  \"scriptPubKey\" : \"hex\",       (string) The hex encoded scriptPubKey generated by the address\n"
             "  \"ismine\" : true|false,        (boolean) If the address is yours or not\n"
             "  \"iswatchonly\" : true|false,   (boolean) If the address is watchonly\n"
@@ -357,7 +367,7 @@ CScript _createmultisig_redeemScript(const UniValue& params)
     {
         const std::string& ks = keys[i].get_str();
 #ifdef ENABLE_WALLET
-        // Case 1: TriveCoin address and we have full public key:
+        // Case 1: Trivechain address and we have full public key:
         CBitcoinAddress address(ks);
         if (pwalletMain && address.IsValid())
         {
@@ -408,9 +418,9 @@ UniValue createmultisig(const UniValue& params, bool fHelp)
 
             "\nArguments:\n"
             "1. nrequired      (numeric, required) The number of required signatures out of the n keys or addresses.\n"
-            "2. \"keys\"       (string, required) A json array of keys which are trivecoin addresses or hex-encoded public keys\n"
+            "2. \"keys\"       (string, required) A json array of keys which are trivechain addresses or hex-encoded public keys\n"
             "     [\n"
-            "       \"key\"    (string) trivecoin address or hex-encoded public key\n"
+            "       \"key\"    (string) trivechain address or hex-encoded public key\n"
             "       ,...\n"
             "     ]\n"
 
@@ -445,10 +455,10 @@ UniValue verifymessage(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() != 3)
         throw runtime_error(
-            "verifymessage \"trivecoinaddress\" \"signature\" \"message\"\n"
+            "verifymessage \"trivechainaddress\" \"signature\" \"message\"\n"
             "\nVerify a signed message\n"
             "\nArguments:\n"
-            "1. \"trivecoinaddress\"  (string, required) The trivecoin address to use for the signature.\n"
+            "1. \"trivechainaddress\"  (string, required) The trivechain address to use for the signature.\n"
             "2. \"signature\"       (string, required) The signature provided by the signer in base 64 encoding (see signmessage).\n"
             "3. \"message\"         (string, required) The message that was signed.\n"
             "\nResult:\n"

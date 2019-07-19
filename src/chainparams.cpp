@@ -72,17 +72,17 @@ class CMainParams : public CChainParams {
 public:
     CMainParams() {
         strNetworkID = "main";
-        consensus.nSubsidyHalvingInterval = 210240; // Note: actual number of blocks per calendar year with DGW v3 is ~200700 (for example 449750 - 249050)
+        consensus.nSubsidyHalvingInterval = 525600; // Note: actual number of blocks per calendar year with DGW v3 is ~200700 (for example 449750 - 249050)
         consensus.nMasternodePaymentsStartBlock = 1000; 
-        consensus.nMasternodePaymentsIncreaseBlock = 0; // Masternode payment in Trivecoin is fixed at 40%
-        consensus.nMasternodePaymentsIncreasePeriod = 0; // Masternode payment in Trivecoin is fixed at 40%
+        consensus.nMasternodePaymentsIncreaseBlock = 0; // Masternode payment in Trivechain is fixed at 40%
+        consensus.nMasternodePaymentsIncreasePeriod = 0; // Masternode payment in Trivechain is fixed at 40%
         consensus.nDirectSendKeepLock = 24;
         consensus.nBudgetPaymentsStartBlock = 2;
-        consensus.nBudgetPaymentsCycleBlocks = 16616; // ~(60*24*30)/2.6, actual number of blocks per month is 200700 / 12 = 16725
+        consensus.nBudgetPaymentsCycleBlocks = 43200; // ~(60*24*30), actual number of blocks per month is 525600 / 12 = 43800
         consensus.nBudgetPaymentsWindowBlocks = 100;
         consensus.nBudgetProposalEstablishingTime = 60*60*24;
         consensus.nSuperblockStartBlock = 1000; 
-        consensus.nSuperblockCycle = 16616; // ~(60*24*30)/2.6, actual number of blocks per month is 200700 / 12 = 16725
+        consensus.nSuperblockCycle = 43200; // ~(60*24*30), actual number of blocks per month is 525600 / 12 = 43800
         consensus.nGovernanceMinQuorum = 10;
         consensus.nGovernanceFilterElements = 20000;
         consensus.nMasternodeMinimumConfirmations = 1;
@@ -92,8 +92,8 @@ public:
         consensus.BIP34Height = 1;
         consensus.BIP34Hash = uint256S("0x000007d91d1254d60e2dd1ae580383070a4ddffa4c64c2eeb4a2f9ecc0414343");
         consensus.powLimit = uint256S("00000fffff000000000000000000000000000000000000000000000000000000");
-        consensus.nPowTargetTimespan = 6 * 60 * 60;
-        consensus.nPowTargetSpacing = 2.5 * 60; // TriveCoin: 2.5 minutes
+        consensus.nPowTargetTimespan = 6 * 60 * 60; // Adjustment using 6 hour
+        consensus.nPowTargetSpacing = 60; // Trivechain: 1 minute
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 1916; // 95% of 2016
@@ -120,7 +120,8 @@ public:
 
         // By default assume that the signatures in ancestors of this block are valid.
         //consensus.defaultAssumeValid = uint256S("0x00000000000000b4181bbbdddbae464ce11fede5d0292fb63fdede1e7c8ab21c"); //750000
-        consensus.defaultAssumeValid = uint256S("0x00");
+        // consensus.defaultAssumeValid = uint256S("0x00");
+        consensus.defaultAssumeValid = uint256S("0000000000012c3d19793ebb8fe56bf3644529b159fbee8b7a8ab21ff463f4eb"); //226650
         /**
          * The message start string is designed to be unlikely to occur in normal data.
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
@@ -142,20 +143,20 @@ public:
         assert(consensus.hashGenesisBlock == uint256S("0x000008ad295e16d2a5456aef65cb1c28139835aba6a340d0be0fb8ca2b2e9e26"));
         assert(genesis.hashMerkleRoot == uint256S("0x72c0f9b5871b31ead65a1a21a2d769f74c674e954fb4d4baeeac0e23b37699c8"));
 
-        vSeeds.push_back(CDNSSeedData("trivecoin.org", "dnsseed.trivecoin.org"));
+        vSeeds.push_back(CDNSSeedData("trivechain.com", "dnsseed.trivechain.com"));
 
-        // TriveCoin addresses start with 'T'
+        // Trivechain addresses start with 'T'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,65);
-        // TriveCoin script addresses start with '8'
+        // Trivechain script addresses start with '8'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,18);
-        // TriveCoin private keys start with '8' or 'T'
+        // Trivechain private keys start with '8' or 'T'
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,204);
-        // TriveCoin BIP32 pubkeys start with 'xpub' (Bitcoin defaults)
+        // Trivechain BIP32 pubkeys start with 'xpub' (Bitcoin defaults)
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x88)(0xB2)(0x1E).convert_to_container<std::vector<unsigned char> >();
-        // TriveCoin BIP32 prvkeys start with 'xprv' (Bitcoin defaults)
+        // Trivechain BIP32 prvkeys start with 'xprv' (Bitcoin defaults)
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x88)(0xAD)(0xE4).convert_to_container<std::vector<unsigned char> >();
 
-        // TriveCoin BIP44 coin type is '5'
+        // Trivechain BIP44 coin type is '5'
         nExtCoinType = 5;
 
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_main, pnSeed6_main + ARRAYLEN(pnSeed6_main));
@@ -170,15 +171,19 @@ public:
         nFulfilledRequestExpireTime = 60*60; // fulfilled requests expire in 1 hour
         strSporkPubKey = "03136a7e7ce557dbcdc38860684cd31299e013cfd7ba4dfb117ec2cee0f420828c";
 
+
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            (  0, uint256S("0x000008ad295e16d2a5456aef65cb1c28139835aba6a340d0be0fb8ca2b2e9e26"))
-            (  4991, uint256S("0x000000003b01809551952460744d5dbb8fcbd6cbae3c220267bf7fa43f837367"))
-            (  19465, uint256S("0x0000000000002d6b4663d59a7dd8ced9379ab551da02bdf1e2821057a8e3d7c8"))
-            (  53039, uint256S("0x0000000000000662d00551043355938b21a485633e771ef648b7d9000b49ee22"))
-            (  80233, uint256S("0x0000000000000413123b48d1d5af96a1879f2b41b1f401b651476cdc33b6a000")),
-            0, // * UNIX timestamp of last checkpoint block
-            0,    // * total number of transactions between genesis and last checkpoint
+            (   1500, uint256S("0x0000019499f2569d0c4c99a171a94294f8111036fc3331a85e1d09320f586684"))
+            (   5000, uint256S("0x000002bcecf140a86b1db138706636e58b09b6271066110369cb4b2c168b0262"))
+            (  50000, uint256S("0x00000000000012dcd42042070a4e106e577394760f7663ebfc130c348766acea"))
+            ( 100000, uint256S("0x0000000000015c62c9a493529215f3f0c3e9e01a45c14063671340558dce34d4"))
+            ( 150000, uint256S("0x000000000000a5a404d4b403401c61159df545da193fe002115d7f799e2b85fe"))
+            ( 200000, uint256S("0x00000000000df26f68d1a64d69ef250797d773b0c6e00fa399ee3cec059541e7"))
+            ( 226650, uint256S("0x0000000000012c3d19793ebb8fe56bf3644529b159fbee8b7a8ab21ff463f4eb"))
+            ( 288000, uint256S("0x00000000029c6f80395cbec98682c8fba0f13d47b7089607637173ff7f65f65b")),
+            1559822642, // * UNIX timestamp of last checkpoint block
+            507840,     // * total number of transactions between genesis and last checkpoint
                         //   (the tx=... number in the SetBestChain debug.log lines)
             5000        // * estimated number of transactions per day after checkpoint
         };
@@ -193,7 +198,7 @@ class CTestNetParams : public CChainParams {
 public:
     CTestNetParams() {
         strNetworkID = "test";
-        consensus.nSubsidyHalvingInterval = 210240;
+        consensus.nSubsidyHalvingInterval = 525600;
         consensus.nMasternodePaymentsStartBlock = 4010; // not true, but it's ok as long as it's less then nMasternodePaymentsIncreaseBlock
         consensus.nMasternodePaymentsIncreaseBlock = 4030;
         consensus.nMasternodePaymentsIncreasePeriod = 10;
@@ -213,8 +218,8 @@ public:
         consensus.BIP34Height = 1;
         consensus.BIP34Hash = uint256S("0x0000047d24635e347be3aaaeb66c26be94901a2f962feccd4f95090191f208c1");
         consensus.powLimit = uint256S("00000fffff000000000000000000000000000000000000000000000000000000");
-        consensus.nPowTargetTimespan = 24 * 60 * 60; // TriveCoin: 1 day
-        consensus.nPowTargetSpacing = 2.5 * 60; // TriveCoin: 2.5 minutes
+        consensus.nPowTargetTimespan = 24 * 60 * 60; // Trivechain: 1 day
+        consensus.nPowTargetSpacing = 15; // Trivechain: 1 minute
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 1512; // 75% for testchains
@@ -259,20 +264,20 @@ public:
 
         vFixedSeeds.clear();
         vSeeds.clear();
-        vSeeds.push_back(CDNSSeedData("trivecoin.org",  "testnet-dnsseed.trivecoin.org"));
+        vSeeds.push_back(CDNSSeedData("trvc.dev",  "dnsseed.trvc.dev"));
 
-        // Testnet TriveCoin addresses start with 'y'
+        // Testnet Trivechain addresses start with 'y'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,140);
-        // Testnet TriveCoin script addresses start with '8' or '9'
+        // Testnet Trivechain script addresses start with '8' or '9'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,19);
         // Testnet private keys start with '9' or 'c' (Bitcoin defaults)
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,239);
-        // Testnet TriveCoin BIP32 pubkeys start with 'tpub' (Bitcoin defaults)
+        // Testnet Trivechain BIP32 pubkeys start with 'tpub' (Bitcoin defaults)
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x35)(0x87)(0xCF).convert_to_container<std::vector<unsigned char> >();
-        // Testnet TriveCoin BIP32 prvkeys start with 'tprv' (Bitcoin defaults)
+        // Testnet Trivechain BIP32 prvkeys start with 'tprv' (Bitcoin defaults)
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x35)(0x83)(0x94).convert_to_container<std::vector<unsigned char> >();
 
-        // Testnet TriveCoin BIP44 coin type is '1' (All coin's testnet default)
+        // Testnet Trivechain BIP44 coin type is '1' (All coin's testnet default)
         nExtCoinType = 1;
 
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_test, pnSeed6_test + ARRAYLEN(pnSeed6_test));
@@ -289,14 +294,12 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            (  0, uint256S("0x000008ad295e16d2a5456aef65cb1c28139835aba6a340d0be0fb8ca2b2e9e26"))
-            (  16433, uint256S("0x00000144b4df98b684c3524fa38964fa3b9cdadeb90bca8ed415c836e4935045")),
-            0, // * UNIX timestamp of last checkpoint block
-            0,    // * total number of transactions between genesis and last checkpoint
+            ( 203871, uint256S("0x000000d54be3783d235c99915edb20f1a711f3a78717208c58a35087e77cf2aa")),
+            1554365338, // * UNIX timestamp of last known number of transactions (Block 203871)
+            204600,     // * total number of transactions between genesis and that timestamp
                         //   (the tx=... number in the SetBestChain debug.log lines)
-            5000        // * estimated number of transactions per day after checkpoint
+            0.01        // * estimated number of transactions per second after that timestamp
         };
-
     }
 };
 static CTestNetParams testNetParams;
@@ -328,8 +331,8 @@ public:
         consensus.BIP34Height = -1; // BIP34 has not necessarily activated on regtest
         consensus.BIP34Hash = uint256();
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-        consensus.nPowTargetTimespan = 24 * 60 * 60; // TriveCoin: 1 day
-        consensus.nPowTargetSpacing = 2.5 * 60; // TriveCoin: 2.5 minutes
+        consensus.nPowTargetTimespan = 24 * 60 * 60; // Trivechain: 1 day
+        consensus.nPowTargetSpacing = 2.5 * 60; // Trivechain: 2.5 minutes
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = true;
         consensus.nRuleChangeActivationThreshold = 108; // 75% for testchains
@@ -384,18 +387,18 @@ public:
                         //   (the tx=... number in the SetBestChain debug.log lines)
             0        // * estimated number of transactions per day after checkpoint
         };
-        // Regtest TriveCoin addresses start with 'y'
+        // Regtest Trivechain addresses start with 'y'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,140);
-        // Regtest TriveCoin script addresses start with '8' or '9'
+        // Regtest Trivechain script addresses start with '8' or '9'
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,19);
         // Regtest private keys start with '9' or 'c' (Bitcoin defaults)
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,239);
-        // Regtest TriveCoin BIP32 pubkeys start with 'tpub' (Bitcoin defaults)
+        // Regtest Trivechain BIP32 pubkeys start with 'tpub' (Bitcoin defaults)
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x35)(0x87)(0xCF).convert_to_container<std::vector<unsigned char> >();
-        // Regtest TriveCoin BIP32 prvkeys start with 'tprv' (Bitcoin defaults)
+        // Regtest Trivechain BIP32 prvkeys start with 'tprv' (Bitcoin defaults)
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x35)(0x83)(0x94).convert_to_container<std::vector<unsigned char> >();
 
-        // Regtest TriveCoin BIP44 coin type is '1' (All coin's testnet default)
+        // Regtest Trivechain BIP44 coin type is '1' (All coin's testnet default)
         nExtCoinType = 1;
    }
 };
