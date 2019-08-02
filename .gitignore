@@ -62,7 +62,7 @@ libconftest.dylib*
 *.o
 *.o-*
 *.patch
-.trivechain
+!depends/patches/*/*.patch
 *.a
 *.pb.cc
 *.pb.h
